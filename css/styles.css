@@ -1072,6 +1072,13 @@ ul { list-style: none; }
   align-items: start;
 }
 
+.footer-logo {
+  height: 28px;
+  width: auto;
+  margin-bottom: var(--space-base);
+  opacity: 0.8;
+}
+
 .footer-location h4,
 .footer-services h4 {
   font-size: 10px;
@@ -1302,4 +1309,569 @@ ul { list-style: none; }
   }
   .search-btn { padding: var(--space-md) var(--space-lg); }
   .navbar-wa { padding: var(--space-md) var(--space-lg); }
+}
+
+/* ============================================================
+   LA VITRINA — Property Detail Page
+   ============================================================ */
+
+/* Scroll reveal */
+.vt-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms cubic-bezier(0.25, 1, 0.5, 1), transform 600ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+.vt-reveal.vt-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vt-reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* --- 1. HERO FULL-BLEED --- */
+.vt-hero {
+  position: relative;
+  width: 100%;
+  height: 72vh;
+  min-height: 420px;
+  max-height: 700px;
+  overflow: hidden;
+  margin-top: 64px;
+}
+
+.vt-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.vt-hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15,10,26,0.8) 0%, rgba(15,10,26,0.15) 50%, transparent 100%);
+}
+
+.vt-hero-content {
+  position: absolute;
+  bottom: 48px;
+  left: max(48px, 6vw);
+  right: 40%;
+  z-index: 2;
+}
+
+.vt-hero-eyebrow {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--oro);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.vt-hero-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.6rem, 1.2rem + 2vw, 2.8rem);
+  font-weight: 400;
+  color: var(--perla);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.vt-hero-address {
+  font-size: 0.9375rem;
+  color: var(--lavanda);
+  opacity: 0.7;
+}
+
+.vt-hero-badge {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: var(--oro);
+  color: var(--tinta);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  z-index: 2;
+}
+
+/* --- 2. PRICE RIBBON --- */
+.vt-ribbon {
+  padding: var(--space-4xl) var(--space-lg);
+  text-align: center;
+}
+
+.vt-ribbon-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.vt-price {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.2rem, 1.8rem + 2.5vw, 3.8rem);
+  font-weight: 400;
+  color: var(--plum);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.vt-price-sub {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+.vt-stats-line {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.vt-stat-sep {
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background: var(--oro);
+  opacity: 0.4;
+  vertical-align: middle;
+}
+
+/* --- 3. EDITORIAL ZONE --- */
+.vt-editorial {
+  padding: 0 var(--space-lg) var(--space-3xl);
+}
+
+.vt-editorial-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: var(--space-3xl);
+  align-items: start;
+}
+
+.vt-content {
+  min-width: 0;
+}
+
+.vt-pullquote {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: clamp(1.15rem, 1rem + 0.8vw, 1.5rem);
+  font-weight: 400;
+  color: var(--plum);
+  line-height: 1.5;
+  margin-bottom: var(--space-xl);
+  max-width: 55ch;
+  padding: 0;
+  border: 0;
+}
+
+.vt-desc {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--space-xl);
+  max-width: 65ch;
+}
+
+.vt-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.vt-tag {
+  background: var(--lavanda-wash);
+  color: var(--plum);
+  font-size: 0.75rem;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-weight: 500;
+}
+
+.vt-tag-gold {
+  background: var(--oro-wash);
+  color: var(--cobre);
+}
+
+/* Agent sidebar (sticky) */
+.vt-agent-sidebar {
+  position: sticky;
+  top: 80px;
+}
+
+.vt-agent-card {
+  background: var(--plum);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+.vt-agent-eyebrow {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--oro);
+  margin-bottom: var(--space-md);
+  font-weight: 600;
+}
+
+.vt-agent-name {
+  font-family: 'Fraunces', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--perla);
+  margin-bottom: var(--space-sm);
+}
+
+.vt-agent-info {
+  font-size: 0.8125rem;
+  color: var(--lavanda);
+  opacity: 0.6;
+  margin-bottom: 2px;
+}
+
+.vt-agent-wa {
+  display: block;
+  background: #25D366;
+  color: #fff;
+  padding: 13px;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: var(--space-lg);
+  transition: transform 150ms cubic-bezier(0.25,1,0.5,1);
+}
+.vt-agent-wa:hover { transform: translateY(-1px); }
+
+.vt-agent-call {
+  display: block;
+  background: var(--plum-mid);
+  color: var(--lavanda);
+  padding: 12px;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: var(--space-sm);
+  border: 1px solid var(--plum-light);
+  transition: background 200ms;
+}
+.vt-agent-call:hover { background: var(--plum-light); }
+
+/* --- 4. PHOTO STRIP --- */
+.vt-photos-section {
+  padding: var(--space-2xl) 0;
+  overflow: hidden;
+}
+
+.vt-photos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 max(48px, 6vw);
+  margin-bottom: var(--space-lg);
+}
+
+.vt-section-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--cobre);
+}
+
+.vt-photos-count {
+  font-size: 0.8125rem;
+  color: var(--color-text-tertiary);
+}
+
+.vt-photo-strip {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 max(48px, 6vw);
+  scrollbar-width: thin;
+  scrollbar-color: var(--lavanda-soft) transparent;
+}
+
+.vt-photo-strip::-webkit-scrollbar { height: 6px; }
+.vt-photo-strip::-webkit-scrollbar-track { background: transparent; }
+.vt-photo-strip::-webkit-scrollbar-thumb { background: var(--lavanda-soft); border-radius: 3px; }
+
+.vt-photo-item {
+  flex-shrink: 0;
+  width: 280px;
+  scroll-snap-align: start;
+  cursor: pointer;
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.vt-photo-item img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  display: block;
+  transition: transform 400ms cubic-bezier(0.25,1,0.5,1);
+}
+
+.vt-photo-item:hover img { transform: scale(1.04); }
+
+.vt-photo-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 14px;
+  background: linear-gradient(to top, rgba(15,10,26,0.7) 0%, transparent 100%);
+  color: var(--perla);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+/* --- 5. DETAILS (collapsible) --- */
+.vt-details {
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+.vt-details-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.vt-detail-group {
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.vt-detail-summary {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--plum);
+  padding: var(--space-lg) 0;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vt-detail-summary::after {
+  content: '+';
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 1.25rem;
+  color: var(--cobre);
+  font-weight: 300;
+  transition: transform 300ms cubic-bezier(0.25,1,0.5,1);
+}
+
+.vt-detail-group[open] > .vt-detail-summary::after {
+  transform: rotate(45deg);
+}
+
+.vt-detail-summary::-webkit-details-marker { display: none; }
+
+.vt-detail-body {
+  padding: 0 0 var(--space-xl);
+}
+
+.vt-chars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 32px;
+}
+
+.vt-char-item {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vt-char-item::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--oro);
+  flex-shrink: 0;
+}
+
+.vt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.vt-table tr:nth-child(even) { background: var(--perla); }
+
+.vt-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.vt-table td:first-child { color: var(--color-text-tertiary); width: 44%; }
+.vt-table td:last-child { color: var(--color-text); font-weight: 500; }
+
+.vt-services {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 32px;
+}
+
+.vt-serv-item {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vt-serv-icon {
+  font-size: 1rem;
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* --- 6. TRANSPORT BAND --- */
+.vt-transport {
+  background: var(--plum);
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+.vt-transport-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.vt-transport-list {
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vt-transport-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(197,179,217,0.1);
+  font-size: 0.875rem;
+  color: var(--lavanda);
+}
+
+.vt-transport-badge {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 100px;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.vt-metro { background: #9e2a2a; color: #fff; }
+.vt-bus { background: #2a5a9e; color: #fff; }
+
+.vt-transport-name { flex: 1; }
+
+.vt-transport-dist {
+  font-size: 0.75rem;
+  color: rgba(197,179,217,0.5);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- 7. FINAL CTA --- */
+.vt-final-cta {
+  padding: var(--space-4xl) var(--space-lg);
+  text-align: center;
+  background: var(--tinta);
+}
+
+.vt-final-inner {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.vt-final-agent {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.4rem, 1.2rem + 1vw, 2rem);
+  font-weight: 400;
+  color: var(--perla);
+  margin: var(--space-md) 0 var(--space-xl);
+}
+
+.vt-final-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-xl);
+}
+
+.vt-final-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(197,179,217,0.25);
+  text-transform: uppercase;
+}
+
+/* --- VITRINA RESPONSIVE --- */
+@media (max-width: 768px) {
+  .vt-hero { height: 50vh; min-height: 320px; margin-top: 56px; }
+  .vt-hero-content { left: 24px; right: 24px; bottom: 32px; }
+  .vt-hero-title { font-size: clamp(1.3rem, 4vw, 1.8rem); }
+
+  .vt-ribbon { padding: var(--space-2xl) var(--space-lg); }
+  .vt-price { font-size: clamp(1.8rem, 5vw, 2.5rem); }
+
+  .vt-editorial-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .vt-agent-sidebar {
+    position: static;
+    order: -1;
+  }
+
+  .vt-agent-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    text-align: left;
+    padding: var(--space-lg);
+  }
+  .vt-agent-eyebrow { grid-column: 1 / -1; }
+  .vt-agent-name { grid-column: 1 / -1; }
+  .vt-agent-info { grid-column: 1 / -1; }
+
+  .vt-photo-item { width: 220px; }
+  .vt-photo-item img { height: 280px; }
+
+  .vt-chars, .vt-services { grid-template-columns: 1fr; }
+
+  .vt-final-btns { flex-direction: column; }
 }
