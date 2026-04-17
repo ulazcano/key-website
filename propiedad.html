@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propiedad — Key Propiedades</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar-logo">
+      <img src="logo_key.png" alt="Key Propiedades">
+    </a>
+    <button class="menu-toggle" onclick="document.querySelector('.navbar-links').classList.toggle('open')">&#9776;</button>
+    <div class="navbar-links">
+      <a href="index.html#propiedades">Propiedades</a>
+      <a href="index.html#nosotros">Nosotros</a>
+      <a href="index.html#contacto">Contacto</a>
+      <a href="https://wa.me/56912345678" class="navbar-wa" target="_blank">WhatsApp</a>
+    </div>
+  </nav>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-btn lb-prev" onclick="lbNav(-1)">&#8592;</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lightbox-caption" id="lb-caption"></div>
+    <button class="lb-btn lb-next" onclick="lbNav(1)">&#8594;</button>
+    <button class="lb-close" onclick="closeLb()">&#10005;</button>
+  </div>
+
+  <!-- FICHA CONTENT (rendered by JS) -->
+  <div class="ficha-wrapper" id="ficha-wrapper">
+    <p style="text-align:center;padding:60px 0;color:#999;">Cargando propiedad...</p>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/ficha.js"></script>
+</body>
+</html>
