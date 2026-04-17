@@ -1,7 +1,6 @@
 import { getStore } from "@netlify/blobs";
-import crypto from "crypto";
 
-export default async (req) => {
+export default async (req, context) => {
   const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -23,8 +22,8 @@ export default async (req) => {
   try {
     const { email, password } = await req.json();
 
-    const adminEmail = Netlify.env.get("ADMIN_EMAIL");
-    const adminPassword = Netlify.env.get("ADMIN_PASSWORD");
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPassword = process.env.ADMIN_PASSWORD;
 
     if (!email || !password || email !== adminEmail || password !== adminPassword) {
       return new Response(JSON.stringify({ error: "Invalid credentials" }), {
@@ -33,13 +32,13 @@ export default async (req) => {
       });
     }
 
-    const token = crypto.randomUUID();
+    const token = globalThis.crypto.randomUUID();
     const store = getStore("admin-sessions");
     await store.setJSON(token, { email, created: Date.now() });
 
     return new Response(JSON.stringify({ token }), { status: 200, headers });
   } catch (err) {
-    return new Response(JSON.stringify({ error: "Server error" }), {
+    return new Response(JSON.stringify({ error: "Server error: " + err.message }), {
       status: 500,
       headers,
     });

@@ -136,4 +136,4 @@ export default async (req) => {
   return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405, headers });
 };
 
-export const config = { path: "/api/propiedades/*" };
+export const config = { path: ["/api/propiedades", "/api/propiedades/*"] };
