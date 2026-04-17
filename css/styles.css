@@ -128,7 +128,7 @@ ul { list-style: none; }
   background: rgba(15, 10, 26, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  padding: 0 var(--space-lg);
+  padding: 0 var(--space-2xl);
   height: 64px;
   display: flex;
   align-items: center;
@@ -142,8 +142,8 @@ ul { list-style: none; }
 }
 
 .navbar-logo img {
-  height: 27px;
-  max-height: 27px;
+  height: 30px;
+  max-height: 30px;
   width: auto;
 }
 
