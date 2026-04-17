@@ -5,809 +5,586 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin — Key Propiedades</title>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* Admin-specific overrides */
+    .admin-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1001;
+      background: #1a1a1a; color: #fff; height: 52px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; font-size: 13px;
+    }
+    .admin-bar strong { font-family: 'Libre Caslon Display', serif; font-size: 16px; font-weight: 400; }
+    .admin-bar button {
+      background: rgba(255,255,255,0.12); border: none; color: #fff;
+      padding: 6px 16px; border-radius: 6px; cursor: pointer; font-family: 'Figtree', sans-serif; font-size: 12px;
+    }
+    .admin-bar button:hover { background: rgba(255,255,255,0.2); }
+    .navbar { display: none; }
+    body { padding-top: 52px; }
 
-    body {
-      font-family: 'Figtree', sans-serif;
-      background: #f5f5f3;
-      color: #1a1a1a;
-      line-height: 1.5;
+    /* Login */
+    .login-screen {
+      display: flex; align-items: center; justify-content: center;
+      min-height: calc(100vh - 52px); padding: 24px;
     }
+    .login-box {
+      background: #fff; border-radius: 12px; padding: 40px;
+      width: 100%; max-width: 380px; text-align: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .login-box h2 { font-size: 24px; margin-bottom: 8px; }
+    .login-box p { color: #888; font-size: 13px; margin-bottom: 24px; }
+    .login-box input {
+      width: 100%; padding: 12px 14px; border: 1px solid #e0e0e0; border-radius: 8px;
+      font-family: 'Figtree', sans-serif; font-size: 14px; margin-bottom: 12px;
+    }
+    .login-box input:focus { outline: 2px solid var(--color-accent); border-color: transparent; }
+    .login-btn {
+      width: 100%; padding: 12px; background: var(--color-primary); color: #fff;
+      border: none; border-radius: 8px; font-family: 'Figtree', sans-serif;
+      font-size: 14px; font-weight: 500; cursor: pointer;
+    }
+    .login-btn:hover { opacity: 0.9; }
+    .login-error { color: #c0392b; font-size: 12px; margin-top: 8px; display: none; }
 
-    h1, h2, h3 {
-      font-family: 'Libre Caslon Display', serif;
-      font-weight: 400;
+    /* Cards view */
+    .admin-content { padding: 32px 24px; max-width: 1200px; margin: 0 auto; }
+    .admin-actions { display: flex; gap: 12px; margin-bottom: 24px; align-items: center; }
+    .btn-new {
+      background: var(--color-primary); color: #fff; border: none;
+      padding: 10px 20px; border-radius: 8px; font-family: 'Figtree', sans-serif;
+      font-size: 13px; font-weight: 500; cursor: pointer;
     }
+    .btn-new:hover { opacity: 0.9; }
+    .admin-status { font-size: 12px; color: #999; margin-left: auto; }
 
-    /* --- Layout --- */
-    .admin-header {
-      background: #1a1a1a;
-      color: #fff;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    /* Editable ficha overrides */
+    .edit-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      z-index: 1002; overflow-y: auto; padding: 24px;
     }
-    .admin-header h1 { font-size: 1.25rem; color: #c9a84c; }
-    .admin-header button {
-      background: transparent;
-      border: 1px solid #666;
-      color: #ccc;
-      padding: 0.4rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: inherit;
+    .edit-overlay.open { display: block; }
+    .edit-wrap {
+      max-width: 800px; margin: 20px auto; position: relative;
     }
-    .admin-header button:hover { border-color: #c9a84c; color: #c9a84c; }
-
-    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-
-    /* --- Login --- */
-    .login-wrap {
-      max-width: 400px;
-      margin: 4rem auto;
-      background: #fff;
-      border-radius: 8px;
-      padding: 2.5rem;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    .edit-topbar {
+      display: flex; gap: 12px; justify-content: space-between; align-items: center;
+      margin-bottom: 16px; position: sticky; top: 0; z-index: 10;
+      background: #1a1a1a; padding: 12px 20px; border-radius: 10px;
     }
-    .login-wrap h2 { margin-bottom: 1.5rem; text-align: center; }
-
-    /* --- Forms --- */
-    label {
-      display: block;
-      font-weight: 500;
-      font-size: 0.85rem;
-      margin-bottom: 0.25rem;
-      color: #444;
+    .edit-topbar span { color: #fff; font-size: 14px; font-weight: 500; }
+    .btn-save {
+      background: #27ae60; color: #fff; border: none; padding: 8px 24px;
+      border-radius: 6px; font-family: 'Figtree', sans-serif; font-size: 13px;
+      font-weight: 500; cursor: pointer;
     }
-    input, select, textarea {
-      width: 100%;
-      padding: 0.5rem 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-family: inherit;
-      font-size: 0.9rem;
-      margin-bottom: 0.75rem;
-      background: #fff;
+    .btn-save:hover { background: #219a52; }
+    .btn-cancel {
+      background: rgba(255,255,255,0.15); color: #fff; border: none; padding: 8px 16px;
+      border-radius: 6px; font-family: 'Figtree', sans-serif; font-size: 13px; cursor: pointer;
     }
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: #c9a84c;
-      box-shadow: 0 0 0 2px rgba(201,168,76,0.15);
-    }
-    textarea { resize: vertical; min-height: 80px; }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 0 1rem;
-    }
-
-    /* --- Buttons --- */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.5rem 1.25rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-    .btn-primary { background: #c9a84c; color: #fff; }
-    .btn-primary:hover { background: #b8953e; }
-    .btn-danger { background: #d44; color: #fff; }
-    .btn-danger:hover { background: #b33; }
-    .btn-secondary { background: #e0e0e0; color: #333; }
-    .btn-secondary:hover { background: #d0d0d0; }
-    .btn-sm { padding: 0.3rem 0.75rem; font-size: 0.8rem; }
-
-    .toolbar {
-      display: flex;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
+    .btn-delete {
+      background: #c0392b; color: #fff; border: none; padding: 8px 16px;
+      border-radius: 6px; font-family: 'Figtree', sans-serif; font-size: 13px; cursor: pointer;
     }
 
-    /* --- Table --- */
-    .prop-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    /* Editable fields inside ficha */
+    .e-field {
+      background: rgba(255,255,200,0.15); border: 1px dashed var(--color-accent);
+      border-radius: 4px; padding: 2px 4px; min-width: 40px;
+      outline: none; cursor: text;
     }
-    .prop-table th {
-      background: #1a1a1a;
-      color: #fff;
-      text-align: left;
-      padding: 0.75rem 1rem;
-      font-size: 0.8rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+    .e-field:focus { background: #fffde6; border-style: solid; }
+    textarea.e-area {
+      width: 100%; min-height: 60px; padding: 8px; border: 1px dashed var(--color-accent);
+      border-radius: 6px; font-family: 'Figtree', sans-serif; font-size: 13px;
+      background: rgba(255,255,200,0.15); resize: vertical; line-height: 1.6;
     }
-    .prop-table td {
-      padding: 0.65rem 1rem;
-      border-bottom: 1px solid #eee;
-      font-size: 0.875rem;
-    }
-    .prop-table tr:hover td { background: #fafaf8; }
-    .prop-table .actions { white-space: nowrap; display: flex; gap: 0.4rem; }
+    textarea.e-area:focus { background: #fffde6; border-style: solid; outline: none; }
 
-    /* --- Sections --- */
-    .form-section {
-      background: #fff;
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    /* List editors */
+    .e-list { margin-bottom: 16px; }
+    .e-list-item {
+      display: flex; gap: 6px; align-items: center; margin-bottom: 4px;
     }
-    .form-section h3 {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid #c9a84c;
-      color: #1a1a1a;
+    .e-list-item input {
+      flex: 1; padding: 6px 8px; border: 1px solid #ddd; border-radius: 4px;
+      font-family: 'Figtree', sans-serif; font-size: 12px;
     }
+    .e-list-item input:focus { outline: 1px solid var(--color-accent); }
+    .e-rm {
+      background: none; border: none; color: #c0392b; font-size: 16px;
+      cursor: pointer; padding: 4px; line-height: 1;
+    }
+    .e-add {
+      background: none; border: 1px dashed #ccc; color: #888; padding: 4px 12px;
+      border-radius: 4px; font-size: 11px; cursor: pointer; font-family: 'Figtree', sans-serif;
+    }
+    .e-add:hover { border-color: var(--color-accent); color: var(--color-accent); }
 
-    /* --- Dynamic lists --- */
-    .dyn-list-item {
-      display: flex;
-      gap: 0.5rem;
-      align-items: flex-start;
-      margin-bottom: 0.5rem;
-      padding: 0.5rem;
-      background: #fafaf8;
-      border-radius: 4px;
-      border: 1px solid #eee;
+    .e-section-label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--color-accent); font-weight: 600; margin: 16px 0 6px; display: block;
     }
-    .dyn-list-item input,
-    .dyn-list-item select,
-    .dyn-list-item textarea {
-      margin-bottom: 0;
-    }
-    .dyn-list-item .btn-remove {
-      background: #eee;
-      border: none;
-      color: #999;
-      cursor: pointer;
-      padding: 0.35rem 0.5rem;
-      border-radius: 4px;
-      font-size: 1rem;
-      line-height: 1;
-      flex-shrink: 0;
-    }
-    .dyn-list-item .btn-remove:hover { background: #d44; color: #fff; }
-
-    .btn-add {
-      background: none;
-      border: 1px dashed #c9a84c;
-      color: #c9a84c;
-      padding: 0.4rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.8rem;
-      font-weight: 500;
-    }
-    .btn-add:hover { background: rgba(201,168,76,0.08); }
-
-    /* --- Status messages --- */
-    .msg {
-      padding: 0.75rem 1rem;
-      border-radius: 4px;
-      margin-bottom: 1rem;
-      font-size: 0.875rem;
-    }
-    .msg-error { background: #ffeaea; color: #c33; }
-    .msg-success { background: #eafce5; color: #2a7a1e; }
-
-    /* --- Responsive --- */
-    @media (max-width: 768px) {
-      .container { padding: 1rem; }
-      .form-row { grid-template-columns: 1fr; }
-      .prop-table { font-size: 0.8rem; }
-      .prop-table th, .prop-table td { padding: 0.5rem; }
-    }
-
-    .hidden { display: none !important; }
   </style>
 </head>
 <body>
 
-<header class="admin-header">
-  <h1>Key Propiedades — Admin</h1>
-  <button id="btn-logout" class="hidden" onclick="logout()">Cerrar sesion</button>
-</header>
-
-<!-- ============ LOGIN ============ -->
-<div id="login-screen" class="login-wrap">
-  <h2>Iniciar sesion</h2>
-  <div id="login-msg"></div>
-  <label for="login-email">Email</label>
-  <input type="email" id="login-email" autocomplete="email">
-  <label for="login-password">Contrasena</label>
-  <input type="password" id="login-password" autocomplete="current-password">
-  <button class="btn btn-primary" style="width:100%;margin-top:0.5rem" onclick="doLogin()">Entrar</button>
-</div>
-
-<!-- ============ PROPERTY LIST ============ -->
-<div id="list-screen" class="container hidden">
-  <h2 style="margin-bottom:1rem">Propiedades</h2>
-  <div class="toolbar">
-    <button class="btn btn-primary" onclick="showForm()">+ Nueva propiedad</button>
-    <button class="btn btn-secondary" onclick="importFromJSON()">Importar desde JSON</button>
-  </div>
-  <div id="list-msg"></div>
-  <div style="overflow-x:auto">
-    <table class="prop-table">
-      <thead>
-        <tr>
-          <th>Titulo</th>
-          <th>Direccion</th>
-          <th>Precio</th>
-          <th>Operacion</th>
-          <th>Estado</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="prop-tbody"></tbody>
-    </table>
+<!-- ADMIN BAR -->
+<div class="admin-bar">
+  <strong>Admin — Key Propiedades</strong>
+  <div>
+    <span id="admin-email" style="margin-right:12px;opacity:0.6"></span>
+    <button onclick="logout()">Cerrar sesion</button>
   </div>
 </div>
 
-<!-- ============ PROPERTY FORM ============ -->
-<div id="form-screen" class="container hidden">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
-    <h2 id="form-title">Nueva propiedad</h2>
-    <button class="btn btn-secondary" onclick="showList()">Volver a lista</button>
+<!-- LOGIN -->
+<div id="login-screen" class="login-screen">
+  <div class="login-box">
+    <h2>Administrador</h2>
+    <p>Ingresa tus credenciales</p>
+    <input type="email" id="login-email" placeholder="Email">
+    <input type="password" id="login-pass" placeholder="Contraseña" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Ingresar</button>
+    <div class="login-error" id="login-error">Credenciales incorrectas</div>
   </div>
-  <div id="form-msg"></div>
-  <form id="prop-form" onsubmit="return saveProperty(event)">
-    <input type="hidden" id="f-id">
+</div>
 
-    <!-- Informacion basica -->
-    <div class="form-section">
-      <h3>Informacion basica</h3>
-      <div class="form-row">
-        <div><label>Titulo</label><input type="text" id="f-titulo" required></div>
-        <div><label>Direccion</label><input type="text" id="f-direccion" required></div>
-        <div><label>Comuna</label><input type="text" id="f-comuna"></div>
+<!-- MAIN CONTENT -->
+<div id="main-content" style="display:none">
+  <div class="admin-content">
+    <div class="section-header">
+      <h2>Propiedades</h2>
+    </div>
+    <div class="admin-actions">
+      <button class="btn-new" onclick="openNew()">+ Nueva propiedad</button>
+      <span class="admin-status" id="status-msg"></span>
+    </div>
+    <div class="properties-grid" id="admin-grid"></div>
+  </div>
+</div>
+
+<!-- EDIT OVERLAY -->
+<div class="edit-overlay" id="edit-overlay">
+  <div class="edit-wrap">
+    <div class="edit-topbar">
+      <div style="display:flex;gap:8px">
+        <button class="btn-cancel" onclick="closeEdit()">Cerrar</button>
+        <button class="btn-delete" id="btn-delete" onclick="doDelete()">Eliminar</button>
       </div>
-      <div class="form-row">
-        <div><label>Precio</label><input type="number" id="f-precio"></div>
-        <div><label>Precio formato</label><input type="text" id="f-precio_formato"></div>
-        <div><label>Moneda</label>
-          <select id="f-moneda">
-            <option value="CLP">CLP</option>
-            <option value="UF">UF</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div><label>Gastos comunes</label><input type="text" id="f-gastos_comunes"></div>
-        <div><label>Contribuciones</label><input type="text" id="f-contribuciones"></div>
-        <div><label>Operacion</label>
-          <select id="f-operacion">
-            <option value="Venta">Venta</option>
-            <option value="Arriendo">Arriendo</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div><label>Tipo</label>
-          <select id="f-tipo">
-            <option value="Departamento">Departamento</option>
-            <option value="Casa">Casa</option>
-            <option value="Oficina">Oficina</option>
-          </select>
-        </div>
-        <div><label>Estado</label><input type="text" id="f-estado"></div>
-        <div><label>Dormitorios</label><input type="number" id="f-dormitorios" min="0"></div>
-      </div>
-      <div class="form-row">
-        <div><label>Banos</label><input type="number" id="f-banos" min="0"></div>
-        <div><label>Superficie util (m2)</label><input type="number" id="f-superficie_util" min="0"></div>
-        <div><label>Superficie total (m2)</label><input type="number" id="f-superficie_total" min="0"></div>
-      </div>
-      <div class="form-row">
-        <div><label>Terraza (m2)</label><input type="number" id="f-terraza" min="0"></div>
-        <div><label>Piso</label><input type="text" id="f-piso"></div>
-        <div><label>Estacionamientos</label><input type="number" id="f-estacionamientos" min="0"></div>
-      </div>
-      <div class="form-row">
-        <div><label>Orientacion</label><input type="text" id="f-orientacion"></div>
-      </div>
+      <span id="edit-title-bar">Editando propiedad</span>
+      <button class="btn-save" onclick="doSave()">Guardar cambios</button>
     </div>
-
-    <!-- Textos -->
-    <div class="form-section">
-      <h3>Textos</h3>
-      <label>Highlight</label>
-      <textarea id="f-highlight" rows="3"></textarea>
-      <label>Descripcion</label>
-      <textarea id="f-descripcion" rows="5"></textarea>
-    </div>
-
-    <!-- Caracteristicas -->
-    <div class="form-section">
-      <h3>Caracteristicas</h3>
-      <div id="list-caracteristicas"></div>
-      <button type="button" class="btn-add" onclick="addCaracteristica()">+ Agregar caracteristica</button>
-    </div>
-
-    <!-- Tags -->
-    <div class="form-section">
-      <h3>Tags</h3>
-      <div id="list-tags"></div>
-      <button type="button" class="btn-add" onclick="addTag()">+ Agregar tag</button>
-    </div>
-
-    <!-- Ficha tecnica -->
-    <div class="form-section">
-      <h3>Ficha tecnica</h3>
-      <div id="list-ficha_tecnica"></div>
-      <button type="button" class="btn-add" onclick="addFicha()">+ Agregar campo</button>
-    </div>
-
-    <!-- Servicios del edificio -->
-    <div class="form-section">
-      <h3>Servicios del edificio</h3>
-      <div id="list-servicios_edificio"></div>
-      <button type="button" class="btn-add" onclick="addServicio()">+ Agregar servicio</button>
-    </div>
-
-    <!-- Transporte -->
-    <div class="form-section">
-      <h3>Transporte</h3>
-      <div id="list-transporte"></div>
-      <button type="button" class="btn-add" onclick="addTransporte()">+ Agregar transporte</button>
-    </div>
-
-    <!-- Imagenes -->
-    <div class="form-section">
-      <h3>Imagenes</h3>
-      <label>Hero (URL/ruta)</label>
-      <input type="text" id="f-hero">
-
-      <label style="margin-top:0.5rem">Thumbnails</label>
-      <div id="list-thumbnails"></div>
-      <button type="button" class="btn-add" onclick="addThumbnail()">+ Agregar thumbnail</button>
-
-      <label style="margin-top:1rem">Galeria</label>
-      <div id="list-galeria"></div>
-      <button type="button" class="btn-add" onclick="addGaleria()">+ Agregar imagen</button>
-    </div>
-
-    <!-- Agente -->
-    <div class="form-section">
-      <h3>Agente</h3>
-      <div class="form-row">
-        <div><label>Nombre</label><input type="text" id="f-agente_nombre"></div>
-        <div><label>Telefono</label><input type="text" id="f-agente_telefono"></div>
-      </div>
-      <div class="form-row">
-        <div><label>WhatsApp</label><input type="text" id="f-agente_whatsapp"></div>
-        <div><label>Email</label><input type="email" id="f-agente_email"></div>
-      </div>
-    </div>
-
-    <div style="display:flex;gap:0.75rem;margin-top:1rem">
-      <button type="submit" class="btn btn-primary">Guardar propiedad</button>
-      <button type="button" class="btn btn-secondary" onclick="showList()">Cancelar</button>
-    </div>
-  </form>
+    <div class="ficha-card" id="edit-ficha"></div>
+  </div>
 </div>
 
 <script>
-// ========== STATE ==========
+// ===== STATE =====
+let token = localStorage.getItem('kp-admin-token');
+let properties = [];
+let editingProp = null;
+let editingIdx = -1;
+let isNew = false;
+
 const API = '/api/propiedades';
 const AUTH = '/api/auth';
-let token = localStorage.getItem('admin_token') || '';
-let properties = [];
-let editingId = null;
 
-// ========== AUTH ==========
-function authHeaders() {
-  return {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`,
-  };
+function headers() {
+  return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token };
 }
 
+// ===== AUTH =====
 async function doLogin() {
   const email = document.getElementById('login-email').value;
-  const password = document.getElementById('login-password').value;
-  const msgEl = document.getElementById('login-msg');
-  msgEl.innerHTML = '';
-
+  const pass = document.getElementById('login-pass').value;
   try {
-    const res = await fetch(AUTH, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!res.ok) {
-      msgEl.innerHTML = '<div class="msg msg-error">Credenciales incorrectas</div>';
-      return;
-    }
+    const res = await fetch(AUTH, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({email, password: pass}) });
+    if (!res.ok) throw new Error();
     const data = await res.json();
     token = data.token;
-    localStorage.setItem('admin_token', token);
-    showApp();
-  } catch (e) {
-    msgEl.innerHTML = '<div class="msg msg-error">Error de conexion</div>';
+    localStorage.setItem('kp-admin-token', token);
+    showApp(email);
+  } catch {
+    document.getElementById('login-error').style.display = 'block';
   }
 }
 
 function logout() {
-  token = '';
-  localStorage.removeItem('admin_token');
-  document.getElementById('login-screen').classList.remove('hidden');
-  document.getElementById('list-screen').classList.add('hidden');
-  document.getElementById('form-screen').classList.add('hidden');
-  document.getElementById('btn-logout').classList.add('hidden');
+  token = null;
+  localStorage.removeItem('kp-admin-token');
+  location.reload();
 }
 
-async function showApp() {
-  document.getElementById('login-screen').classList.add('hidden');
-  document.getElementById('form-screen').classList.add('hidden');
-  document.getElementById('list-screen').classList.remove('hidden');
-  document.getElementById('btn-logout').classList.remove('hidden');
+async function showApp(email) {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('main-content').style.display = 'block';
+  document.getElementById('admin-email').textContent = email || '';
   await loadProperties();
 }
 
-// ========== CRUD ==========
+// ===== DATA =====
 async function loadProperties() {
+  setStatus('Cargando...');
   try {
-    const res = await fetch(API);
-    properties = await res.json();
-  } catch {
-    properties = [];
+    let res = await fetch(API, { headers: headers() });
+    let data = await res.json();
+
+    // Auto-seed from static JSON if API is empty
+    if (!data || data.length === 0) {
+      setStatus('Importando propiedades...');
+      const seed = await fetch('data/propiedades.json').then(r => r.json());
+      await fetch(API, { method: 'POST', headers: headers(), body: JSON.stringify(seed) });
+      data = seed;
+    }
+
+    properties = data;
+    renderCards();
+    setStatus(properties.length + ' propiedades');
+  } catch (e) {
+    // If auth failed, go back to login
+    if (e.message?.includes('401')) { logout(); return; }
+    // Fallback to static
+    try {
+      properties = await fetch('data/propiedades.json').then(r => r.json());
+      renderCards();
+      setStatus(properties.length + ' propiedades (modo local)');
+    } catch { setStatus('Error cargando propiedades'); }
   }
-  renderTable();
 }
 
-function renderTable() {
-  const tbody = document.getElementById('prop-tbody');
-  if (properties.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:#888">No hay propiedades. Importa desde JSON o crea una nueva.</td></tr>';
-    return;
-  }
-  tbody.innerHTML = properties.map(p => `
-    <tr>
-      <td>${esc(p.titulo)}</td>
-      <td>${esc(p.direccion)}</td>
-      <td>${esc(p.precio_formato)}</td>
-      <td>${esc(p.operacion)}</td>
-      <td>${esc(p.estado || '')}</td>
-      <td class="actions">
-        <button class="btn btn-sm btn-primary" onclick="editProperty('${p.id}')">Editar</button>
-        <button class="btn btn-sm btn-danger" onclick="deleteProperty('${p.id}')">Eliminar</button>
-      </td>
-    </tr>
+function setStatus(msg) { document.getElementById('status-msg').textContent = msg; }
+
+// ===== CARDS =====
+function renderCards() {
+  const grid = document.getElementById('admin-grid');
+  grid.innerHTML = properties.map((p, i) => `
+    <div class="property-card" onclick="openEdit(${i})" style="cursor:pointer">
+      <div class="card-img-wrap">
+        <img src="${p.imagenes?.hero || ''}" alt="${p.titulo}" loading="lazy">
+        ${p.estado ? `<span class="card-badge">${p.estado}</span>` : ''}
+        <span class="card-op">${p.operacion}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-price">${p.precio_formato}</div>
+        <div class="card-address">${p.direccion}</div>
+        <div class="card-stats">
+          <div class="card-stat"><span>${p.dormitorios}</span> dorm.</div>
+          <div class="card-stat"><span>${p.banos}</span> banos</div>
+          <div class="card-stat"><span>${p.superficie_util}</span> m2</div>
+          <div class="card-stat"><span>${p.estacionamientos}</span> estac.</div>
+        </div>
+      </div>
+    </div>
   `).join('');
 }
 
-function esc(s) {
-  if (s == null) return '';
-  const d = document.createElement('div');
-  d.textContent = String(s);
-  return d.innerHTML;
+// ===== EDITABLE FICHA =====
+function ef(val, field, type) {
+  // editable field inline
+  if (type === 'area') return `<textarea class="e-area" data-field="${field}">${val || ''}</textarea>`;
+  return `<span class="e-field" contenteditable="true" data-field="${field}">${val ?? ''}</span>`;
 }
 
-async function deleteProperty(id) {
-  if (!confirm('Eliminar esta propiedad?')) return;
-  try {
-    const res = await fetch(`${API}/${id}`, { method: 'DELETE', headers: authHeaders() });
-    if (res.status === 401) { logout(); return; }
-    await loadProperties();
-    showMsg('list-msg', 'Propiedad eliminada', 'success');
-  } catch {
-    showMsg('list-msg', 'Error al eliminar', 'error');
-  }
+function listEditor(items, listId, fields) {
+  // fields: array of {key, placeholder, width?}
+  let html = `<div class="e-list" id="list-${listId}">`;
+  (items || []).forEach((item, i) => {
+    html += `<div class="e-list-item" data-list="${listId}" data-i="${i}">`;
+    if (typeof item === 'string') {
+      html += `<input value="${esc(item)}" data-key="value" style="flex:1">`;
+    } else {
+      fields.forEach(f => {
+        html += `<input value="${esc(item[f.key] || '')}" data-key="${f.key}" placeholder="${f.placeholder}" style="flex:${f.width||1}">`;
+      });
+    }
+    html += `<button class="e-rm" onclick="rmListItem('${listId}',${i})">×</button></div>`;
+  });
+  html += `<button class="e-add" onclick="addListItem('${listId}')">+ Agregar</button></div>`;
+  return html;
 }
 
-async function importFromJSON() {
-  if (!confirm('Esto reemplazara TODAS las propiedades con los datos de data/propiedades.json. Continuar?')) return;
-  try {
-    const res = await fetch('data/propiedades.json');
-    const data = await res.json();
-    const saveRes = await fetch(API, {
-      method: 'POST',
-      headers: authHeaders(),
-      body: JSON.stringify(data),
+function esc(s) { return String(s || '').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+
+function renderEditFicha(p) {
+  const f = document.getElementById('edit-ficha');
+  document.getElementById('edit-title-bar').textContent = isNew ? 'Nueva propiedad' : p.titulo;
+  document.getElementById('btn-delete').style.display = isNew ? 'none' : '';
+
+  f.innerHTML = `
+    <!-- HERO IMAGE -->
+    <div class="ficha-header">
+      <div class="ficha-hero-wrap" style="cursor:default">
+        <img src="${p.imagenes?.hero || ''}" alt="" id="edit-hero-img">
+        ${p.estado ? `<span class="ficha-badge">${ef(p.estado,'estado')}</span>` : ''}
+      </div>
+    </div>
+
+    <!-- PRICE BAR -->
+    <div class="ficha-price-bar">
+      <div class="ficha-price-bar-left">
+        <div class="ficha-price-main">${ef(p.precio_formato,'precio_formato')}</div>
+        <div class="ficha-price-detail">
+          ${ef(p.operacion,'operacion')} · GC ${ef(p.gastos_comunes,'gastos_comunes')}
+        </div>
+      </div>
+    </div>
+
+    <div class="ficha-body">
+      <!-- BASIC INFO -->
+      <div class="ficha-title">${ef(p.titulo,'titulo')}</div>
+      <div class="ficha-address">${ef(p.direccion,'direccion')}, ${ef(p.comuna,'comuna')}</div>
+
+      <div class="ficha-stats">
+        <div class="ficha-stat-box"><div class="ficha-stat-val">${ef(p.dormitorios,'dormitorios')}</div><div class="ficha-stat-lbl">Dormitorios</div></div>
+        <div class="ficha-stat-box"><div class="ficha-stat-val">${ef(p.banos,'banos')}</div><div class="ficha-stat-lbl">Banos</div></div>
+        <div class="ficha-stat-box"><div class="ficha-stat-val">${ef(p.superficie_util,'superficie_util')}</div><div class="ficha-stat-lbl">m2 utiles</div></div>
+        <div class="ficha-stat-box"><div class="ficha-stat-val">${ef(p.piso,'piso')}</div><div class="ficha-stat-lbl">Piso</div></div>
+        <div class="ficha-stat-box"><div class="ficha-stat-val">${ef(p.estacionamientos,'estacionamientos')}</div><div class="ficha-stat-lbl">Estac.</div></div>
+      </div>
+
+      <label class="e-section-label">Datos adicionales</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;margin-bottom:16px;font-size:13px;color:#666">
+        <div>Precio (num): ${ef(p.precio,'precio')}</div>
+        <div>Moneda: ${ef(p.moneda,'moneda')}</div>
+        <div>Tipo: ${ef(p.tipo,'tipo')}</div>
+        <div>Sup. total: ${ef(p.superficie_total,'superficie_total')}</div>
+        <div>Terraza: ${ef(p.terraza,'terraza')}</div>
+        <div>Orientacion: ${ef(p.orientacion,'orientacion')}</div>
+      </div>
+
+      <!-- HIGHLIGHT -->
+      <div class="ficha-highlight">
+        <div class="ficha-highlight-title">Por que esta propiedad</div>
+        ${ef(p.highlight,'highlight','area')}
+      </div>
+
+      <!-- DESCRIPTION -->
+      <div class="ficha-section-title">Descripcion</div>
+      ${ef(p.descripcion,'descripcion','area')}
+
+      <!-- IMAGES -->
+      <div class="ficha-section-title">Imagenes</div>
+      <label class="e-section-label">Hero (URL)</label>
+      <div class="e-list"><div class="e-list-item"><input id="edit-hero-url" value="${esc(p.imagenes?.hero)}" style="flex:1" onchange="document.getElementById('edit-hero-img').src=this.value"></div></div>
+      <label class="e-section-label">Thumbnails</label>
+      ${listEditor(p.imagenes?.thumbnails || [], 'thumbnails', [{key:'value',placeholder:'URL imagen'}])}
+      <label class="e-section-label">Galeria (recorrido)</label>
+      ${listEditor(p.imagenes?.galeria || [], 'galeria', [{key:'src',placeholder:'URL imagen',width:2},{key:'label',placeholder:'Nombre recinto',width:1}])}
+
+      <!-- CHARACTERISTICS -->
+      <div class="ficha-section-title">Caracteristicas</div>
+      ${listEditor(p.caracteristicas || [], 'caracteristicas', [{key:'value',placeholder:'Ej: 2 dormitorios en suite'}])}
+
+      <!-- TAGS -->
+      <div class="ficha-section-title">Tags</div>
+      ${listEditor(p.tags || [], 'tags', [{key:'icono',placeholder:'Emoji',width:0.3},{key:'texto',placeholder:'Texto',width:2},{key:'tipo',placeholder:'default/gold',width:0.8}])}
+
+      <!-- FICHA TECNICA -->
+      <div class="ficha-section-title">Ficha tecnica</div>
+      ${listEditor(p.ficha_tecnica || [], 'ficha_tecnica', [{key:'campo',placeholder:'Campo',width:1},{key:'valor',placeholder:'Valor',width:1}])}
+
+      <!-- SERVICES -->
+      <div class="ficha-section-title">Servicios del edificio</div>
+      ${listEditor(p.servicios_edificio || [], 'servicios', [{key:'icono',placeholder:'Emoji',width:0.3},{key:'nombre',placeholder:'Servicio',width:2}])}
+
+      <!-- TRANSPORT -->
+      <div class="ficha-section-title">Transporte</div>
+      ${listEditor(p.transporte || [], 'transporte', [{key:'tipo',placeholder:'metro/bus',width:0.6},{key:'nombre',placeholder:'Nombre',width:2},{key:'distancia',placeholder:'Dist.',width:0.6},{key:'tiempo',placeholder:'Tiempo',width:0.6}])}
+
+      <!-- AGENT -->
+      <div class="ficha-section-title">Agente</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;margin-bottom:16px;font-size:13px;color:#666">
+        <div>Nombre: ${ef(p.agente?.nombre,'agente.nombre')}</div>
+        <div>Telefono: ${ef(p.agente?.telefono,'agente.telefono')}</div>
+        <div>WhatsApp: ${ef(p.agente?.whatsapp,'agente.whatsapp')}</div>
+        <div>Email: ${ef(p.agente?.email,'agente.email')}</div>
+      </div>
+    </div>
+  `;
+}
+
+// ===== LIST OPERATIONS =====
+function getListData(listId) {
+  const container = document.getElementById('list-' + listId);
+  if (!container) return [];
+  const items = container.querySelectorAll('.e-list-item');
+  return Array.from(items).map(row => {
+    const inputs = row.querySelectorAll('input');
+    if (inputs.length === 1 && inputs[0].dataset.key === 'value') return inputs[0].value;
+    const obj = {};
+    inputs.forEach(inp => { obj[inp.dataset.key] = inp.value; });
+    return obj;
+  });
+}
+
+function rmListItem(listId, idx) {
+  const container = document.getElementById('list-' + listId);
+  const items = container.querySelectorAll('.e-list-item');
+  if (items[idx]) items[idx].remove();
+}
+
+function addListItem(listId) {
+  const container = document.getElementById('list-' + listId);
+  const addBtn = container.querySelector('.e-add');
+  // Clone structure from first item or create default
+  const existing = container.querySelector('.e-list-item');
+  const div = document.createElement('div');
+  div.className = 'e-list-item';
+  div.dataset.list = listId;
+
+  if (existing) {
+    const inputs = existing.querySelectorAll('input');
+    inputs.forEach(inp => {
+      const newInp = document.createElement('input');
+      newInp.dataset.key = inp.dataset.key;
+      newInp.placeholder = inp.placeholder;
+      newInp.style.flex = inp.style.flex;
+      div.appendChild(newInp);
     });
-    if (saveRes.status === 401) { logout(); return; }
-    await loadProperties();
-    showMsg('list-msg', `Importadas ${data.length} propiedades`, 'success');
-  } catch (e) {
-    showMsg('list-msg', 'Error al importar: ' + e.message, 'error');
+  } else {
+    const inp = document.createElement('input');
+    inp.dataset.key = 'value';
+    inp.style.flex = '1';
+    div.appendChild(inp);
   }
+  const rm = document.createElement('button');
+  rm.className = 'e-rm';
+  rm.textContent = '×';
+  rm.onclick = () => div.remove();
+  div.appendChild(rm);
+  container.insertBefore(div, addBtn);
 }
 
-// ========== FORM ==========
-function showForm(prop) {
-  editingId = prop ? prop.id : null;
-  document.getElementById('form-title').textContent = prop ? 'Editar propiedad' : 'Nueva propiedad';
-  document.getElementById('list-screen').classList.add('hidden');
-  document.getElementById('form-screen').classList.remove('hidden');
-  clearForm();
-  if (prop) populateForm(prop);
-  window.scrollTo(0, 0);
-}
+// ===== COLLECT FORM DATA =====
+function collectData() {
+  const p = JSON.parse(JSON.stringify(editingProp));
 
-function showList() {
-  document.getElementById('form-screen').classList.add('hidden');
-  document.getElementById('list-screen').classList.remove('hidden');
-  window.scrollTo(0, 0);
-}
-
-function showMsg(containerId, text, type) {
-  const el = document.getElementById(containerId);
-  el.innerHTML = `<div class="msg msg-${type}">${esc(text)}</div>`;
-  setTimeout(() => { el.innerHTML = ''; }, 4000);
-}
-
-function clearForm() {
-  document.getElementById('prop-form').reset();
-  document.getElementById('f-id').value = '';
-  ['caracteristicas', 'tags', 'ficha_tecnica', 'servicios_edificio', 'transporte', 'thumbnails', 'galeria'].forEach(k => {
-    document.getElementById('list-' + k).innerHTML = '';
-  });
-}
-
-function populateForm(p) {
-  document.getElementById('f-id').value = p.id || '';
-  // Simple fields
-  const simple = ['titulo','direccion','comuna','precio','precio_formato','moneda','gastos_comunes','contribuciones','operacion','tipo','estado','dormitorios','banos','superficie_util','superficie_total','terraza','piso','estacionamientos','orientacion','highlight','descripcion'];
-  simple.forEach(k => {
-    const el = document.getElementById('f-' + k);
-    if (el) el.value = p[k] != null ? p[k] : '';
+  // Simple fields from contenteditable spans
+  document.querySelectorAll('#edit-ficha .e-field').forEach(el => {
+    const field = el.dataset.field;
+    const val = el.textContent.trim();
+    if (field.includes('.')) {
+      const [obj, key] = field.split('.');
+      if (!p[obj]) p[obj] = {};
+      p[obj][key] = val;
+    } else {
+      // Convert numbers
+      if (['precio','dormitorios','banos','superficie_util','superficie_total','terraza','estacionamientos'].includes(field)) {
+        p[field] = val === '' ? null : Number(val);
+      } else {
+        p[field] = val;
+      }
+    }
   });
 
-  // Imagenes
-  document.getElementById('f-hero').value = (p.imagenes && p.imagenes.hero) || '';
+  // Textareas
+  document.querySelectorAll('#edit-ficha .e-area').forEach(el => {
+    p[el.dataset.field] = el.value.trim();
+  });
 
-  // Dynamic lists
-  (p.caracteristicas || []).forEach(c => addCaracteristica(c));
-  (p.tags || []).forEach(t => addTag(t));
-  (p.ficha_tecnica || []).forEach(f => addFicha(f));
-  (p.servicios_edificio || []).forEach(s => addServicio(s));
-  (p.transporte || []).forEach(t => addTransporte(t));
-  ((p.imagenes && p.imagenes.thumbnails) || []).forEach(t => addThumbnail(t));
-  ((p.imagenes && p.imagenes.galeria) || []).forEach(g => addGaleria(g));
+  // Images
+  p.imagenes = p.imagenes || {};
+  p.imagenes.hero = document.getElementById('edit-hero-url')?.value || '';
+  p.imagenes.thumbnails = getListData('thumbnails');
+  p.imagenes.galeria = getListData('galeria');
 
-  // Agente
-  if (p.agente) {
-    document.getElementById('f-agente_nombre').value = p.agente.nombre || '';
-    document.getElementById('f-agente_telefono').value = p.agente.telefono || '';
-    document.getElementById('f-agente_whatsapp').value = p.agente.whatsapp || '';
-    document.getElementById('f-agente_email').value = p.agente.email || '';
-  }
+  // Lists
+  p.caracteristicas = getListData('caracteristicas');
+  p.tags = getListData('tags');
+  p.ficha_tecnica = getListData('ficha_tecnica');
+  p.servicios_edificio = getListData('servicios');
+  p.transporte = getListData('transporte');
+
+  return p;
 }
 
-function collectForm() {
-  const val = id => {
-    const el = document.getElementById('f-' + id);
-    return el ? el.value : '';
-  };
-  const numOrNull = id => {
-    const v = val(id);
-    return v === '' ? null : Number(v);
-  };
-
-  const obj = {
-    id: val('id') || undefined,
-    titulo: val('titulo'),
-    direccion: val('direccion'),
-    comuna: val('comuna'),
-    precio: numOrNull('precio'),
-    precio_formato: val('precio_formato'),
-    moneda: val('moneda'),
-    gastos_comunes: val('gastos_comunes'),
-    contribuciones: val('contribuciones') || undefined,
-    operacion: val('operacion'),
-    tipo: val('tipo'),
-    estado: val('estado'),
-    dormitorios: numOrNull('dormitorios'),
-    banos: numOrNull('banos'),
-    superficie_util: numOrNull('superficie_util'),
-    superficie_total: numOrNull('superficie_total'),
-    terraza: numOrNull('terraza'),
-    piso: val('piso'),
-    estacionamientos: numOrNull('estacionamientos'),
-    orientacion: val('orientacion'),
-    highlight: val('highlight'),
-    descripcion: val('descripcion'),
-    caracteristicas: collectList('caracteristicas', el => el.querySelector('input').value).filter(Boolean),
-    tags: collectList('tags', el => ({
-      texto: el.querySelector('[data-field="texto"]').value,
-      icono: el.querySelector('[data-field="icono"]').value,
-      tipo: el.querySelector('[data-field="tipo"]').value,
-    })),
-    ficha_tecnica: collectList('ficha_tecnica', el => ({
-      campo: el.querySelector('[data-field="campo"]').value,
-      valor: el.querySelector('[data-field="valor"]').value,
-    })),
-    servicios_edificio: collectList('servicios_edificio', el => ({
-      icono: el.querySelector('[data-field="icono"]').value,
-      nombre: el.querySelector('[data-field="nombre"]').value,
-    })),
-    transporte: collectList('transporte', el => ({
-      tipo: el.querySelector('[data-field="tipo"]').value,
-      nombre: el.querySelector('[data-field="nombre"]').value,
-      distancia: el.querySelector('[data-field="distancia"]').value,
-      tiempo: el.querySelector('[data-field="tiempo"]').value,
-    })),
-    imagenes: {
-      hero: val('hero'),
-      thumbnails: collectList('thumbnails', el => el.querySelector('input').value).filter(Boolean),
-      galeria: collectList('galeria', el => ({
-        src: el.querySelector('[data-field="src"]').value,
-        label: el.querySelector('[data-field="label"]').value,
-      })),
-    },
-    agente: {
-      nombre: val('agente_nombre'),
-      telefono: val('agente_telefono'),
-      whatsapp: val('agente_whatsapp'),
-      email: val('agente_email'),
-    },
-  };
-
-  return obj;
+// ===== CRUD =====
+function openEdit(idx) {
+  editingIdx = idx;
+  editingProp = JSON.parse(JSON.stringify(properties[idx]));
+  isNew = false;
+  renderEditFicha(editingProp);
+  document.getElementById('edit-overlay').classList.add('open');
+  document.getElementById('edit-overlay').scrollTop = 0;
 }
 
-function collectList(name, mapper) {
-  const container = document.getElementById('list-' + name);
-  return Array.from(container.querySelectorAll('.dyn-list-item')).map(mapper);
+function openNew() {
+  editingIdx = -1;
+  isNew = true;
+  editingProp = {
+    id: '', slug: '', titulo: 'Nueva propiedad', direccion: '', comuna: '',
+    precio: 0, precio_formato: '', moneda: 'CLP', gastos_comunes: '',
+    operacion: 'Venta', tipo: 'Departamento', estado: 'Nuevo ingreso',
+    dormitorios: 0, banos: 0, superficie_util: 0, superficie_total: 0,
+    terraza: null, piso: '', estacionamientos: 0, orientacion: '',
+    highlight: '', descripcion: '',
+    caracteristicas: [], tags: [], ficha_tecnica: [],
+    servicios_edificio: [], transporte: [],
+    imagenes: { hero: '', thumbnails: [], galeria: [] },
+    agente: { nombre: 'Keyla Tobar', telefono: '+56985298224', whatsapp: '+56985298224', email: 'keypropiedades.cl@gmail.com' }
+  };
+  renderEditFicha(editingProp);
+  document.getElementById('edit-overlay').classList.add('open');
+  document.getElementById('edit-overlay').scrollTop = 0;
 }
 
-async function saveProperty(e) {
-  e.preventDefault();
-  const data = collectForm();
+function closeEdit() {
+  document.getElementById('edit-overlay').classList.remove('open');
+  editingProp = null;
+}
 
+async function doSave() {
+  const data = collectData();
   try {
     let res;
-    if (editingId) {
-      res = await fetch(`${API}/${editingId}`, {
-        method: 'PUT',
-        headers: authHeaders(),
-        body: JSON.stringify(data),
-      });
+    if (isNew) {
+      res = await fetch(API, { method: 'POST', headers: headers(), body: JSON.stringify(data) });
     } else {
-      res = await fetch(API, {
-        method: 'POST',
-        headers: authHeaders(),
-        body: JSON.stringify(data),
-      });
+      res = await fetch(API + '/' + data.id, { method: 'PUT', headers: headers(), body: JSON.stringify(data) });
     }
-    if (res.status === 401) { logout(); return; }
-    if (!res.ok) {
-      showMsg('form-msg', 'Error al guardar', 'error');
-      return;
-    }
+    if (!res.ok) throw new Error('Error ' + res.status);
+    closeEdit();
     await loadProperties();
-    showList();
-    showMsg('list-msg', editingId ? 'Propiedad actualizada' : 'Propiedad creada', 'success');
-  } catch (err) {
-    showMsg('form-msg', 'Error: ' + err.message, 'error');
+    setStatus('Guardado');
+  } catch (e) {
+    alert('Error al guardar: ' + e.message);
   }
 }
 
-function editProperty(id) {
-  const prop = properties.find(p => p.id === id);
-  if (!prop) return;
-  showForm(prop);
+async function doDelete() {
+  if (!editingProp?.id || !confirm('Eliminar "' + editingProp.titulo + '"?')) return;
+  try {
+    const res = await fetch(API + '/' + editingProp.id, { method: 'DELETE', headers: headers() });
+    if (!res.ok) throw new Error('Error ' + res.status);
+    closeEdit();
+    await loadProperties();
+    setStatus('Eliminada');
+  } catch (e) {
+    alert('Error al eliminar: ' + e.message);
+  }
 }
 
-// ========== DYNAMIC LIST HELPERS ==========
-function removeItem(btn) {
-  btn.closest('.dyn-list-item').remove();
-}
-
-function addCaracteristica(value) {
-  const container = document.getElementById('list-caracteristicas');
-  const div = document.createElement('div');
-  div.className = 'dyn-list-item';
-  div.innerHTML = `<input type="text" value="${escAttr(value || '')}" placeholder="Caracteristica" style="flex:1">
-    <button type="button" class="btn-remove" onclick="removeItem(this)">&times;</button>`;
-  container.appendChild(div);
-}
-
-function addTag(t) {
-  const container = document.getElementById('list-tags');
-  const div = document.createElement('div');
-  div.className = 'dyn-list-item';
-  div.innerHTML = `<input data-field="texto" type="text" value="${escAttr(t?.texto || '')}" placeholder="Texto" style="flex:2">
-    <input data-field="icono" type="text" value="${escAttr(t?.icono || '')}" placeholder="Icono" style="flex:0.5;min-width:60px">
-    <select data-field="tipo" style="flex:1;min-width:100px">
-      <option value="default" ${(!t || t?.tipo === 'default') ? 'selected' : ''}>default</option>
-      <option value="gold" ${t?.tipo === 'gold' ? 'selected' : ''}>gold</option>
-    </select>
-    <button type="button" class="btn-remove" onclick="removeItem(this)">&times;</button>`;
-  container.appendChild(div);
-}
-
-function addFicha(f) {
-  const container = document.getElementById('list-ficha_tecnica');
-  const div = document.createElement('div');
-  div.className = 'dyn-list-item';
-  div.innerHTML = `<input data-field="campo" type="text" value="${escAttr(f?.campo || '')}" placeholder="Campo" style="flex:1">
-    <input data-field="valor" type="text" value="${escAttr(f?.valor || '')}" placeholder="Valor" style="flex:1">
-    <button type="button" class="btn-remove" onclick="removeItem(this)">&times;</button>`;
-  container.appendChild(div);
-}
-
-function addServicio(s) {
-  const container = document.getElementById('list-servicios_edificio');
-  const div = document.createElement('div');
-  div.className = 'dyn-list-item';
-  div.innerHTML = `<input data-field="icono" type="text" value="${escAttr(s?.icono || '')}" placeholder="Icono" style="flex:0.5;min-width:60px">
-    <input data-field="nombre" type="text" value="${escAttr(s?.nombre || '')}" placeholder="Nombre" style="flex:2">
-    <button type="button" class="btn-remove" onclick="removeItem(this)">&times;</button>`;
-  container.appendChild(div);
-}
-
-function addTransporte(t) {
-  const container = document.getElementById('list-transporte');
-  const div = document.createElement('div');
-  div.className = 'dyn-list-item';
-  div.innerHTML = `<select data-field="tipo" style="flex:0.7;min-width:80px">
-      <option value="metro" ${t?.tipo === 'metro' ? 'selected' : ''}>metro</option>
-      <option value="bus" ${(!t || t?.tipo === 'bus') ? 'selected' : ''}>bus</option>
-    </select>
-    <input data-field="nombre" type="text" value="${escAttr(t?.nombre || '')}" placeholder="Nombre" style="flex:2">
-    <input data-field="distancia" type="text" value="${escAttr(t?.distancia || '')}" placeholder="Distancia" style="flex:0.7;min-width:70px">
-    <input data-field="tiempo" type="text" value="${escAttr(t?.tiempo || '')}" placeholder="Tiempo" style="flex:0.7;min-width:70px">
-    <button type="button" class="btn-remove" onclick="removeItem(this)">&times;</button>`;
-  container.appendChild(div);
-}
-
-function addThumbnail(value) {
-  const container = document.getElementById('list-thumbnails');
-  const div = document.createElement('div');
-  div.className = 'dyn-list-item';
-  div.innerHTML = `<input type="text" value="${escAttr(value || '')}" placeholder="URL o ruta de imagen" style="flex:1">
-    <button type="button" class="btn-remove" onclick="removeItem(this)">&times;</button>`;
-  container.appendChild(div);
-}
-
-function addGaleria(g) {
-  const container = document.getElementById('list-galeria');
-  const div = document.createElement('div');
-  div.className = 'dyn-list-item';
-  div.innerHTML = `<input data-field="src" type="text" value="${escAttr(g?.src || '')}" placeholder="URL / ruta" style="flex:2">
-    <input data-field="label" type="text" value="${escAttr(g?.label || '')}" placeholder="Label" style="flex:1">
-    <button type="button" class="btn-remove" onclick="removeItem(this)">&times;</button>`;
-  container.appendChild(div);
-}
-
-function escAttr(s) {
-  if (s == null) return '';
-  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-// ========== INIT ==========
-document.addEventListener('DOMContentLoaded', () => {
-  // Allow login with Enter key
-  document.getElementById('login-password').addEventListener('keydown', e => {
-    if (e.key === 'Enter') doLogin();
-  });
-
+// ===== INIT =====
+(async () => {
   if (token) {
-    // Validate token by trying to load properties
-    showApp();
+    // Validate token by trying API
+    try {
+      const res = await fetch(API, { headers: headers() });
+      if (res.status === 401) throw new Error();
+      showApp();
+    } catch {
+      // Token expired or invalid
+      token = null;
+      localStorage.removeItem('kp-admin-token');
+    }
   }
-});
+  if (!token) {
+    document.getElementById('login-screen').style.display = 'flex';
+  }
+})();
 </script>
 </body>
 </html>
