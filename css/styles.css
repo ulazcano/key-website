@@ -142,7 +142,8 @@ ul { list-style: none; }
 }
 
 .navbar-logo img {
-  height: 38px;
+  height: 27px;
+  max-height: 27px;
   width: auto;
 }
 
