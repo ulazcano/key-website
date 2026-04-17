@@ -168,9 +168,10 @@ ul { list-style: none; }
 /* === HERO === */
 .hero {
   position: relative;
-  height: 100vh;
-  height: 100dvh;
-  min-height: 560px;
+  height: 70vh;
+  height: 70dvh;
+  min-height: 480px;
+  max-height: 680px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -503,36 +504,39 @@ ul { list-style: none; }
   transform: scale(1.02);
 }
 
-.ficha-hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, oklch(0.12 0.02 295 / 0.75) 0%, transparent 55%);
-}
-
-.ficha-hero-price {
-  position: absolute;
-  bottom: var(--space-lg);
-  left: var(--space-lg);
+/* --- Price bar (below hero) --- */
+.ficha-price-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-xl);
+  background: var(--color-primary);
+  gap: var(--space-base);
 }
 
 .ficha-price-main {
-  color: oklch(0.97 0.005 295);
   font-family: 'Libre Caslon Display', serif;
-  font-size: clamp(1.8rem, 1.5rem + 1.5vw, 2.5rem);
+  font-size: clamp(1.6rem, 1.3rem + 1.5vw, 2.2rem);
   font-weight: 400;
+  color: oklch(0.98 0.005 295);
   line-height: 1;
 }
 
-.ficha-price-sub {
-  color: oklch(0.88 0.01 295);
+.ficha-price-detail {
   font-size: var(--text-sm);
+  color: oklch(0.72 0.015 295);
   margin-top: var(--space-xs);
 }
 
-.ficha-price-gc {
-  color: oklch(0.72 0.01 295);
+.ficha-op-badge {
+  background: var(--color-accent);
+  color: oklch(0.98 0.005 295);
   font-size: var(--text-xs);
-  margin-top: 2px;
+  font-weight: 600;
+  padding: var(--space-sm) var(--space-base);
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .ficha-badge {

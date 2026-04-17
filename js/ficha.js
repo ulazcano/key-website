@@ -49,18 +49,23 @@ function renderFicha(p) {
       <div class="ficha-header">
         <div class="ficha-hero-wrap" onclick="openLb(0)">
           <img src="${p.imagenes.hero}" alt="${p.titulo}">
-          <div class="ficha-hero-overlay"></div>
-          <div class="ficha-hero-price">
-            <div class="ficha-price-main">${p.precio_formato}</div>
-            <div class="ficha-price-sub">Precio de ${p.operacion.toLowerCase()}</div>
-            ${p.gastos_comunes ? `<div class="ficha-price-gc">Gastos comunes ${p.gastos_comunes}</div>` : ''}
-          </div>
           ${p.estado ? `<span class="ficha-badge">${p.estado}</span>` : ''}
         </div>
         <div class="thumb-grid">
           ${p.imagenes.thumbnails.map((src, i) => `
             <img src="${src}" alt="Foto ${i + 2}" onclick="openLb(${i + 1})" loading="lazy">
           `).join('')}
+        </div>
+      </div>
+
+      <!-- PRICE BAR -->
+      <div class="ficha-price-bar">
+        <div class="ficha-price-bar-left">
+          <div class="ficha-price-main">${p.precio_formato}</div>
+          <div class="ficha-price-detail">Precio de ${p.operacion.toLowerCase()}${p.gastos_comunes ? ` · GC ${p.gastos_comunes}` : ''}</div>
+        </div>
+        <div class="ficha-price-bar-right">
+          <span class="ficha-op-badge">${p.operacion}</span>
         </div>
       </div>
 
