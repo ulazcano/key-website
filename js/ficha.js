@@ -47,10 +47,6 @@ function renderFicha(p) {
     <div class="ficha-card">
       <!-- HEADER -->
       <div class="ficha-header">
-        <div class="ficha-header-top">
-          <img src="logo_key.png" alt="Key Propiedades" style="height:44px;border-radius:6px;background:#fff;padding:4px 6px;">
-          <span class="card-badge" style="position:static;">${p.operacion}</span>
-        </div>
         <div class="ficha-hero-wrap" onclick="openLb(0)">
           <img src="${p.imagenes.hero}" alt="${p.titulo}">
           <div class="ficha-hero-overlay"></div>

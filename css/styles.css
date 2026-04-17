@@ -469,7 +469,7 @@ ul { list-style: none; }
 
 .ficha-header {
   background: var(--color-primary);
-  padding: var(--space-lg) var(--space-lg) 0;
+  padding: 0;
 }
 
 .ficha-header-top {
@@ -488,7 +488,6 @@ ul { list-style: none; }
 
 .ficha-hero-wrap {
   position: relative;
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
   overflow: hidden;
   cursor: pointer;
 }
@@ -517,7 +516,7 @@ ul { list-style: none; }
 }
 
 .ficha-price-main {
-  color: var(--color-accent);
+  color: oklch(0.98 0.005 295);
   font-family: 'Libre Caslon Display', serif;
   font-size: clamp(1.8rem, 1.5rem + 1.5vw, 2.5rem);
   font-weight: 400;
@@ -553,8 +552,7 @@ ul { list-style: none; }
 .thumb-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 3px;
-  margin-top: 3px;
+  gap: 2px;
 }
 
 .thumb-grid img {
