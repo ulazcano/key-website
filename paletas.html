@@ -11,8 +11,9 @@
   h1 { font-family: 'Libre Caslon Display', serif; font-size: 32px; text-align: center; margin-bottom: 8px; }
   .subtitle { text-align: center; color: #888; font-size: 15px; margin-bottom: 48px; }
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(520px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto; }
-  .palette { background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid #eee; }
-  .palette-header { padding: 24px 24px 16px; }
+  .palette { background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid #eee; position: relative; transition: border-color 0.3s; }
+  .palette.liked { border-color: #e88890; }
+  .palette-header { padding: 24px 24px 16px; position: relative; }
   .palette-num { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #aaa; font-weight: 600; }
   .palette-name { font-family: 'Libre Caslon Display', serif; font-size: 22px; margin-top: 4px; }
   .palette-desc { font-size: 13px; color: #777; margin-top: 6px; line-height: 1.5; }
@@ -27,6 +28,73 @@
   .preview-btn { padding: 10px 20px; border-radius: 100px; font-size: 12px; font-weight: 500; border: none; cursor: pointer; }
   .preview-pill { padding: 5px 12px; border-radius: 100px; font-size: 11px; font-weight: 500; }
   .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  /* Heart toggle */
+  .heart-btn {
+    position: absolute; top: 18px; right: 18px;
+    width: 40px; height: 40px;
+    background: none; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2;
+  }
+  .heart-btn svg {
+    width: 26px; height: 26px;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), fill 0.3s, stroke 0.3s;
+    fill: none; stroke: #ccc; stroke-width: 1.5;
+  }
+  .heart-btn:hover svg { stroke: #e88890; transform: scale(1.1); }
+  .heart-btn.active svg {
+    fill: #e25d6a; stroke: #e25d6a;
+    animation: heart-pop 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  @keyframes heart-pop {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.35); }
+    60% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+  }
+  .heart-btn .heart-count {
+    position: absolute; top: -4px; right: -4px;
+    background: #e25d6a; color: #fff;
+    font-size: 9px; font-weight: 700;
+    min-width: 18px; height: 18px;
+    border-radius: 100px; display: none;
+    align-items: center; justify-content: center;
+    line-height: 1; padding: 0 4px;
+  }
+  .heart-btn .heart-count.visible { display: flex; }
+
+  /* Favorites summary */
+  .favorites-bar {
+    max-width: 1200px; margin: 0 auto 32px;
+    background: #fff; border-radius: 14px; border: 1px solid #eee;
+    padding: 20px 24px; display: none;
+  }
+  .favorites-bar.visible { display: block; }
+  .favorites-bar h3 { font-family: 'Libre Caslon Display', serif; font-size: 18px; margin-bottom: 10px; color: #e25d6a; }
+  .favorites-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .fav-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #fef0f1; color: #c04050; border-radius: 100px;
+    padding: 6px 14px; font-size: 12px; font-weight: 500;
+  }
+  .fav-chip .fav-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .share-link {
+    margin-top: 14px; padding-top: 14px; border-top: 1px solid #f0e8e8;
+    font-size: 12px; color: #999; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .share-link input {
+    flex: 1; min-width: 200px; padding: 8px 12px; border: 1px solid #e8e0e0;
+    border-radius: 8px; font-size: 12px; font-family: 'Figtree', sans-serif;
+    color: #666; background: #faf8f8;
+  }
+  .share-link button {
+    padding: 8px 16px; border-radius: 8px; border: none;
+    background: #e25d6a; color: #fff; font-size: 12px;
+    font-family: 'Figtree', sans-serif; font-weight: 500;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .share-link button:hover { opacity: 0.85; }
+
   @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .swatches { height: 60px; } }
 </style>
 </head>
@@ -34,6 +102,16 @@
 
 <h1>Paletas de Color</h1>
 <p class="subtitle">30 propuestas para Key Propiedades — luz, claridad, feminidad, limpieza, orden</p>
+
+<div class="favorites-bar" id="favorites-bar">
+  <h3>Favoritas</h3>
+  <div class="favorites-list" id="favorites-list"></div>
+  <div class="share-link">
+    <span>Comparte tu seleccion:</span>
+    <input type="text" id="share-url" readonly>
+    <button onclick="copyShareUrl()">Copiar link</button>
+  </div>
+</div>
 
 <div class="grid" id="grid"></div>
 
@@ -490,16 +568,97 @@ const palettes = [
   }
 ];
 
+const HEART_SVG = `<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+
 const grid = document.getElementById('grid');
 
+// --- Persistence: load likes from URL hash or localStorage ---
+function getLikes() {
+  const hash = window.location.hash.replace('#', '');
+  if (hash.startsWith('likes=')) {
+    const ids = hash.replace('likes=', '').split(',').map(Number).filter(n => !isNaN(n));
+    return new Set(ids);
+  }
+  try {
+    const stored = JSON.parse(localStorage.getItem('kp-palette-likes') || '[]');
+    return new Set(stored);
+  } catch { return new Set(); }
+}
+
+let likes = getLikes();
+
+function saveLikes() {
+  localStorage.setItem('kp-palette-likes', JSON.stringify([...likes]));
+  const hash = likes.size > 0 ? '#likes=' + [...likes].sort((a,b) => a - b).join(',') : '';
+  history.replaceState(null, '', window.location.pathname + hash);
+  updateFavoritesBar();
+  updateShareUrl();
+}
+
+function toggleLike(idx) {
+  if (likes.has(idx)) likes.delete(idx);
+  else likes.add(idx);
+
+  const card = document.querySelector(`[data-palette="${idx}"]`);
+  const btn = card.querySelector('.heart-btn');
+  btn.classList.toggle('active', likes.has(idx));
+  card.classList.toggle('liked', likes.has(idx));
+
+  // Re-trigger animation
+  if (likes.has(idx)) {
+    const svg = btn.querySelector('svg');
+    svg.style.animation = 'none';
+    svg.offsetHeight; // reflow
+    svg.style.animation = '';
+  }
+
+  saveLikes();
+}
+
+function updateFavoritesBar() {
+  const bar = document.getElementById('favorites-bar');
+  const list = document.getElementById('favorites-list');
+  if (likes.size === 0) {
+    bar.classList.remove('visible');
+    return;
+  }
+  bar.classList.add('visible');
+  list.innerHTML = [...likes].sort((a,b) => a - b).map(idx => {
+    const p = palettes[idx];
+    return `<span class="fav-chip"><span class="fav-dot" style="background:${p.accent}"></span>${idx + 1}. ${p.name}</span>`;
+  }).join('');
+}
+
+function updateShareUrl() {
+  const input = document.getElementById('share-url');
+  if (likes.size === 0) { input.value = ''; return; }
+  const url = window.location.origin + window.location.pathname + '#likes=' + [...likes].sort((a,b) => a - b).join(',');
+  input.value = url;
+}
+
+function copyShareUrl() {
+  const input = document.getElementById('share-url');
+  input.select();
+  navigator.clipboard.writeText(input.value).then(() => {
+    const btn = input.nextElementSibling;
+    btn.textContent = 'Copiado';
+    setTimeout(() => { btn.textContent = 'Copiar link'; }, 1500);
+  });
+}
+
+// --- Render palettes ---
 palettes.forEach((p, idx) => {
   const el = document.createElement('div');
-  el.className = 'palette';
+  el.className = 'palette' + (likes.has(idx) ? ' liked' : '');
+  el.dataset.palette = idx;
   el.innerHTML = `
     <div class="palette-header">
       <div class="palette-num">Paleta ${idx + 1}</div>
       <div class="palette-name">${p.name}</div>
       <div class="palette-desc">${p.desc}</div>
+      <button class="heart-btn ${likes.has(idx) ? 'active' : ''}" onclick="toggleLike(${idx})" aria-label="Marcar como favorita">
+        ${HEART_SVG}
+      </button>
     </div>
     <div class="swatches">
       ${p.colors.map(c => `<div class="swatch" style="background:${c.bg}"><span style="color:${c.text}">${c.label}<br>${c.bg}</span></div>`).join('')}
@@ -518,6 +677,10 @@ palettes.forEach((p, idx) => {
   `;
   grid.appendChild(el);
 });
+
+// Init
+updateFavoritesBar();
+updateShareUrl();
 </script>
 </body>
 </html>
