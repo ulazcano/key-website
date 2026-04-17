@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Key Propiedades — Corredora de Propiedades</title>
-  <meta name="description" content="Key Propiedades: encuentra tu departamento o casa ideal. Venta y arriendo de propiedades en Santiago, Chile.">
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>Alquimia — Corretaje Boutique de Propiedades</title>
+  <meta name="description" content="Alquimia: corretaje boutique de propiedades en Santiago y La Serena. El arte de convertir una propiedad en su mejor precio. Venta y arriendo de casas y departamentos.">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -13,7 +13,8 @@
   <!-- NAVBAR -->
   <nav class="navbar">
     <a href="index.html" class="navbar-logo">
-      <img src="logo_key.png" alt="Key Propiedades">
+      <img src="logo_key.png" alt="Alquimia">
+      <span class="navbar-wordmark">ALQUIMIA</span>
     </a>
     <button class="menu-toggle" onclick="document.querySelector('.navbar-links').classList.toggle('open')">&#9776;</button>
     <div class="navbar-links">
@@ -30,13 +31,19 @@
     <video class="hero-video hero-vid" id="hero-vid-b" muted playsinline></video>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <h1 class="hero-title">Tu pr&oacute;ximo hogar te espera</h1>
-      <p class="hero-subtitle">Asesor&iacute;a cercana y profesional en venta y arriendo de propiedades</p>
+      <span class="hero-eyebrow">Corretaje Boutique</span>
+      <h1 class="hero-title">El arte de convertir una propiedad en su <em>mejor precio</em>.</h1>
+      <p class="hero-subtitle">Corretaje boutique en Santiago y La Serena. Venta y arriendo de casas y departamentos.</p>
+
+      <div class="hero-ctas">
+        <a href="https://wa.me/56985298224" class="cta-primary" target="_blank">Tasa tu propiedad</a>
+        <a href="#propiedades" class="cta-secondary">Ver portafolio</a>
+      </div>
 
       <!-- SEARCH BAR -->
       <div class="search-bar">
         <div class="search-field">
-          <label>Operación</label>
+          <label>Operaci&oacute;n</label>
           <select id="search-operacion">
             <option value="">Todas</option>
             <option value="Venta">Venta</option>
@@ -76,8 +83,9 @@
   <!-- PROPIEDADES -->
   <section class="section" id="propiedades">
     <div class="section-header">
-      <h2>Propiedades Destacadas</h2>
-      <p>Descubre nuestra selección de propiedades disponibles</p>
+      <span class="section-eyebrow">Portafolio</span>
+      <h2>Propiedades seleccionadas</h2>
+      <p>Cada propiedad pasa por nuestro proceso de curaci&oacute;n antes de ser publicada</p>
     </div>
     <div class="properties-grid" id="properties-grid">
       <!-- Cards rendered by JS -->
@@ -86,11 +94,24 @@
 
   <!-- FOOTER -->
   <footer class="site-footer" id="contacto">
-    <h3>Key Propiedades</h3>
-    <p>Keyla Tobar — Corredora de Propiedades</p>
-    <p>contacto@keypropiedades.cl</p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3>ALQUIMIA</h3>
+        <p>Keyla Tobar — Corredora de Propiedades</p>
+        <p>contacto@keypropiedades.cl</p>
+      </div>
+      <div class="footer-services">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#">Alquimia Venta</a></li>
+          <li><a href="#">Alquimia Arriendo</a></li>
+          <li><a href="#">Alquimia Lab</a></li>
+          <li><a href="#">Alquimia Tasa</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="footer-copy">
-      &copy; 2025 Key Propiedades. Todos los derechos reservados.
+      &copy; 2026 Alquimia. Todos los derechos reservados.
     </div>
   </footer>
 
