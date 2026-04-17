@@ -101,87 +101,57 @@
     const vidB = document.getElementById('hero-vid-b');
     if (!vidA || !vidB) return;
 
+    const TOTAL_VIDEOS = 3;
     let current = 1;
-    let maxFound = 99;
-    let transitioning = false;
+    let triggered = false;
 
-    // Active = visible, standby = hidden and preloaded
     let active = vidA;
     let standby = vidB;
 
     function nextIndex() {
-      return current >= maxFound ? 1 : current + 1;
+      return current >= TOTAL_VIDEOS ? 1 : current + 1;
     }
 
     function preloadStandby() {
-      const idx = nextIndex();
-      standby.src = 'video/' + idx + '.mp4';
+      standby.src = 'video/' + nextIndex() + '.mp4';
       standby.load();
     }
 
     function doTransition() {
-      if (transitioning) return;
-      transitioning = true;
+      if (triggered) return;
+      triggered = true;
 
-      const idx = nextIndex();
-      current = idx;
+      current = nextIndex();
+      standby.currentTime = 0;
 
-      // Start playing standby (still invisible)
       standby.play().then(() => {
-        // Fade in standby, fade out active
         standby.classList.add('active');
         active.classList.remove('active');
 
-        // After CSS transition completes, pause the old one
         setTimeout(() => {
           active.pause();
           active.currentTime = 0;
 
-          // Swap roles
           const tmp = active;
           active = standby;
           standby = tmp;
+          triggered = false;
 
-          transitioning = false;
           preloadStandby();
-        }, 1300); // slightly longer than CSS transition (1.2s)
-      }).catch(() => {
-        // Video doesn't exist — cap max
-        maxFound = current - 1;
-        if (maxFound < 1) maxFound = 1;
-        current = maxFound;
-        transitioning = false;
-        preloadStandby();
+        }, 1400);
       });
     }
 
-    // Watch timeupdate to trigger transition 1s before end
-    function watchEnd(vid) {
-      vid.addEventListener('timeupdate', function() {
-        if (vid !== active || transitioning) return;
-        if (vid.duration && vid.currentTime >= vid.duration - 1) {
-          doTransition();
-        }
-      });
-      // Safety: if ended fires without transition (short video)
-      vid.addEventListener('ended', function() {
-        if (vid === active && !transitioning) doTransition();
-      });
-    }
-
-    watchEnd(vidA);
-    watchEnd(vidB);
-
-    // Handle load errors on standby
-    vidB.addEventListener('error', () => {
-      if (standby === vidB && current > 1) {
-        maxFound = current - 1;
-        current = maxFound;
-        preloadStandby();
+    setInterval(() => {
+      if (triggered || !active.duration) return;
+      if (active.currentTime >= active.duration - 1.2) {
+        doTransition();
       }
-    });
+    }, 200);
 
-    // Start first video
+    vidA.addEventListener('ended', () => { if (active === vidA && !triggered) doTransition(); });
+    vidB.addEventListener('ended', () => { if (active === vidB && !triggered) doTransition(); });
+
     vidA.src = 'video/1.mp4';
     vidA.play().then(() => {
       vidA.classList.add('active');
