@@ -116,6 +116,7 @@ ul { list-style: none; }
 .navbar-logo img {
   height: 42px;
   width: auto;
+  filter: brightness(1.3);
 }
 
 .navbar-links {
@@ -1031,16 +1032,40 @@ ul { list-style: none; }
     gap: var(--space-base);
   }
 
-  .hero-content { text-align: left; }
-  .hero-title { max-width: 100%; }
+  /* Hero: auto height, content fits naturally */
+  .hero {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 96px var(--space-base) var(--space-xl);
+  }
+  .hero-content {
+    text-align: left;
+    padding: 0 var(--space-sm);
+  }
+  .hero-title {
+    max-width: 100%;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    margin-bottom: var(--space-sm);
+  }
+  .hero-subtitle {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-lg);
+  }
 
+  /* Search bar: 2-column grid on mobile */
   .search-bar {
-    flex-direction: column;
-    gap: var(--space-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
     padding: var(--space-base);
   }
-  .search-field { min-width: 100%; }
-  .search-btn { width: 100%; text-align: center; padding: var(--space-md); }
+  .search-field { min-width: 0; }
+  .search-btn {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: var(--space-md);
+  }
 
   .properties-grid { grid-template-columns: 1fr; }
 
@@ -1051,6 +1076,7 @@ ul { list-style: none; }
   .ficha-chars { grid-template-columns: 1fr; }
   .ficha-servicios { grid-template-columns: 1fr; }
   .thumb-grid { grid-template-columns: repeat(3, 1fr); }
+  .ficha-price-bar { flex-wrap: wrap; padding: var(--space-base) var(--space-lg); }
 }
 
 @media (pointer: coarse) {
