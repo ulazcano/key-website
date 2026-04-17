@@ -169,15 +169,13 @@ ul { list-style: none; }
 /* === HERO === */
 .hero {
   position: relative;
-  height: 70vh;
-  height: 70dvh;
-  min-height: 480px;
-  max-height: 680px;
+  min-height: min(70dvh, 680px);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   background: var(--color-primary);
+  padding: 80px 0 var(--space-xl);
 }
 
 .hero-video {

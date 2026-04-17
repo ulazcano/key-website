@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Key Propiedades</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: #f5f5f3;
+      color: #1a1a1a;
+      line-height: 1.5;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Libre Caslon Display', serif;
+      font-weight: 400;
+    }
+
+    /* --- Layout --- */
+    .admin-header {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .admin-header h1 { font-size: 1.25rem; color: #c9a84c; }
+    .admin-header button {
+      background: transparent;
+      border: 1px solid #666;
+      color: #ccc;
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .admin-header button:hover { border-color: #c9a84c; color: #c9a84c; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+    /* --- Login --- */
+    .login-wrap {
+      max-width: 400px;
+      margin: 4rem auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 2.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .login-wrap h2 { margin-bottom: 1.5rem; text-align: center; }
+
+    /* --- Forms --- */
+    label {
+      display: block;
+      font-weight: 500;
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
+      color: #444;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      background: #fff;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #c9a84c;
+      box-shadow: 0 0 0 2px rgba(201,168,76,0.15);
+    }
+    textarea { resize: vertical; min-height: 80px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0 1rem;
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1.25rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .btn-primary { background: #c9a84c; color: #fff; }
+    .btn-primary:hover { background: #b8953e; }
+    .btn-danger { background: #d44; color: #fff; }
+    .btn-danger:hover { background: #b33; }
+    .btn-secondary { background: #e0e0e0; color: #333; }
+    .btn-secondary:hover { background: #d0d0d0; }
+    .btn-sm { padding: 0.3rem 0.75rem; font-size: 0.8rem; }
+
+    .toolbar {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* --- Table --- */
+    .prop-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+    .prop-table th {
+      background: #1a1a1a;
+      color: #fff;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .prop-table td {
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid #eee;
+      font-size: 0.875rem;
+    }
+    .prop-table tr:hover td { background: #fafaf8; }
+    .prop-table .actions { white-space: nowrap; display: flex; gap: 0.4rem; }
+
+    /* --- Sections --- */
+    .form-section {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+    .form-section h3 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #c9a84c;
+      color: #1a1a1a;
+    }
+
+    /* --- Dynamic lists --- */
+    .dyn-list-item {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      background: #fafaf8;
+      border-radius: 4px;
+      border: 1px solid #eee;
+    }
+    .dyn-list-item input,
+    .dyn-list-item select,
+    .dyn-list-item textarea {
+      margin-bottom: 0;
+    }
+    .dyn-list-item .btn-remove {
+      background: #eee;
+      border: none;
+      color: #999;
+      cursor: pointer;
+      padding: 0.35rem 0.5rem;
+      border-radius: 4px;
+      font-size: 1rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .dyn-list-item .btn-remove:hover { background: #d44; color: #fff; }
+
+    .btn-add {
+      background: none;
+      border: 1px dashed #c9a84c;
+      color: #c9a84c;
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    .btn-add:hover { background: rgba(201,168,76,0.08); }
+
+    /* --- Status messages --- */
+    .msg {
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+    .msg-error { background: #ffeaea; color: #c33; }
+    .msg-success { background: #eafce5; color: #2a7a1e; }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .container { padding: 1rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .prop-table { font-size: 0.8rem; }
+      .prop-table th, .prop-table td { padding: 0.5rem; }
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<header class="admin-header">
+  <h1>Key Propiedades — Admin</h1>
+  <button id="btn-logout" class="hidden" onclick="logout()">Cerrar sesion</button>
+</header>
+
+<!-- ============ LOGIN ============ -->
+<div id="login-screen" class="login-wrap">
+  <h2>Iniciar sesion</h2>
+  <div id="login-msg"></div>
+  <label for="login-email">Email</label>
+  <input type="email" id="login-email" autocomplete="email">
+  <label for="login-password">Contrasena</label>
+  <input type="password" id="login-password" autocomplete="current-password">
+  <button class="btn btn-primary" style="width:100%;margin-top:0.5rem" onclick="doLogin()">Entrar</button>
+</div>
+
+<!-- ============ PROPERTY LIST ============ -->
+<div id="list-screen" class="container hidden">
+  <h2 style="margin-bottom:1rem">Propiedades</h2>
+  <div class="toolbar">
+    <button class="btn btn-primary" onclick="showForm()">+ Nueva propiedad</button>
+    <button class="btn btn-secondary" onclick="importFromJSON()">Importar desde JSON</button>
+  </div>
+  <div id="list-msg"></div>
+  <div style="overflow-x:auto">
+    <table class="prop-table">
+      <thead>
+        <tr>
+          <th>Titulo</th>
+          <th>Direccion</th>
+          <th>Precio</th>
+          <th>Operacion</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="prop-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============ PROPERTY FORM ============ -->
+<div id="form-screen" class="container hidden">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+    <h2 id="form-title">Nueva propiedad</h2>
+    <button class="btn btn-secondary" onclick="showList()">Volver a lista</button>
+  </div>
+  <div id="form-msg"></div>
+  <form id="prop-form" onsubmit="return saveProperty(event)">
+    <input type="hidden" id="f-id">
+
+    <!-- Informacion basica -->
+    <div class="form-section">
+      <h3>Informacion basica</h3>
+      <div class="form-row">
+        <div><label>Titulo</label><input type="text" id="f-titulo" required></div>
+        <div><label>Direccion</label><input type="text" id="f-direccion" required></div>
+        <div><label>Comuna</label><input type="text" id="f-comuna"></div>
+      </div>
+      <div class="form-row">
+        <div><label>Precio</label><input type="number" id="f-precio"></div>
+        <div><label>Precio formato</label><input type="text" id="f-precio_formato"></div>
+        <div><label>Moneda</label>
+          <select id="f-moneda">
+            <option value="CLP">CLP</option>
+            <option value="UF">UF</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div><label>Gastos comunes</label><input type="text" id="f-gastos_comunes"></div>
+        <div><label>Contribuciones</label><input type="text" id="f-contribuciones"></div>
+        <div><label>Operacion</label>
+          <select id="f-operacion">
+            <option value="Venta">Venta</option>
+            <option value="Arriendo">Arriendo</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div><label>Tipo</label>
+          <select id="f-tipo">
+            <option value="Departamento">Departamento</option>
+            <option value="Casa">Casa</option>
+            <option value="Oficina">Oficina</option>
+          </select>
+        </div>
+        <div><label>Estado</label><input type="text" id="f-estado"></div>
+        <div><label>Dormitorios</label><input type="number" id="f-dormitorios" min="0"></div>
+      </div>
+      <div class="form-row">
+        <div><label>Banos</label><input type="number" id="f-banos" min="0"></div>
+        <div><label>Superficie util (m2)</label><input type="number" id="f-superficie_util" min="0"></div>
+        <div><label>Superficie total (m2)</label><input type="number" id="f-superficie_total" min="0"></div>
+      </div>
+      <div class="form-row">
+        <div><label>Terraza (m2)</label><input type="number" id="f-terraza" min="0"></div>
+        <div><label>Piso</label><input type="text" id="f-piso"></div>
+        <div><label>Estacionamientos</label><input type="number" id="f-estacionamientos" min="0"></div>
+      </div>
+      <div class="form-row">
+        <div><label>Orientacion</label><input type="text" id="f-orientacion"></div>
+      </div>
+    </div>
+
+    <!-- Textos -->
+    <div class="form-section">
+      <h3>Textos</h3>
+      <label>Highlight</label>
+      <textarea id="f-highlight" rows="3"></textarea>
+      <label>Descripcion</label>
+      <textarea id="f-descripcion" rows="5"></textarea>
+    </div>
+
+    <!-- Caracteristicas -->
+    <div class="form-section">
+      <h3>Caracteristicas</h3>
+      <div id="list-caracteristicas"></div>
+      <button type="button" class="btn-add" onclick="addCaracteristica()">+ Agregar caracteristica</button>
+    </div>
+
+    <!-- Tags -->
+    <div class="form-section">
+      <h3>Tags</h3>
+      <div id="list-tags"></div>
+      <button type="button" class="btn-add" onclick="addTag()">+ Agregar tag</button>
+    </div>
+
+    <!-- Ficha tecnica -->
+    <div class="form-section">
+      <h3>Ficha tecnica</h3>
+      <div id="list-ficha_tecnica"></div>
+      <button type="button" class="btn-add" onclick="addFicha()">+ Agregar campo</button>
+    </div>
+
+    <!-- Servicios del edificio -->
+    <div class="form-section">
+      <h3>Servicios del edificio</h3>
+      <div id="list-servicios_edificio"></div>
+      <button type="button" class="btn-add" onclick="addServicio()">+ Agregar servicio</button>
+    </div>
+
+    <!-- Transporte -->
+    <div class="form-section">
+      <h3>Transporte</h3>
+      <div id="list-transporte"></div>
+      <button type="button" class="btn-add" onclick="addTransporte()">+ Agregar transporte</button>
+    </div>
+
+    <!-- Imagenes -->
+    <div class="form-section">
+      <h3>Imagenes</h3>
+      <label>Hero (URL/ruta)</label>
+      <input type="text" id="f-hero">
+
+      <label style="margin-top:0.5rem">Thumbnails</label>
+      <div id="list-thumbnails"></div>
+      <button type="button" class="btn-add" onclick="addThumbnail()">+ Agregar thumbnail</button>
+
+      <label style="margin-top:1rem">Galeria</label>
+      <div id="list-galeria"></div>
+      <button type="button" class="btn-add" onclick="addGaleria()">+ Agregar imagen</button>
+    </div>
+
+    <!-- Agente -->
+    <div class="form-section">
+      <h3>Agente</h3>
+      <div class="form-row">
+        <div><label>Nombre</label><input type="text" id="f-agente_nombre"></div>
+        <div><label>Telefono</label><input type="text" id="f-agente_telefono"></div>
+      </div>
+      <div class="form-row">
+        <div><label>WhatsApp</label><input type="text" id="f-agente_whatsapp"></div>
+        <div><label>Email</label><input type="email" id="f-agente_email"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:0.75rem;margin-top:1rem">
+      <button type="submit" class="btn btn-primary">Guardar propiedad</button>
+      <button type="button" class="btn btn-secondary" onclick="showList()">Cancelar</button>
+    </div>
+  </form>
+</div>
+
+<script>
+// ========== STATE ==========
+const API = '/api/propiedades';
+const AUTH = '/api/auth';
+let token = localStorage.getItem('admin_token') || '';
+let properties = [];
+let editingId = null;
+
+// ========== AUTH ==========
+function authHeaders() {
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`,
+  };
+}
+
+async function doLogin() {
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+  const msgEl = document.getElementById('login-msg');
+  msgEl.innerHTML = '';
+
+  try {
+    const res = await fetch(AUTH, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+    if (!res.ok) {
+      msgEl.innerHTML = '<div class="msg msg-error">Credenciales incorrectas</div>';
+      return;
+    }
+    const data = await res.json();
+    token = data.token;
+    localStorage.setItem('admin_token', token);
+    showApp();
+  } catch (e) {
+    msgEl.innerHTML = '<div class="msg msg-error">Error de conexion</div>';
+  }
+}
+
+function logout() {
+  token = '';
+  localStorage.removeItem('admin_token');
+  document.getElementById('login-screen').classList.remove('hidden');
+  document.getElementById('list-screen').classList.add('hidden');
+  document.getElementById('form-screen').classList.add('hidden');
+  document.getElementById('btn-logout').classList.add('hidden');
+}
+
+async function showApp() {
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('form-screen').classList.add('hidden');
+  document.getElementById('list-screen').classList.remove('hidden');
+  document.getElementById('btn-logout').classList.remove('hidden');
+  await loadProperties();
+}
+
+// ========== CRUD ==========
+async function loadProperties() {
+  try {
+    const res = await fetch(API);
+    properties = await res.json();
+  } catch {
+    properties = [];
+  }
+  renderTable();
+}
+
+function renderTable() {
+  const tbody = document.getElementById('prop-tbody');
+  if (properties.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:#888">No hay propiedades. Importa desde JSON o crea una nueva.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = properties.map(p => `
+    <tr>
+      <td>${esc(p.titulo)}</td>
+      <td>${esc(p.direccion)}</td>
+      <td>${esc(p.precio_formato)}</td>
+      <td>${esc(p.operacion)}</td>
+      <td>${esc(p.estado || '')}</td>
+      <td class="actions">
+        <button class="btn btn-sm btn-primary" onclick="editProperty('${p.id}')">Editar</button>
+        <button class="btn btn-sm btn-danger" onclick="deleteProperty('${p.id}')">Eliminar</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function esc(s) {
+  if (s == null) return '';
+  const d = document.createElement('div');
+  d.textContent = String(s);
+  return d.innerHTML;
+}
+
+async function deleteProperty(id) {
+  if (!confirm('Eliminar esta propiedad?')) return;
+  try {
+    const res = await fetch(`${API}/${id}`, { method: 'DELETE', headers: authHeaders() });
+    if (res.status === 401) { logout(); return; }
+    await loadProperties();
+    showMsg('list-msg', 'Propiedad eliminada', 'success');
+  } catch {
+    showMsg('list-msg', 'Error al eliminar', 'error');
+  }
+}
+
+async function importFromJSON() {
+  if (!confirm('Esto reemplazara TODAS las propiedades con los datos de data/propiedades.json. Continuar?')) return;
+  try {
+    const res = await fetch('data/propiedades.json');
+    const data = await res.json();
+    const saveRes = await fetch(API, {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify(data),
+    });
+    if (saveRes.status === 401) { logout(); return; }
+    await loadProperties();
+    showMsg('list-msg', `Importadas ${data.length} propiedades`, 'success');
+  } catch (e) {
+    showMsg('list-msg', 'Error al importar: ' + e.message, 'error');
+  }
+}
+
+// ========== FORM ==========
+function showForm(prop) {
+  editingId = prop ? prop.id : null;
+  document.getElementById('form-title').textContent = prop ? 'Editar propiedad' : 'Nueva propiedad';
+  document.getElementById('list-screen').classList.add('hidden');
+  document.getElementById('form-screen').classList.remove('hidden');
+  clearForm();
+  if (prop) populateForm(prop);
+  window.scrollTo(0, 0);
+}
+
+function showList() {
+  document.getElementById('form-screen').classList.add('hidden');
+  document.getElementById('list-screen').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+
+function showMsg(containerId, text, type) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = `<div class="msg msg-${type}">${esc(text)}</div>`;
+  setTimeout(() => { el.innerHTML = ''; }, 4000);
+}
+
+function clearForm() {
+  document.getElementById('prop-form').reset();
+  document.getElementById('f-id').value = '';
+  ['caracteristicas', 'tags', 'ficha_tecnica', 'servicios_edificio', 'transporte', 'thumbnails', 'galeria'].forEach(k => {
+    document.getElementById('list-' + k).innerHTML = '';
+  });
+}
+
+function populateForm(p) {
+  document.getElementById('f-id').value = p.id || '';
+  // Simple fields
+  const simple = ['titulo','direccion','comuna','precio','precio_formato','moneda','gastos_comunes','contribuciones','operacion','tipo','estado','dormitorios','banos','superficie_util','superficie_total','terraza','piso','estacionamientos','orientacion','highlight','descripcion'];
+  simple.forEach(k => {
+    const el = document.getElementById('f-' + k);
+    if (el) el.value = p[k] != null ? p[k] : '';
+  });
+
+  // Imagenes
+  document.getElementById('f-hero').value = (p.imagenes && p.imagenes.hero) || '';
+
+  // Dynamic lists
+  (p.caracteristicas || []).forEach(c => addCaracteristica(c));
+  (p.tags || []).forEach(t => addTag(t));
+  (p.ficha_tecnica || []).forEach(f => addFicha(f));
+  (p.servicios_edificio || []).forEach(s => addServicio(s));
+  (p.transporte || []).forEach(t => addTransporte(t));
+  ((p.imagenes && p.imagenes.thumbnails) || []).forEach(t => addThumbnail(t));
+  ((p.imagenes && p.imagenes.galeria) || []).forEach(g => addGaleria(g));
+
+  // Agente
+  if (p.agente) {
+    document.getElementById('f-agente_nombre').value = p.agente.nombre || '';
+    document.getElementById('f-agente_telefono').value = p.agente.telefono || '';
+    document.getElementById('f-agente_whatsapp').value = p.agente.whatsapp || '';
+    document.getElementById('f-agente_email').value = p.agente.email || '';
+  }
+}
+
+function collectForm() {
+  const val = id => {
+    const el = document.getElementById('f-' + id);
+    return el ? el.value : '';
+  };
+  const numOrNull = id => {
+    const v = val(id);
+    return v === '' ? null : Number(v);
+  };
+
+  const obj = {
+    id: val('id') || undefined,
+    titulo: val('titulo'),
+    direccion: val('direccion'),
+    comuna: val('comuna'),
+    precio: numOrNull('precio'),
+    precio_formato: val('precio_formato'),
+    moneda: val('moneda'),
+    gastos_comunes: val('gastos_comunes'),
+    contribuciones: val('contribuciones') || undefined,
+    operacion: val('operacion'),
+    tipo: val('tipo'),
+    estado: val('estado'),
+    dormitorios: numOrNull('dormitorios'),
+    banos: numOrNull('banos'),
+    superficie_util: numOrNull('superficie_util'),
+    superficie_total: numOrNull('superficie_total'),
+    terraza: numOrNull('terraza'),
+    piso: val('piso'),
+    estacionamientos: numOrNull('estacionamientos'),
+    orientacion: val('orientacion'),
+    highlight: val('highlight'),
+    descripcion: val('descripcion'),
+    caracteristicas: collectList('caracteristicas', el => el.querySelector('input').value).filter(Boolean),
+    tags: collectList('tags', el => ({
+      texto: el.querySelector('[data-field="texto"]').value,
+      icono: el.querySelector('[data-field="icono"]').value,
+      tipo: el.querySelector('[data-field="tipo"]').value,
+    })),
+    ficha_tecnica: collectList('ficha_tecnica', el => ({
+      campo: el.querySelector('[data-field="campo"]').value,
+      valor: el.querySelector('[data-field="valor"]').value,
+    })),
+    servicios_edificio: collectList('servicios_edificio', el => ({
+      icono: el.querySelector('[data-field="icono"]').value,
+      nombre: el.querySelector('[data-field="nombre"]').value,
+    })),
+    transporte: collectList('transporte', el => ({
+      tipo: el.querySelector('[data-field="tipo"]').value,
+      nombre: el.querySelector('[data-field="nombre"]').value,
+      distancia: el.querySelector('[data-field="distancia"]').value,
+      tiempo: el.querySelector('[data-field="tiempo"]').value,
+    })),
+    imagenes: {
+      hero: val('hero'),
+      thumbnails: collectList('thumbnails', el => el.querySelector('input').value).filter(Boolean),
+      galeria: collectList('galeria', el => ({
+        src: el.querySelector('[data-field="src"]').value,
+        label: el.querySelector('[data-field="label"]').value,
+      })),
+    },
+    agente: {
+      nombre: val('agente_nombre'),
+      telefono: val('agente_telefono'),
+      whatsapp: val('agente_whatsapp'),
+      email: val('agente_email'),
+    },
+  };
+
+  return obj;
+}
+
+function collectList(name, mapper) {
+  const container = document.getElementById('list-' + name);
+  return Array.from(container.querySelectorAll('.dyn-list-item')).map(mapper);
+}
+
+async function saveProperty(e) {
+  e.preventDefault();
+  const data = collectForm();
+
+  try {
+    let res;
+    if (editingId) {
+      res = await fetch(`${API}/${editingId}`, {
+        method: 'PUT',
+        headers: authHeaders(),
+        body: JSON.stringify(data),
+      });
+    } else {
+      res = await fetch(API, {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify(data),
+      });
+    }
+    if (res.status === 401) { logout(); return; }
+    if (!res.ok) {
+      showMsg('form-msg', 'Error al guardar', 'error');
+      return;
+    }
+    await loadProperties();
+    showList();
+    showMsg('list-msg', editingId ? 'Propiedad actualizada' : 'Propiedad creada', 'success');
+  } catch (err) {
+    showMsg('form-msg', 'Error: ' + err.message, 'error');
+  }
+}
+
+function editProperty(id) {
+  const prop = properties.find(p => p.id === id);
+  if (!prop) return;
+  showForm(prop);
+}
+
+// ========== DYNAMIC LIST HELPERS ==========
+function removeItem(btn) {
+  btn.closest('.dyn-list-item').remove();
+}
+
+function addCaracteristica(value) {
+  const container = document.getElementById('list-caracteristicas');
+  const div = document.createElement('div');
+  div.className = 'dyn-list-item';
+  div.innerHTML = `<input type="text" value="${escAttr(value || '')}" placeholder="Caracteristica" style="flex:1">
+    <button type="button" class="btn-remove" onclick="removeItem(this)">&times;</button>`;
+  container.appendChild(div);
+}
+
+function addTag(t) {
+  const container = document.getElementById('list-tags');
+  const div = document.createElement('div');
+  div.className = 'dyn-list-item';
+  div.innerHTML = `<input data-field="texto" type="text" value="${escAttr(t?.texto || '')}" placeholder="Texto" style="flex:2">
+    <input data-field="icono" type="text" value="${escAttr(t?.icono || '')}" placeholder="Icono" style="flex:0.5;min-width:60px">
+    <select data-field="tipo" style="flex:1;min-width:100px">
+      <option value="default" ${(!t || t?.tipo === 'default') ? 'selected' : ''}>default</option>
+      <option value="gold" ${t?.tipo === 'gold' ? 'selected' : ''}>gold</option>
+    </select>
+    <button type="button" class="btn-remove" onclick="removeItem(this)">&times;</button>`;
+  container.appendChild(div);
+}
+
+function addFicha(f) {
+  const container = document.getElementById('list-ficha_tecnica');
+  const div = document.createElement('div');
+  div.className = 'dyn-list-item';
+  div.innerHTML = `<input data-field="campo" type="text" value="${escAttr(f?.campo || '')}" placeholder="Campo" style="flex:1">
+    <input data-field="valor" type="text" value="${escAttr(f?.valor || '')}" placeholder="Valor" style="flex:1">
+    <button type="button" class="btn-remove" onclick="removeItem(this)">&times;</button>`;
+  container.appendChild(div);
+}
+
+function addServicio(s) {
+  const container = document.getElementById('list-servicios_edificio');
+  const div = document.createElement('div');
+  div.className = 'dyn-list-item';
+  div.innerHTML = `<input data-field="icono" type="text" value="${escAttr(s?.icono || '')}" placeholder="Icono" style="flex:0.5;min-width:60px">
+    <input data-field="nombre" type="text" value="${escAttr(s?.nombre || '')}" placeholder="Nombre" style="flex:2">
+    <button type="button" class="btn-remove" onclick="removeItem(this)">&times;</button>`;
+  container.appendChild(div);
+}
+
+function addTransporte(t) {
+  const container = document.getElementById('list-transporte');
+  const div = document.createElement('div');
+  div.className = 'dyn-list-item';
+  div.innerHTML = `<select data-field="tipo" style="flex:0.7;min-width:80px">
+      <option value="metro" ${t?.tipo === 'metro' ? 'selected' : ''}>metro</option>
+      <option value="bus" ${(!t || t?.tipo === 'bus') ? 'selected' : ''}>bus</option>
+    </select>
+    <input data-field="nombre" type="text" value="${escAttr(t?.nombre || '')}" placeholder="Nombre" style="flex:2">
+    <input data-field="distancia" type="text" value="${escAttr(t?.distancia || '')}" placeholder="Distancia" style="flex:0.7;min-width:70px">
+    <input data-field="tiempo" type="text" value="${escAttr(t?.tiempo || '')}" placeholder="Tiempo" style="flex:0.7;min-width:70px">
+    <button type="button" class="btn-remove" onclick="removeItem(this)">&times;</button>`;
+  container.appendChild(div);
+}
+
+function addThumbnail(value) {
+  const container = document.getElementById('list-thumbnails');
+  const div = document.createElement('div');
+  div.className = 'dyn-list-item';
+  div.innerHTML = `<input type="text" value="${escAttr(value || '')}" placeholder="URL o ruta de imagen" style="flex:1">
+    <button type="button" class="btn-remove" onclick="removeItem(this)">&times;</button>`;
+  container.appendChild(div);
+}
+
+function addGaleria(g) {
+  const container = document.getElementById('list-galeria');
+  const div = document.createElement('div');
+  div.className = 'dyn-list-item';
+  div.innerHTML = `<input data-field="src" type="text" value="${escAttr(g?.src || '')}" placeholder="URL / ruta" style="flex:2">
+    <input data-field="label" type="text" value="${escAttr(g?.label || '')}" placeholder="Label" style="flex:1">
+    <button type="button" class="btn-remove" onclick="removeItem(this)">&times;</button>`;
+  container.appendChild(div);
+}
+
+function escAttr(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ========== INIT ==========
+document.addEventListener('DOMContentLoaded', () => {
+  // Allow login with Enter key
+  document.getElementById('login-password').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+
+  if (token) {
+    // Validate token by trying to load properties
+    showApp();
+  }
+});
+</script>
+</body>
+</html>
