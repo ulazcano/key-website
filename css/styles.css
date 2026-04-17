@@ -469,7 +469,6 @@ ul { list-style: none; }
 
 .ficha-header {
   background: var(--color-primary);
-  padding: var(--space-lg) var(--space-lg) 0;
 }
 
 .ficha-header-top {
@@ -517,7 +516,7 @@ ul { list-style: none; }
 }
 
 .ficha-price-main {
-  color: var(--color-accent);
+  color: oklch(0.97 0.005 295);
   font-family: 'Libre Caslon Display', serif;
   font-size: clamp(1.8rem, 1.5rem + 1.5vw, 2.5rem);
   font-weight: 400;
