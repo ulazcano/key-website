@@ -121,12 +121,13 @@ function renderFicha(p) {
         </table>
 
         <!-- BUILDING SERVICES -->
+        ${p.servicios_edificio && p.servicios_edificio.length > 0 ? `
         <div class="ficha-section-title">Servicios del edificio</div>
         <div class="ficha-servicios">
           ${p.servicios_edificio.map(s => `
             <div class="ficha-serv-item"><span class="ficha-serv-icon">${s.icono}</span>${s.nombre}</div>
           `).join('')}
-        </div>
+        </div>` : ''}
 
         <!-- TRANSPORT -->
         <div class="ficha-section-title">Conectividad y transporte</div>

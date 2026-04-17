@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Key Propiedades — Paletas de Color</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Figtree', sans-serif; background: #f8f7f5; color: #2a2a2a; padding: 48px 24px; }
+  h1 { font-family: 'Libre Caslon Display', serif; font-size: 32px; text-align: center; margin-bottom: 8px; }
+  .subtitle { text-align: center; color: #888; font-size: 15px; margin-bottom: 48px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(520px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto; }
+  .palette { background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid #eee; }
+  .palette-header { padding: 24px 24px 16px; }
+  .palette-num { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #aaa; font-weight: 600; }
+  .palette-name { font-family: 'Libre Caslon Display', serif; font-size: 22px; margin-top: 4px; }
+  .palette-desc { font-size: 13px; color: #777; margin-top: 6px; line-height: 1.5; }
+  .swatches { display: flex; height: 80px; }
+  .swatch { flex: 1; display: flex; align-items: flex-end; padding: 6px 8px; }
+  .swatch span { font-size: 9px; font-weight: 500; letter-spacing: 0.03em; opacity: 0.85; }
+  .preview { padding: 20px 24px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .preview-nav { height: 44px; display: flex; align-items: center; padding: 0 16px; border-radius: 8px; font-size: 13px; font-weight: 500; letter-spacing: 0.02em; }
+  .preview-card { flex: 1; min-width: 200px; border-radius: 10px; padding: 16px; }
+  .preview-price { font-family: 'Libre Caslon Display', serif; font-size: 20px; margin-bottom: 4px; }
+  .preview-addr { font-size: 12px; opacity: 0.7; }
+  .preview-btn { padding: 10px 20px; border-radius: 100px; font-size: 12px; font-weight: 500; border: none; cursor: pointer; }
+  .preview-pill { padding: 5px 12px; border-radius: 100px; font-size: 11px; font-weight: 500; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .swatches { height: 60px; } }
+</style>
+</head>
+<body>
+
+<h1>Paletas de Color</h1>
+<p class="subtitle">30 propuestas para Key Propiedades — luz, claridad, feminidad, limpieza, orden</p>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const palettes = [
+  {
+    name: "Champagne Dorado",
+    desc: "Dorado suave con acentos bronce. Elegancia cálida sin ostentación.",
+    colors: [
+      { bg: "#f9f6f0", label: "Fondo", text: "#6b5c3e" },
+      { bg: "#fff9ee", label: "Superficie", text: "#8a7650" },
+      { bg: "#c9a96e", label: "Acento", text: "#fff" },
+      { bg: "#3d3224", label: "Primario", text: "#e8d5b0" },
+      { bg: "#e8c8a0", label: "Secundario", text: "#3d3224" },
+    ],
+    primary: "#3d3224", primaryText: "#f5ece0",
+    accent: "#c9a96e", accentText: "#fff",
+    surface: "#f9f6f0", surfaceText: "#3d3224",
+    card: "#fff9ee", cardBorder: "#ede4d4",
+    pill: "#f5eadb", pillText: "#8a7650",
+  },
+  {
+    name: "Rose Quartz",
+    desc: "Rosa empolvado con toques dorados. Femenino, delicado, profesional.",
+    colors: [
+      { bg: "#faf5f5", label: "Fondo", text: "#8b6b6b" },
+      { bg: "#fff8f6", label: "Superficie", text: "#9e7878" },
+      { bg: "#d4a0a0", label: "Rosa", text: "#fff" },
+      { bg: "#4a2f2f", label: "Primario", text: "#f0d4d4" },
+      { bg: "#e8c89c", label: "Dorado", text: "#4a2f2f" },
+    ],
+    primary: "#4a2f2f", primaryText: "#f8e8e0",
+    accent: "#d4a0a0", accentText: "#fff",
+    surface: "#faf5f5", surfaceText: "#4a2f2f",
+    card: "#fff8f6", cardBorder: "#f0e0de",
+    pill: "#fce8e8", pillText: "#8b5e5e",
+  },
+  {
+    name: "Marfil & Miel",
+    desc: "Blancos cremosos con acento miel ámbar. Luminoso y acogedor.",
+    colors: [
+      { bg: "#faf8f4", label: "Fondo", text: "#7a6d55" },
+      { bg: "#fffcf5", label: "Superficie", text: "#8a7c60" },
+      { bg: "#dba654", label: "Miel", text: "#fff" },
+      { bg: "#38301e", label: "Primario", text: "#ecd9b0" },
+      { bg: "#f0dbb8", label: "Claro", text: "#5a4d35" },
+    ],
+    primary: "#38301e", primaryText: "#f5e8cc",
+    accent: "#dba654", accentText: "#fff",
+    surface: "#faf8f4", surfaceText: "#38301e",
+    card: "#fffcf5", cardBorder: "#ede3cc",
+    pill: "#faf0dc", pillText: "#8a7040",
+  },
+  {
+    name: "Blush & Arena",
+    desc: "Rosa pálido con arena natural. Suave, femenino, terrenal.",
+    colors: [
+      { bg: "#f9f5f2", label: "Fondo", text: "#7a6860" },
+      { bg: "#fef9f6", label: "Superficie", text: "#8a7a70" },
+      { bg: "#c8968a", label: "Blush", text: "#fff" },
+      { bg: "#3e2e28", label: "Primario", text: "#e8cfc4" },
+      { bg: "#dcc4a8", label: "Arena", text: "#3e2e28" },
+    ],
+    primary: "#3e2e28", primaryText: "#f0ddd0",
+    accent: "#c8968a", accentText: "#fff",
+    surface: "#f9f5f2", surfaceText: "#3e2e28",
+    card: "#fef9f6", cardBorder: "#ece0d8",
+    pill: "#f8e8e2", pillText: "#8a6558",
+  },
+  {
+    name: "Perla & Lavanda",
+    desc: "Blanco perla con lavanda suave. Limpio, fresco, refinado.",
+    colors: [
+      { bg: "#f7f5f9", label: "Fondo", text: "#6e6680" },
+      { bg: "#fdfcfe", label: "Superficie", text: "#7a7090" },
+      { bg: "#a08cbe", label: "Lavanda", text: "#fff" },
+      { bg: "#2e2640", label: "Primario", text: "#d8cce8" },
+      { bg: "#d4c8e2", label: "Claro", text: "#3e3458" },
+    ],
+    primary: "#2e2640", primaryText: "#e8e0f2",
+    accent: "#a08cbe", accentText: "#fff",
+    surface: "#f7f5f9", surfaceText: "#2e2640",
+    card: "#fdfcfe", cardBorder: "#e8e2f0",
+    pill: "#ede6f5", pillText: "#6e5a90",
+  },
+  {
+    name: "Durazno & Crema",
+    desc: "Tonos durazno sobre crema cálida. Luminoso, jovial, sofisticado.",
+    colors: [
+      { bg: "#fdf7f3", label: "Fondo", text: "#8a6e5e" },
+      { bg: "#fffaf6", label: "Superficie", text: "#9a7e6e" },
+      { bg: "#e0956e", label: "Durazno", text: "#fff" },
+      { bg: "#3a2820", label: "Primario", text: "#f0cdb5" },
+      { bg: "#f5d4b8", label: "Claro", text: "#5a3e2e" },
+    ],
+    primary: "#3a2820", primaryText: "#f5dcc8",
+    accent: "#e0956e", accentText: "#fff",
+    surface: "#fdf7f3", surfaceText: "#3a2820",
+    card: "#fffaf6", cardBorder: "#f0e0d2",
+    pill: "#fce8d8", pillText: "#a06840",
+  },
+  {
+    name: "Oro Rosa",
+    desc: "Rose gold auténtico con base marfil. Femenino y lujoso sin exceso.",
+    colors: [
+      { bg: "#f9f5f3", label: "Fondo", text: "#7a6560" },
+      { bg: "#fef9f7", label: "Superficie", text: "#8a7570" },
+      { bg: "#c4917a", label: "Oro Rosa", text: "#fff" },
+      { bg: "#402e2a", label: "Primario", text: "#e8c8b8" },
+      { bg: "#e8c4a8", label: "Dorado", text: "#402e2a" },
+    ],
+    primary: "#402e2a", primaryText: "#f5ddd0",
+    accent: "#c4917a", accentText: "#fff",
+    surface: "#f9f5f3", surfaceText: "#402e2a",
+    card: "#fef9f7", cardBorder: "#ede0d6",
+    pill: "#f8e2d6", pillText: "#906050",
+  },
+  {
+    name: "Lino Blanco",
+    desc: "Ultra limpio, casi monocromático. Acento dorado mínimo. Orden puro.",
+    colors: [
+      { bg: "#f6f5f3", label: "Fondo", text: "#6a6660" },
+      { bg: "#fdfcfb", label: "Superficie", text: "#8a8680" },
+      { bg: "#b8a07a", label: "Dorado", text: "#fff" },
+      { bg: "#2e2c28", label: "Primario", text: "#d8ccb8" },
+      { bg: "#e8e0d4", label: "Lino", text: "#3e3a32" },
+    ],
+    primary: "#2e2c28", primaryText: "#e8e2d6",
+    accent: "#b8a07a", accentText: "#fff",
+    surface: "#f6f5f3", surfaceText: "#2e2c28",
+    card: "#fdfcfb", cardBorder: "#e8e4dc",
+    pill: "#f0e8dc", pillText: "#7a6e58",
+  },
+  {
+    name: "Magnolia & Cobre",
+    desc: "Blanco magnolia con acento cobre rosado. Cálido y distinguido.",
+    colors: [
+      { bg: "#faf6f4", label: "Fondo", text: "#7a6862" },
+      { bg: "#fffbf8", label: "Superficie", text: "#907a72" },
+      { bg: "#c08a70", label: "Cobre", text: "#fff" },
+      { bg: "#382820", label: "Primario", text: "#e0c4b0" },
+      { bg: "#e8ceb8", label: "Magnolia", text: "#4a3830" },
+    ],
+    primary: "#382820", primaryText: "#f0dcc8",
+    accent: "#c08a70", accentText: "#fff",
+    surface: "#faf6f4", surfaceText: "#382820",
+    card: "#fffbf8", cardBorder: "#ede0d4",
+    pill: "#f5e4d6", pillText: "#8a6050",
+  },
+  {
+    name: "Miel & Rosa Antiguo",
+    desc: "Dorado miel con rosa antiguo. Equilibrio perfecto entre calidez y feminidad.",
+    colors: [
+      { bg: "#f9f5f0", label: "Fondo", text: "#7a6a55" },
+      { bg: "#fffaf3", label: "Superficie", text: "#8a7a62" },
+      { bg: "#cca060", label: "Miel", text: "#fff" },
+      { bg: "#3a2e1e", label: "Primario", text: "#e8d0a8" },
+      { bg: "#c89a8a", label: "Rosa Ant.", text: "#fff" },
+    ],
+    primary: "#3a2e1e", primaryText: "#f2dfc0",
+    accent: "#cca060", accentText: "#fff",
+    surface: "#f9f5f0", surfaceText: "#3a2e1e",
+    card: "#fffaf3", cardBorder: "#ede2cc",
+    pill: "#f8ead2", pillText: "#8a7040",
+    secondary: "#c89a8a",
+  },
+  {
+    name: "Vainilla & Malva",
+    desc: "Crema vainilla con malva suave. Delicado, femenino y sereno.",
+    colors: [
+      { bg: "#f9f6f3", label: "Fondo", text: "#6e6068" },
+      { bg: "#fefbf8", label: "Superficie", text: "#807078" },
+      { bg: "#b08898", label: "Malva", text: "#fff" },
+      { bg: "#3a2830", label: "Primario", text: "#dcc0cc" },
+      { bg: "#e8d4b8", label: "Vainilla", text: "#3a2830" },
+    ],
+    primary: "#3a2830", primaryText: "#f0dce4",
+    accent: "#b08898", accentText: "#fff",
+    surface: "#f9f6f3", surfaceText: "#3a2830",
+    card: "#fefbf8", cardBorder: "#ecdce4",
+    pill: "#f4e4ec", pillText: "#7a5868",
+  },
+  {
+    name: "Seda Dorada",
+    desc: "Dorado satinado profundo. Como un vestido de noche bajo luz cálida.",
+    colors: [
+      { bg: "#f8f5ed", label: "Fondo", text: "#6a5e40" },
+      { bg: "#fef9f0", label: "Superficie", text: "#8a7c58" },
+      { bg: "#c4a050", label: "Dorado", text: "#fff" },
+      { bg: "#322a18", label: "Primario", text: "#e0cc90" },
+      { bg: "#e8d8a8", label: "Seda", text: "#3a3018" },
+    ],
+    primary: "#322a18", primaryText: "#f0e0b8",
+    accent: "#c4a050", accentText: "#fff",
+    surface: "#f8f5ed", surfaceText: "#322a18",
+    card: "#fef9f0", cardBorder: "#e8dcc0",
+    pill: "#f5ecd0", pillText: "#7a6830",
+  },
+  {
+    name: "Algodón & Terracota",
+    desc: "Blanco algodón con terracota rosada. Cálido, orgánico, acogedor.",
+    colors: [
+      { bg: "#f8f4f2", label: "Fondo", text: "#7a6460" },
+      { bg: "#fefaf7", label: "Superficie", text: "#907068" },
+      { bg: "#c07868", label: "Terracota", text: "#fff" },
+      { bg: "#3a2622", label: "Primario", text: "#e0b8a8" },
+      { bg: "#f0d8c8", label: "Algodón", text: "#4a3430" },
+    ],
+    primary: "#3a2622", primaryText: "#f0d4c4",
+    accent: "#c07868", accentText: "#fff",
+    surface: "#f8f4f2", surfaceText: "#3a2622",
+    card: "#fefaf7", cardBorder: "#ecdcd4",
+    pill: "#f8dcd0", pillText: "#8a5448",
+  },
+  {
+    name: "Nácar & Bronce",
+    desc: "Superficie nacarada con bronce cálido. Lujo discreto y atemporal.",
+    colors: [
+      { bg: "#f7f5f2", label: "Fondo", text: "#6a6258" },
+      { bg: "#fcfaf7", label: "Superficie", text: "#8a8070" },
+      { bg: "#a08860", label: "Bronce", text: "#fff" },
+      { bg: "#302a20", label: "Primario", text: "#d4c4a0" },
+      { bg: "#e4d8c0", label: "Nácar", text: "#3a3428" },
+    ],
+    primary: "#302a20", primaryText: "#e4d8c0",
+    accent: "#a08860", accentText: "#fff",
+    surface: "#f7f5f2", surfaceText: "#302a20",
+    card: "#fcfaf7", cardBorder: "#e4dcd0",
+    pill: "#ede4d4", pillText: "#706040",
+  },
+  {
+    name: "Pétalo & Caramelo",
+    desc: "Rosa pétalo con caramelo dorado. Dulce, luminoso, femenino.",
+    colors: [
+      { bg: "#fdf6f4", label: "Fondo", text: "#886860" },
+      { bg: "#fff9f6", label: "Superficie", text: "#9a7870" },
+      { bg: "#d8907a", label: "Pétalo", text: "#fff" },
+      { bg: "#402820", label: "Primario", text: "#f0c0a8" },
+      { bg: "#deb880", label: "Caramelo", text: "#402820" },
+    ],
+    primary: "#402820", primaryText: "#f5d8c0",
+    accent: "#d8907a", accentText: "#fff",
+    surface: "#fdf6f4", surfaceText: "#402820",
+    card: "#fff9f6", cardBorder: "#f0dcd2",
+    pill: "#fce0d4", pillText: "#a06048",
+  },
+  {
+    name: "Avena & Salvia",
+    desc: "Tonos avena con toque salvia. Fresco, natural, ordenado.",
+    colors: [
+      { bg: "#f6f5f0", label: "Fondo", text: "#5e6658" },
+      { bg: "#fcfbf6", label: "Superficie", text: "#707868" },
+      { bg: "#8ea07a", label: "Salvia", text: "#fff" },
+      { bg: "#282e22", label: "Primario", text: "#c4d0b0" },
+      { bg: "#dcd8c4", label: "Avena", text: "#303828" },
+    ],
+    primary: "#282e22", primaryText: "#dce4cc",
+    accent: "#8ea07a", accentText: "#fff",
+    surface: "#f6f5f0", surfaceText: "#282e22",
+    card: "#fcfbf6", cardBorder: "#e0dcd0",
+    pill: "#e8e4d4", pillText: "#58664a",
+  },
+  {
+    name: "Porcelana & Rubí",
+    desc: "Blanco porcelana con acento rubí suave. Elegante y femenino con carácter.",
+    colors: [
+      { bg: "#f8f5f5", label: "Fondo", text: "#706065" },
+      { bg: "#fefbfb", label: "Superficie", text: "#887078" },
+      { bg: "#b86878", label: "Rubí", text: "#fff" },
+      { bg: "#3a2028", label: "Primario", text: "#dca8b8" },
+      { bg: "#e8d0d4", label: "Porcelana", text: "#3a2028" },
+    ],
+    primary: "#3a2028", primaryText: "#f0d0d8",
+    accent: "#b86878", accentText: "#fff",
+    surface: "#f8f5f5", surfaceText: "#3a2028",
+    card: "#fefbfb", cardBorder: "#ecdce0",
+    pill: "#f4dce2", pillText: "#884050",
+  },
+  {
+    name: "Melocotón Suave",
+    desc: "Melocotón pastel con base crema. Suave como la primera luz del día.",
+    colors: [
+      { bg: "#fdf7f2", label: "Fondo", text: "#887060" },
+      { bg: "#fff9f4", label: "Superficie", text: "#9a8070" },
+      { bg: "#e8a88a", label: "Melocotón", text: "#fff" },
+      { bg: "#3e2c22", label: "Primario", text: "#f0c8b0" },
+      { bg: "#f5d8c0", label: "Claro", text: "#4a3428" },
+    ],
+    primary: "#3e2c22", primaryText: "#f5dcc8",
+    accent: "#e8a88a", accentText: "#fff",
+    surface: "#fdf7f2", surfaceText: "#3e2c22",
+    card: "#fff9f4", cardBorder: "#f0e0d4",
+    pill: "#fce8da", pillText: "#a07050",
+  },
+  {
+    name: "Cachemira",
+    desc: "Beige cachemira con acento marrón rosado. Lujo textil, suavidad táctil.",
+    colors: [
+      { bg: "#f5f0ec", label: "Fondo", text: "#6e6058" },
+      { bg: "#faf6f2", label: "Superficie", text: "#887868" },
+      { bg: "#a88070", label: "Cachemira", text: "#fff" },
+      { bg: "#342820", label: "Primario", text: "#d4b8a8" },
+      { bg: "#e0ccbc", label: "Claro", text: "#3a2e24" },
+    ],
+    primary: "#342820", primaryText: "#e8d4c4",
+    accent: "#a88070", accentText: "#fff",
+    surface: "#f5f0ec", surfaceText: "#342820",
+    card: "#faf6f2", cardBorder: "#e2d8cc",
+    pill: "#ecdcc8", pillText: "#7a5c50",
+  },
+  {
+    name: "Ópalo & Dorado",
+    desc: "Iridiscencia suave con dorado cálido. Como una joya bajo luz natural.",
+    colors: [
+      { bg: "#f6f4f0", label: "Fondo", text: "#68604e" },
+      { bg: "#fdfbf6", label: "Superficie", text: "#808060" },
+      { bg: "#c0a458", label: "Dorado", text: "#fff" },
+      { bg: "#302810", label: "Primario", text: "#e0d090" },
+      { bg: "#e2dcd0", label: "Ópalo", text: "#38301a" },
+    ],
+    primary: "#302810", primaryText: "#eee0b0",
+    accent: "#c0a458", accentText: "#fff",
+    surface: "#f6f4f0", surfaceText: "#302810",
+    card: "#fdfbf6", cardBorder: "#e4dcc8",
+    pill: "#f2eacc", pillText: "#786828",
+  },
+  {
+    name: "Cerezo en Flor",
+    desc: "Rosa cerezo sobre marfil puro. Primaveral, luminoso, esperanzador.",
+    colors: [
+      { bg: "#fdf6f6", label: "Fondo", text: "#886068" },
+      { bg: "#fff8f8", label: "Superficie", text: "#9a7078" },
+      { bg: "#d8889a", label: "Cerezo", text: "#fff" },
+      { bg: "#3e2028", label: "Primario", text: "#f0b8c8" },
+      { bg: "#f2d4da", label: "Claro", text: "#482832" },
+    ],
+    primary: "#3e2028", primaryText: "#f8d0da",
+    accent: "#d8889a", accentText: "#fff",
+    surface: "#fdf6f6", surfaceText: "#3e2028",
+    card: "#fff8f8", cardBorder: "#f2dce0",
+    pill: "#fce0e6", pillText: "#985868",
+  },
+  {
+    name: "Arena Blanca",
+    desc: "Neutros arena con dorado arena. Minimalismo mediterráneo.",
+    colors: [
+      { bg: "#f5f2ec", label: "Fondo", text: "#6a6454" },
+      { bg: "#faf8f2", label: "Superficie", text: "#887e68" },
+      { bg: "#b8a470", label: "Arena", text: "#fff" },
+      { bg: "#2e2a1e", label: "Primario", text: "#d4c498" },
+      { bg: "#e0d8c0", label: "Claro", text: "#342e20" },
+    ],
+    primary: "#2e2a1e", primaryText: "#e4d8b8",
+    accent: "#b8a470", accentText: "#fff",
+    surface: "#f5f2ec", surfaceText: "#2e2a1e",
+    card: "#faf8f2", cardBorder: "#e0d8c4",
+    pill: "#eee4ca", pillText: "#706040",
+  },
+  {
+    name: "Lirio & Gris Perla",
+    desc: "Gris perlado con lila suave. Sofisticado, limpio, contemporáneo.",
+    colors: [
+      { bg: "#f4f3f5", label: "Fondo", text: "#626068" },
+      { bg: "#faf9fb", label: "Superficie", text: "#7a7880" },
+      { bg: "#9888a8", label: "Lirio", text: "#fff" },
+      { bg: "#28222e", label: "Primario", text: "#c8bcd8" },
+      { bg: "#dcd4e4", label: "Perla", text: "#302838" },
+    ],
+    primary: "#28222e", primaryText: "#e0d8ea",
+    accent: "#9888a8", accentText: "#fff",
+    surface: "#f4f3f5", surfaceText: "#28222e",
+    card: "#faf9fb", cardBorder: "#e0dce6",
+    pill: "#e8e0f0", pillText: "#5e4e70",
+  },
+  {
+    name: "Amanecer Rosado",
+    desc: "Gradiente del amanecer: rosa, melocotón, dorado. Cálido y esperanzador.",
+    colors: [
+      { bg: "#fdf5f2", label: "Fondo", text: "#886860" },
+      { bg: "#fff8f4", label: "Superficie", text: "#9a7868" },
+      { bg: "#d49070", label: "Amanecer", text: "#fff" },
+      { bg: "#3c2820", label: "Primario", text: "#ecc0a0" },
+      { bg: "#e8b8a0", label: "Rosa", text: "#402c22" },
+    ],
+    primary: "#3c2820", primaryText: "#f5d4bc",
+    accent: "#d49070", accentText: "#fff",
+    surface: "#fdf5f2", surfaceText: "#3c2820",
+    card: "#fff8f4", cardBorder: "#f0dcd0",
+    pill: "#fae0cc", pillText: "#986040",
+  },
+  {
+    name: "Perla Rosa",
+    desc: "Rosa nacarado luminoso. Femenino premium sin ser infantil.",
+    colors: [
+      { bg: "#f8f4f4", label: "Fondo", text: "#786468" },
+      { bg: "#fdf8f8", label: "Superficie", text: "#907478" },
+      { bg: "#c48890", label: "Perla Rosa", text: "#fff" },
+      { bg: "#382428", label: "Primario", text: "#e0b4bc" },
+      { bg: "#e8ccc8", label: "Nacar", text: "#3e2830" },
+    ],
+    primary: "#382428", primaryText: "#f0ccd4",
+    accent: "#c48890", accentText: "#fff",
+    surface: "#f8f4f4", surfaceText: "#382428",
+    card: "#fdf8f8", cardBorder: "#ecdcde",
+    pill: "#f4dce0", pillText: "#885860",
+  },
+  {
+    name: "Canela & Crema",
+    desc: "Canela especiada con crema suave. Cálido, confortable, invitante.",
+    colors: [
+      { bg: "#f8f4ee", label: "Fondo", text: "#705a44" },
+      { bg: "#fdf8f0", label: "Superficie", text: "#8a7254" },
+      { bg: "#c0884c", label: "Canela", text: "#fff" },
+      { bg: "#342410", label: "Primario", text: "#dcb880" },
+      { bg: "#ecd8b8", label: "Crema", text: "#3a2c16" },
+    ],
+    primary: "#342410", primaryText: "#f0d8a8",
+    accent: "#c0884c", accentText: "#fff",
+    surface: "#f8f4ee", surfaceText: "#342410",
+    card: "#fdf8f0", cardBorder: "#e8d8c0",
+    pill: "#f4e4c4", pillText: "#806030",
+  },
+  {
+    name: "Nube & Latte",
+    desc: "Blanco nube con café con leche. Suave como una mañana tranquila.",
+    colors: [
+      { bg: "#f6f3f0", label: "Fondo", text: "#6a6058" },
+      { bg: "#faf8f5", label: "Superficie", text: "#887868" },
+      { bg: "#a8906e", label: "Latte", text: "#fff" },
+      { bg: "#302820", label: "Primario", text: "#d4c0a0" },
+      { bg: "#e4d8c4", label: "Nube", text: "#362e24" },
+    ],
+    primary: "#302820", primaryText: "#e4d8c0",
+    accent: "#a8906e", accentText: "#fff",
+    surface: "#f6f3f0", surfaceText: "#302820",
+    card: "#faf8f5", cardBorder: "#e0d6c8",
+    pill: "#ece0cc", pillText: "#6e5c42",
+  },
+  {
+    name: "Satén Champagne",
+    desc: "Champagne con brillo satinado. La paleta de una celebración íntima.",
+    colors: [
+      { bg: "#f9f6ee", label: "Fondo", text: "#6e6448" },
+      { bg: "#fefaf0", label: "Superficie", text: "#8a7e58" },
+      { bg: "#c8aa68", label: "Champagne", text: "#fff" },
+      { bg: "#342c16", label: "Primario", text: "#e4cc8c" },
+      { bg: "#e8dab0", label: "Satén", text: "#3a3018" },
+    ],
+    primary: "#342c16", primaryText: "#f0e0a8",
+    accent: "#c8aa68", accentText: "#fff",
+    surface: "#f9f6ee", surfaceText: "#342c16",
+    card: "#fefaf0", cardBorder: "#e8dcc0",
+    pill: "#f4eacc", pillText: "#7a6a30",
+  }
+];
+
+const grid = document.getElementById('grid');
+
+palettes.forEach((p, idx) => {
+  const el = document.createElement('div');
+  el.className = 'palette';
+  el.innerHTML = `
+    <div class="palette-header">
+      <div class="palette-num">Paleta ${idx + 1}</div>
+      <div class="palette-name">${p.name}</div>
+      <div class="palette-desc">${p.desc}</div>
+    </div>
+    <div class="swatches">
+      ${p.colors.map(c => `<div class="swatch" style="background:${c.bg}"><span style="color:${c.text}">${c.label}<br>${c.bg}</span></div>`).join('')}
+    </div>
+    <div class="preview" style="background:${p.surface}">
+      <div class="preview-nav" style="background:${p.primary};color:${p.primaryText}">Navbar</div>
+      <div class="preview-btn" style="background:${p.accent};color:${p.accentText}">Buscar</div>
+      <div class="preview-pill" style="background:${p.pill};color:${p.pillText}">Metro 4 min</div>
+    </div>
+    <div class="preview" style="background:${p.surface};padding-top:0">
+      <div class="preview-card" style="background:${p.card};border:1px solid ${p.cardBorder}">
+        <div class="preview-price" style="color:${p.primary}">$92.000.000</div>
+        <div class="preview-addr" style="color:${p.surfaceText}">Av. Vicuña Mackenna 2585, San Joaquín</div>
+      </div>
+    </div>
+  `;
+  grid.appendChild(el);
+});
+</script>
+</body>
+</html>
