@@ -63,38 +63,6 @@
   }
   .heart-btn .heart-count.visible { display: flex; }
 
-  /* Favorites summary */
-  .favorites-bar {
-    max-width: 1200px; margin: 0 auto 32px;
-    background: #fff; border-radius: 14px; border: 1px solid #eee;
-    padding: 20px 24px; display: none;
-  }
-  .favorites-bar.visible { display: block; }
-  .favorites-bar h3 { font-family: 'Libre Caslon Display', serif; font-size: 18px; margin-bottom: 10px; color: #e25d6a; }
-  .favorites-list { display: flex; flex-wrap: wrap; gap: 8px; }
-  .fav-chip {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: #fef0f1; color: #c04050; border-radius: 100px;
-    padding: 6px 14px; font-size: 12px; font-weight: 500;
-  }
-  .fav-chip .fav-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-  .share-link {
-    margin-top: 14px; padding-top: 14px; border-top: 1px solid #f0e8e8;
-    font-size: 12px; color: #999; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-  }
-  .share-link input {
-    flex: 1; min-width: 200px; padding: 8px 12px; border: 1px solid #e8e0e0;
-    border-radius: 8px; font-size: 12px; font-family: 'Figtree', sans-serif;
-    color: #666; background: #faf8f8;
-  }
-  .share-link button {
-    padding: 8px 16px; border-radius: 8px; border: none;
-    background: #e25d6a; color: #fff; font-size: 12px;
-    font-family: 'Figtree', sans-serif; font-weight: 500;
-    cursor: pointer; transition: opacity 0.2s;
-  }
-  .share-link button:hover { opacity: 0.85; }
-
   @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .swatches { height: 60px; } }
 </style>
 </head>
@@ -102,16 +70,6 @@
 
 <h1>Paletas de Color</h1>
 <p class="subtitle">30 propuestas para Key Propiedades — luz, claridad, feminidad, limpieza, orden</p>
-
-<div class="favorites-bar" id="favorites-bar">
-  <h3>Favoritas</h3>
-  <div class="favorites-list" id="favorites-list"></div>
-  <div class="share-link">
-    <span>Comparte tu seleccion:</span>
-    <input type="text" id="share-url" readonly>
-    <button onclick="copyShareUrl()">Copiar link</button>
-  </div>
-</div>
 
 <div class="grid" id="grid"></div>
 
@@ -571,92 +529,75 @@ const palettes = [
 const HEART_SVG = `<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
 
 const grid = document.getElementById('grid');
+let likes = new Set();
 
-// --- Persistence: load likes from URL hash or localStorage ---
-function getLikes() {
-  const hash = window.location.hash.replace('#', '');
-  if (hash.startsWith('likes=')) {
-    const ids = hash.replace('likes=', '').split(',').map(Number).filter(n => !isNaN(n));
-    return new Set(ids);
-  }
+// --- API: shared persistence via Netlify Function ---
+async function fetchLikes() {
   try {
-    const stored = JSON.parse(localStorage.getItem('kp-palette-likes') || '[]');
-    return new Set(stored);
-  } catch { return new Set(); }
+    const res = await fetch('/api/likes');
+    if (res.ok) return new Set(await res.json());
+  } catch {}
+  // Fallback to localStorage if API unavailable (local dev)
+  try { return new Set(JSON.parse(localStorage.getItem('kp-palette-likes') || '[]')); }
+  catch { return new Set(); }
 }
 
-let likes = getLikes();
-
-function saveLikes() {
+async function postLike(idx, action) {
+  try {
+    const res = await fetch('/api/likes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ palette: idx, action })
+    });
+    if (res.ok) return new Set(await res.json());
+  } catch {}
+  // Fallback: save locally
   localStorage.setItem('kp-palette-likes', JSON.stringify([...likes]));
-  const hash = likes.size > 0 ? '#likes=' + [...likes].sort((a,b) => a - b).join(',') : '';
-  history.replaceState(null, '', window.location.pathname + hash);
-  updateFavoritesBar();
-  updateShareUrl();
+  return likes;
 }
 
-function toggleLike(idx) {
-  if (likes.has(idx)) likes.delete(idx);
-  else likes.add(idx);
+async function toggleLike(idx) {
+  const wasLiked = likes.has(idx);
+  if (wasLiked) likes.delete(idx); else likes.add(idx);
 
+  // Update UI immediately (optimistic)
   const card = document.querySelector(`[data-palette="${idx}"]`);
   const btn = card.querySelector('.heart-btn');
-  btn.classList.toggle('active', likes.has(idx));
-  card.classList.toggle('liked', likes.has(idx));
+  btn.classList.toggle('active', !wasLiked);
+  card.classList.toggle('liked', !wasLiked);
 
-  // Re-trigger animation
-  if (likes.has(idx)) {
+  if (!wasLiked) {
     const svg = btn.querySelector('svg');
     svg.style.animation = 'none';
-    svg.offsetHeight; // reflow
+    svg.offsetHeight;
     svg.style.animation = '';
   }
 
-  saveLikes();
+  // Persist to server
+  likes = await postLike(idx, wasLiked ? 'unlike' : 'like');
+  syncUI();
 }
 
-function updateFavoritesBar() {
-  const bar = document.getElementById('favorites-bar');
-  const list = document.getElementById('favorites-list');
-  if (likes.size === 0) {
-    bar.classList.remove('visible');
-    return;
-  }
-  bar.classList.add('visible');
-  list.innerHTML = [...likes].sort((a,b) => a - b).map(idx => {
-    const p = palettes[idx];
-    return `<span class="fav-chip"><span class="fav-dot" style="background:${p.accent}"></span>${idx + 1}. ${p.name}</span>`;
-  }).join('');
-}
-
-function updateShareUrl() {
-  const input = document.getElementById('share-url');
-  if (likes.size === 0) { input.value = ''; return; }
-  const url = window.location.origin + window.location.pathname + '#likes=' + [...likes].sort((a,b) => a - b).join(',');
-  input.value = url;
-}
-
-function copyShareUrl() {
-  const input = document.getElementById('share-url');
-  input.select();
-  navigator.clipboard.writeText(input.value).then(() => {
-    const btn = input.nextElementSibling;
-    btn.textContent = 'Copiado';
-    setTimeout(() => { btn.textContent = 'Copiar link'; }, 1500);
+function syncUI() {
+  document.querySelectorAll('[data-palette]').forEach(card => {
+    const idx = parseInt(card.dataset.palette);
+    const isLiked = likes.has(idx);
+    card.classList.toggle('liked', isLiked);
+    card.querySelector('.heart-btn').classList.toggle('active', isLiked);
   });
 }
 
 // --- Render palettes ---
 palettes.forEach((p, idx) => {
   const el = document.createElement('div');
-  el.className = 'palette' + (likes.has(idx) ? ' liked' : '');
+  el.className = 'palette';
   el.dataset.palette = idx;
   el.innerHTML = `
     <div class="palette-header">
       <div class="palette-num">Paleta ${idx + 1}</div>
       <div class="palette-name">${p.name}</div>
       <div class="palette-desc">${p.desc}</div>
-      <button class="heart-btn ${likes.has(idx) ? 'active' : ''}" onclick="toggleLike(${idx})" aria-label="Marcar como favorita">
+      <button class="heart-btn" onclick="toggleLike(${idx})" aria-label="Marcar como favorita">
         ${HEART_SVG}
       </button>
     </div>
@@ -678,9 +619,8 @@ palettes.forEach((p, idx) => {
   grid.appendChild(el);
 });
 
-// Init
-updateFavoritesBar();
-updateShareUrl();
+// --- Init: load shared likes and sync UI ---
+fetchLikes().then(data => { likes = data; syncUI(); });
 </script>
 </body>
 </html>
