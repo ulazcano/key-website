@@ -1,31 +1,29 @@
 /* ============================================================
    KEY PROPIEDADES — Design System
    Typography: Libre Caslon Display (display) + Figtree (body)
-   Colors: OKLCH — warm champagne/gold, rose gold accent
+   Colors: Paleta 5 — Perla & Lavanda
    Spacing: 4pt scale
    ============================================================ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* --- Color: OKLCH palette — warm gold / champagne --- */
-  --color-primary: oklch(0.30 0.05 65);          /* deep warm bronze */
-  --color-primary-mid: oklch(0.38 0.05 65);
-  --color-primary-light: oklch(0.95 0.02 75);    /* soft champagne surface */
-  --color-accent: oklch(0.65 0.12 55);           /* rich warm gold */
-  --color-accent-subtle: oklch(0.94 0.035 60);   /* light gold wash */
-  --color-accent-dark: oklch(0.52 0.10 55);      /* deep gold */
-  --color-rose: oklch(0.68 0.08 18);             /* soft rose gold */
-  --color-rose-subtle: oklch(0.95 0.02 18);
+  /* --- Color: Perla & Lavanda --- */
+  --color-primary: oklch(0.24 0.05 295);          /* #2e2640 deep plum */
+  --color-primary-mid: oklch(0.32 0.05 295);
+  --color-primary-light: oklch(0.94 0.015 295);   /* soft pearl lavender */
+  --color-accent: oklch(0.62 0.08 295);           /* #a08cbe lavanda */
+  --color-accent-subtle: oklch(0.94 0.025 295);   /* light lavender wash */
+  --color-accent-dark: oklch(0.50 0.08 295);      /* deep lavender */
 
-  /* Neutrals tinted warm (hue 65 — golden) */
-  --color-bg: oklch(0.975 0.008 65);
-  --color-surface: oklch(0.995 0.005 65);
-  --color-border: oklch(0.90 0.012 65);
-  --color-border-light: oklch(0.93 0.008 65);
-  --color-text: oklch(0.22 0.03 65);
-  --color-text-secondary: oklch(0.48 0.02 65);
-  --color-text-tertiary: oklch(0.60 0.015 65);
+  /* Neutrals tinted toward lavender (hue 295) */
+  --color-bg: oklch(0.975 0.006 295);
+  --color-surface: oklch(0.995 0.003 295);
+  --color-border: oklch(0.90 0.010 295);
+  --color-border-light: oklch(0.93 0.006 295);
+  --color-text: oklch(0.22 0.025 295);
+  --color-text-secondary: oklch(0.48 0.018 295);
+  --color-text-tertiary: oklch(0.60 0.012 295);
 
   /* Semantic */
   --color-success: oklch(0.55 0.15 145);
@@ -106,7 +104,7 @@ ul { list-style: none; }
   left: 0;
   right: 0;
   z-index: var(--z-sticky);
-  background: oklch(0.28 0.07 65 / 0.96);
+  background: oklch(0.28 0.07 295 / 0.96);
   backdrop-filter: blur(12px);
   padding: 0 var(--space-lg);
   height: 64px;
@@ -127,7 +125,7 @@ ul { list-style: none; }
 }
 
 .navbar-links a {
-  color: oklch(0.92 0.01 65);
+  color: oklch(0.92 0.01 295);
   font-size: var(--text-sm);
   font-weight: 400;
   letter-spacing: 0.02em;
@@ -161,7 +159,7 @@ ul { list-style: none; }
   display: none;
   background: none;
   border: none;
-  color: oklch(0.92 0.01 65);
+  color: oklch(0.92 0.01 295);
   font-size: 24px;
   cursor: pointer;
   padding: var(--space-sm);
@@ -194,8 +192,8 @@ ul { list-style: none; }
   inset: 0;
   background: linear-gradient(
     175deg,
-    oklch(0.22 0.06 65 / 0.65) 0%,
-    oklch(0.18 0.08 65 / 0.80) 100%
+    oklch(0.22 0.06 295 / 0.65) 0%,
+    oklch(0.18 0.08 295 / 0.80) 100%
   );
 }
 
@@ -218,14 +216,14 @@ ul { list-style: none; }
   font-family: 'Libre Caslon Display', serif;
   font-size: var(--text-3xl);
   font-weight: 400;
-  color: oklch(0.98 0.005 65);
+  color: oklch(0.98 0.005 295);
   line-height: 1.08;
   margin-bottom: var(--space-base);
   max-width: 14ch;
 }
 
 .hero-subtitle {
-  color: oklch(0.82 0.02 65);
+  color: oklch(0.82 0.02 295);
   font-size: var(--text-lg);
   font-weight: 300;
   margin-bottom: var(--space-2xl);
@@ -243,8 +241,8 @@ ul { list-style: none; }
   align-items: end;
   flex-wrap: wrap;
   box-shadow:
-    0 4px 16px oklch(0.15 0.03 65 / 0.12),
-    0 24px 48px oklch(0.15 0.03 65 / 0.08);
+    0 4px 16px oklch(0.15 0.03 295 / 0.12),
+    0 24px 48px oklch(0.15 0.03 295 / 0.08);
   max-width: 920px;
   animation: search-enter 600ms 200ms var(--ease-out) both;
 }
@@ -291,7 +289,7 @@ ul { list-style: none; }
 
 .search-btn {
   background: var(--color-primary);
-  color: oklch(0.97 0.005 65);
+  color: oklch(0.97 0.005 295);
   border: none;
   padding: 11px var(--space-xl);
   border-radius: var(--radius-sm);
@@ -368,7 +366,7 @@ ul { list-style: none; }
 
 .property-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 32px oklch(0.15 0.03 65 / 0.10);
+  box-shadow: 0 12px 32px oklch(0.15 0.03 295 / 0.10);
 }
 
 .card-img-wrap {
@@ -407,7 +405,7 @@ ul { list-style: none; }
   top: var(--space-md);
   right: var(--space-md);
   background: var(--color-primary);
-  color: oklch(0.95 0.01 65);
+  color: oklch(0.95 0.01 295);
   font-size: 10px;
   font-weight: 500;
   padding: var(--space-xs) var(--space-md);
@@ -509,7 +507,7 @@ ul { list-style: none; }
 .ficha-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, oklch(0.12 0.02 65 / 0.75) 0%, transparent 55%);
+  background: linear-gradient(to top, oklch(0.12 0.02 295 / 0.75) 0%, transparent 55%);
 }
 
 .ficha-hero-price {
@@ -527,13 +525,13 @@ ul { list-style: none; }
 }
 
 .ficha-price-sub {
-  color: oklch(0.88 0.01 65);
+  color: oklch(0.88 0.01 295);
   font-size: var(--text-sm);
   margin-top: var(--space-xs);
 }
 
 .ficha-price-gc {
-  color: oklch(0.72 0.01 65);
+  color: oklch(0.72 0.01 295);
   font-size: var(--text-xs);
   margin-top: 2px;
 }
@@ -690,8 +688,8 @@ ul { list-style: none; }
   bottom: 0;
   left: 0;
   right: 0;
-  background: oklch(0.15 0.02 65 / 0.60);
-  color: oklch(0.95 0.005 65);
+  background: oklch(0.15 0.02 295 / 0.60);
+  color: oklch(0.95 0.005 295);
   font-size: 10px;
   padding: var(--space-xs) var(--space-sm);
   text-align: center;
@@ -843,13 +841,13 @@ ul { list-style: none; }
   font-family: 'Libre Caslon Display', serif;
   font-size: var(--text-lg);
   font-weight: 400;
-  color: oklch(0.97 0.005 65);
+  color: oklch(0.97 0.005 295);
   margin-bottom: var(--space-xs);
 }
 
 .ficha-agent-contact {
   font-size: var(--text-xs);
-  color: oklch(0.72 0.01 65);
+  color: oklch(0.72 0.01 295);
   margin-bottom: var(--space-lg);
   line-height: 1.6;
 }
@@ -881,23 +879,23 @@ ul { list-style: none; }
 }
 
 .btn-call {
-  background: oklch(0.36 0.06 65);
-  color: oklch(0.90 0.01 65);
+  background: oklch(0.36 0.06 295);
+  color: oklch(0.90 0.01 295);
   padding: var(--space-md) var(--space-lg);
   border-radius: 100px;
   font-size: var(--text-sm);
   font-weight: 500;
-  border: 1px solid oklch(0.45 0.05 65);
+  border: 1px solid oklch(0.45 0.05 295);
   transition: background 200ms var(--ease-out);
 }
 
 .btn-call:hover {
-  background: oklch(0.42 0.06 65);
+  background: oklch(0.42 0.06 295);
 }
 
 .ficha-footer-brand {
   font-size: 10px;
-  color: oklch(0.45 0.02 65);
+  color: oklch(0.45 0.02 295);
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -905,7 +903,7 @@ ul { list-style: none; }
 /* === SITE FOOTER === */
 .site-footer {
   background: var(--color-primary);
-  color: oklch(0.72 0.01 65);
+  color: oklch(0.72 0.01 295);
   padding: var(--space-3xl) var(--space-lg) var(--space-lg);
   text-align: center;
 }
@@ -914,7 +912,7 @@ ul { list-style: none; }
   font-family: 'Libre Caslon Display', serif;
   font-size: var(--text-lg);
   font-weight: 400;
-  color: oklch(0.95 0.005 65);
+  color: oklch(0.95 0.005 295);
   margin-bottom: var(--space-sm);
 }
 
@@ -926,9 +924,9 @@ ul { list-style: none; }
 .footer-copy {
   margin-top: var(--space-xl);
   padding-top: var(--space-base);
-  border-top: 1px solid oklch(0.35 0.03 65);
+  border-top: 1px solid oklch(0.35 0.03 295);
   font-size: var(--text-xs);
-  color: oklch(0.50 0.02 65);
+  color: oklch(0.50 0.02 295);
 }
 
 /* === LIGHTBOX === */
@@ -936,7 +934,7 @@ ul { list-style: none; }
   display: none;
   position: fixed;
   inset: 0;
-  background: oklch(0.08 0.02 65 / 0.94);
+  background: oklch(0.08 0.02 295 / 0.94);
   z-index: var(--z-modal);
   flex-direction: column;
   align-items: center;
@@ -953,7 +951,7 @@ ul { list-style: none; }
 }
 
 .lightbox-caption {
-  color: oklch(0.82 0.01 65);
+  color: oklch(0.82 0.01 295);
   margin-top: var(--space-md);
   font-size: var(--text-sm);
 }
@@ -962,9 +960,9 @@ ul { list-style: none; }
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: oklch(0.95 0.01 65 / 0.12);
+  background: oklch(0.95 0.01 295 / 0.12);
   border: none;
-  color: oklch(0.92 0.01 65);
+  color: oklch(0.92 0.01 295);
   font-size: 28px;
   padding: var(--space-md) var(--space-lg);
   cursor: pointer;
@@ -972,7 +970,7 @@ ul { list-style: none; }
   transition: background 200ms var(--ease-out);
 }
 
-.lb-btn:hover { background: oklch(0.95 0.01 65 / 0.22); }
+.lb-btn:hover { background: oklch(0.95 0.01 295 / 0.22); }
 .lb-btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 
 .lb-prev { left: var(--space-md); }
@@ -984,7 +982,7 @@ ul { list-style: none; }
   right: var(--space-lg);
   background: none;
   border: none;
-  color: oklch(0.85 0.01 65);
+  color: oklch(0.85 0.01 295);
   font-size: 28px;
   cursor: pointer;
   padding: var(--space-sm);
@@ -1024,7 +1022,7 @@ ul { list-style: none; }
     top: 64px;
     left: 0;
     right: 0;
-    background: oklch(0.28 0.07 65 / 0.98);
+    background: oklch(0.28 0.07 295 / 0.98);
     backdrop-filter: blur(12px);
     padding: var(--space-lg);
     gap: var(--space-base);
