@@ -64,7 +64,13 @@ function renderFicha(p) {
     <!-- 2. PRICE + STATS RIBBON -->
     <section class="vt-ribbon">
       <div class="vt-ribbon-inner">
-        <div class="vt-price">${p.precio_formato}</div>
+        <div class="vt-price-row">
+          <div class="vt-price">${p.precio_formato}</div>
+          <button class="vt-share-btn" onclick="shareProperty(event)" aria-label="Compartir propiedad">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            <span class="vt-share-tooltip">Copiado</span>
+          </button>
+        </div>
         <div class="vt-price-sub">Precio de ${p.operacion.toLowerCase()}${p.gastos_comunes ? ` &middot; GC ${p.gastos_comunes}` : ''}</div>
         <div class="vt-stats-line">${statsLine}</div>
       </div>
@@ -184,6 +190,17 @@ function renderFicha(p) {
   document.querySelectorAll('.vt-ribbon, .vt-editorial, .vt-photos-section, .vt-details, .vt-transport, .vt-final-cta').forEach(el => {
     el.classList.add('vt-reveal');
     observer.observe(el);
+  });
+}
+
+// --- SHARE ---
+function shareProperty(e) {
+  e.stopPropagation();
+  const url = window.location.href;
+  navigator.clipboard.writeText(url).then(() => {
+    const tooltip = document.querySelector('.vt-share-tooltip');
+    tooltip.classList.add('visible');
+    setTimeout(() => tooltip.classList.remove('visible'), 1500);
   });
 }
 

@@ -1414,6 +1414,61 @@ ul { list-style: none; }
   margin: 0 auto;
 }
 
+.vt-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-base);
+}
+
+.vt-share-btn {
+  flex-shrink: 0;
+  position: relative;
+  background: none;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-tertiary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 200ms cubic-bezier(0.25,1,0.5,1), border-color 200ms cubic-bezier(0.25,1,0.5,1), transform 150ms cubic-bezier(0.25,1,0.5,1);
+}
+
+.vt-share-btn:hover {
+  color: var(--oro);
+  border-color: var(--oro);
+  transform: scale(1.08);
+}
+
+.vt-share-btn:active {
+  transform: scale(0.95);
+}
+
+.vt-share-tooltip {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--plum);
+  color: var(--perla);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 100px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms, transform 200ms cubic-bezier(0.25,1,0.5,1);
+}
+
+.vt-share-tooltip.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 .vt-price {
   font-family: 'Fraunces', serif;
   font-size: clamp(2.2rem, 1.8rem + 2.5vw, 3.8rem);
