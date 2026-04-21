@@ -1451,9 +1451,9 @@ ul { list-style: none; }
 .vt-share-btn {
   flex-shrink: 0;
   position: relative;
-  background: none;
-  border: 1px solid var(--color-border);
-  color: var(--color-text-tertiary);
+  background: var(--oro);
+  border: none;
+  color: var(--plum);
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -1465,9 +1465,9 @@ ul { list-style: none; }
 }
 
 .vt-share-btn:hover {
-  color: var(--oro);
-  border-color: var(--oro);
+  color: var(--plum);
   transform: scale(1.08);
+  opacity: 0.9;
 }
 
 .vt-share-btn:active {
