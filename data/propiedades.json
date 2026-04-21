@@ -40,61 +40,228 @@
       "1 estacionamiento incluido"
     ],
     "tags": [
-      { "texto": "Metro 4 min", "icono": "🚇", "tipo": "gold" },
-      { "texto": "Admite mascotas", "icono": "🐾", "tipo": "default" },
-      { "texto": "Aire acondicionado", "icono": "❄️", "tipo": "default" },
-      { "texto": "Sin gimnasio", "icono": "🏋️", "tipo": "default" },
-      { "texto": "Parrilla común", "icono": "🔥", "tipo": "default" },
-      { "texto": "Cowork", "icono": "💻", "tipo": "default" },
-      { "texto": "Lavandería", "icono": "🧺", "tipo": "default" },
-      { "texto": "Áreas verdes", "icono": "🌿", "tipo": "default" },
-      { "texto": "Estacionamiento", "icono": "🚗", "tipo": "default" },
-      { "texto": "Acceso silla ruedas", "icono": "♿", "tipo": "default" }
+      {
+        "texto": "Metro 4 min",
+        "icono": "🚇",
+        "tipo": "gold"
+      },
+      {
+        "texto": "Admite mascotas",
+        "icono": "🐾",
+        "tipo": "default"
+      },
+      {
+        "texto": "Aire acondicionado",
+        "icono": "❄️",
+        "tipo": "default"
+      },
+      {
+        "texto": "Sin gimnasio",
+        "icono": "🏋️",
+        "tipo": "default"
+      },
+      {
+        "texto": "Parrilla común",
+        "icono": "🔥",
+        "tipo": "default"
+      },
+      {
+        "texto": "Cowork",
+        "icono": "💻",
+        "tipo": "default"
+      },
+      {
+        "texto": "Lavandería",
+        "icono": "🧺",
+        "tipo": "default"
+      },
+      {
+        "texto": "Áreas verdes",
+        "icono": "🌿",
+        "tipo": "default"
+      },
+      {
+        "texto": "Estacionamiento",
+        "icono": "🚗",
+        "tipo": "default"
+      },
+      {
+        "texto": "Acceso silla ruedas",
+        "icono": "♿",
+        "tipo": "default"
+      }
     ],
     "ficha_tecnica": [
-      { "campo": "Tipo", "valor": "Departamento" },
-      { "campo": "Operación", "valor": "Venta" },
-      { "campo": "Precio", "valor": "$92.000.000 CLP" },
-      { "campo": "Superficie total", "valor": "46 m²" },
-      { "campo": "Superficie útil", "valor": "50 m²" },
-      { "campo": "Terraza", "valor": "4 m²" },
-      { "campo": "Dormitorios", "valor": "2 (uno en suite)" },
-      { "campo": "Baños", "valor": "2" },
-      { "campo": "Piso", "valor": "9 de 20" },
-      { "campo": "Deptos por piso", "valor": "12" },
-      { "campo": "Torre", "valor": "2" },
-      { "campo": "Estacionamientos", "valor": "1" },
-      { "campo": "Bodegas", "valor": "No incluye" },
-      { "campo": "Orientación", "valor": "Poniente (O)" },
-      { "campo": "Antigüedad", "valor": "13 años" },
-      { "campo": "Gastos comunes", "valor": "$78.000/mes" },
-      { "campo": "Contribuciones", "valor": "$16.000 trimestral" },
-      { "campo": "Seguridad", "valor": "Condominio cerrado 24 hrs" },
-      { "campo": "Gas", "valor": "Natural" },
-      { "campo": "Admite mascotas", "valor": "Sí" }
+      {
+        "campo": "Tipo",
+        "valor": "Departamento"
+      },
+      {
+        "campo": "Operación",
+        "valor": "Venta"
+      },
+      {
+        "campo": "Precio",
+        "valor": "$92.000.000 CLP"
+      },
+      {
+        "campo": "Superficie total",
+        "valor": "46 m²"
+      },
+      {
+        "campo": "Superficie útil",
+        "valor": "50 m²"
+      },
+      {
+        "campo": "Terraza",
+        "valor": "4 m²"
+      },
+      {
+        "campo": "Dormitorios",
+        "valor": "2 (uno en suite)"
+      },
+      {
+        "campo": "Baños",
+        "valor": "2"
+      },
+      {
+        "campo": "Piso",
+        "valor": "9 de 20"
+      },
+      {
+        "campo": "Deptos por piso",
+        "valor": "12"
+      },
+      {
+        "campo": "Torre",
+        "valor": "2"
+      },
+      {
+        "campo": "Estacionamientos",
+        "valor": "1"
+      },
+      {
+        "campo": "Bodegas",
+        "valor": "No incluye"
+      },
+      {
+        "campo": "Orientación",
+        "valor": "Poniente (O)"
+      },
+      {
+        "campo": "Antigüedad",
+        "valor": "13 años"
+      },
+      {
+        "campo": "Gastos comunes",
+        "valor": "$78.000/mes"
+      },
+      {
+        "campo": "Contribuciones",
+        "valor": "$16.000 trimestral"
+      },
+      {
+        "campo": "Seguridad",
+        "valor": "Condominio cerrado 24 hrs"
+      },
+      {
+        "campo": "Gas",
+        "valor": "Natural"
+      },
+      {
+        "campo": "Admite mascotas",
+        "valor": "Sí"
+      }
     ],
     "servicios_edificio": [
-      { "icono": "🔥", "nombre": "Parrilla / quincho" },
-      { "icono": "💻", "nombre": "Cowork" },
-      { "icono": "🎉", "nombre": "Salón de fiestas / usos múltiples" },
-      { "icono": "👶", "nombre": "Área juegos infantiles" },
-      { "icono": "🧺", "nombre": "Lavandería común" },
-      { "icono": "🛗", "nombre": "Ascensor" },
-      { "icono": "🚗", "nombre": "Estacionamiento visitas" },
-      { "icono": "🌿", "nombre": "Áreas verdes / jardines" },
-      { "icono": "♿", "nombre": "Rampa accesibilidad" },
-      { "icono": "🔒", "nombre": "Conserjería 24 hrs" },
-      { "icono": "⚡", "nombre": "Generador eléctrico" },
-      { "icono": "💧", "nombre": "Cisterna" },
-      { "icono": "📶", "nombre": "Acceso a internet" },
-      { "icono": "🔥", "nombre": "Caldera central" }
+      {
+        "icono": "🔥",
+        "nombre": "Parrilla / quincho"
+      },
+      {
+        "icono": "💻",
+        "nombre": "Cowork"
+      },
+      {
+        "icono": "🎉",
+        "nombre": "Salón de fiestas / usos múltiples"
+      },
+      {
+        "icono": "👶",
+        "nombre": "Área juegos infantiles"
+      },
+      {
+        "icono": "🧺",
+        "nombre": "Lavandería común"
+      },
+      {
+        "icono": "🛗",
+        "nombre": "Ascensor"
+      },
+      {
+        "icono": "🚗",
+        "nombre": "Estacionamiento visitas"
+      },
+      {
+        "icono": "🌿",
+        "nombre": "Áreas verdes / jardines"
+      },
+      {
+        "icono": "♿",
+        "nombre": "Rampa accesibilidad"
+      },
+      {
+        "icono": "🔒",
+        "nombre": "Conserjería 24 hrs"
+      },
+      {
+        "icono": "⚡",
+        "nombre": "Generador eléctrico"
+      },
+      {
+        "icono": "💧",
+        "nombre": "Cisterna"
+      },
+      {
+        "icono": "📶",
+        "nombre": "Acceso a internet"
+      },
+      {
+        "icono": "🔥",
+        "nombre": "Caldera central"
+      }
     ],
     "transporte": [
-      { "tipo": "metro", "nombre": "Rodrigo de Araya (L5)", "distancia": "338 m", "tiempo": "4 min" },
-      { "tipo": "bus", "nombre": "Paradero 2 Vicuña Mackenna", "distancia": "331 m", "tiempo": "4 min" },
-      { "tipo": "bus", "nombre": "Vicuña Mackenna / Rodrigo de Araya", "distancia": "302 m", "tiempo": "4 min" },
-      { "tipo": "bus", "nombre": "Fernández Concha / Santa Elena", "distancia": "504 m", "tiempo": "6 min" },
-      { "tipo": "bus", "nombre": "Haydn / Juan Sebastián Bach", "distancia": "549 m", "tiempo": "7 min" }
+      {
+        "tipo": "metro",
+        "nombre": "Rodrigo de Araya (L5)",
+        "distancia": "338 m",
+        "tiempo": "4 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Paradero 2 Vicuña Mackenna",
+        "distancia": "331 m",
+        "tiempo": "4 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Vicuña Mackenna / Rodrigo de Araya",
+        "distancia": "302 m",
+        "tiempo": "4 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Fernández Concha / Santa Elena",
+        "distancia": "504 m",
+        "tiempo": "6 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Haydn / Juan Sebastián Bach",
+        "distancia": "549 m",
+        "tiempo": "7 min"
+      }
     ],
     "imagenes": {
       "hero": "img/propiedades/vicuna-mackenna-2585/foto-02.jpg",
@@ -106,18 +273,54 @@
         "img/propiedades/vicuna-mackenna-2585/foto-07.jpg"
       ],
       "galeria": [
-        { "src": "img/propiedades/vicuna-mackenna-2585/foto-25.jpg", "label": "Living comedor" },
-        { "src": "img/propiedades/vicuna-mackenna-2585/foto-26.jpg", "label": "Cocina" },
-        { "src": "img/propiedades/vicuna-mackenna-2585/foto-27.jpg", "label": "Dormitorio principal" },
-        { "src": "img/propiedades/vicuna-mackenna-2585/foto-28.jpg", "label": "Dormitorio 2" },
-        { "src": "img/propiedades/vicuna-mackenna-2585/foto-29.jpg", "label": "Baño suite" },
-        { "src": "img/propiedades/vicuna-mackenna-2585/foto-30.jpg", "label": "Baño 2" },
-        { "src": "img/propiedades/vicuna-mackenna-2585/foto-31.jpg", "label": "Terraza" },
-        { "src": "img/propiedades/vicuna-mackenna-2585/foto-32.jpg", "label": "Vista" },
-        { "src": "img/propiedades/vicuna-mackenna-2585/foto-33.jpg", "label": "Logia" },
-        { "src": "img/propiedades/vicuna-mackenna-2585/foto-34.jpg", "label": "Walk-in clóset" },
-        { "src": "img/propiedades/vicuna-mackenna-2585/foto-35.jpg", "label": "Hall edificio" },
-        { "src": "img/propiedades/vicuna-mackenna-2585/foto-36.jpg", "label": "Fachada" }
+        {
+          "src": "img/propiedades/vicuna-mackenna-2585/foto-25.jpg",
+          "label": "Living comedor"
+        },
+        {
+          "src": "img/propiedades/vicuna-mackenna-2585/foto-26.jpg",
+          "label": "Cocina"
+        },
+        {
+          "src": "img/propiedades/vicuna-mackenna-2585/foto-27.jpg",
+          "label": "Dormitorio principal"
+        },
+        {
+          "src": "img/propiedades/vicuna-mackenna-2585/foto-28.jpg",
+          "label": "Dormitorio 2"
+        },
+        {
+          "src": "img/propiedades/vicuna-mackenna-2585/foto-29.jpg",
+          "label": "Baño suite"
+        },
+        {
+          "src": "img/propiedades/vicuna-mackenna-2585/foto-30.jpg",
+          "label": "Baño 2"
+        },
+        {
+          "src": "img/propiedades/vicuna-mackenna-2585/foto-31.jpg",
+          "label": "Terraza"
+        },
+        {
+          "src": "img/propiedades/vicuna-mackenna-2585/foto-32.jpg",
+          "label": "Vista"
+        },
+        {
+          "src": "img/propiedades/vicuna-mackenna-2585/foto-33.jpg",
+          "label": "Logia"
+        },
+        {
+          "src": "img/propiedades/vicuna-mackenna-2585/foto-34.jpg",
+          "label": "Walk-in clóset"
+        },
+        {
+          "src": "img/propiedades/vicuna-mackenna-2585/foto-35.jpg",
+          "label": "Hall edificio"
+        },
+        {
+          "src": "img/propiedades/vicuna-mackenna-2585/foto-36.jpg",
+          "label": "Fachada"
+        }
       ]
     },
     "agente": {
@@ -166,54 +369,198 @@
       "Conserjería 24 hrs"
     ],
     "tags": [
-      { "texto": "Metro 6 min", "icono": "🚇", "tipo": "gold" },
-      { "texto": "Vista ciudad", "icono": "🏙️", "tipo": "default" },
-      { "texto": "Parque O'Higgins cerca", "icono": "🌿", "tipo": "default" },
-      { "texto": "Gimnasio", "icono": "🏋️", "tipo": "default" },
-      { "texto": "Quincho común", "icono": "🔥", "tipo": "default" },
-      { "texto": "Lavandería común", "icono": "🧺", "tipo": "default" },
-      { "texto": "Cowork", "icono": "💻", "tipo": "default" },
-      { "texto": "Estacionamiento", "icono": "🚗", "tipo": "default" }
+      {
+        "texto": "Metro 6 min",
+        "icono": "🚇",
+        "tipo": "gold"
+      },
+      {
+        "texto": "Vista ciudad",
+        "icono": "🏙️",
+        "tipo": "default"
+      },
+      {
+        "texto": "Parque O'Higgins cerca",
+        "icono": "🌿",
+        "tipo": "default"
+      },
+      {
+        "texto": "Gimnasio",
+        "icono": "🏋️",
+        "tipo": "default"
+      },
+      {
+        "texto": "Quincho común",
+        "icono": "🔥",
+        "tipo": "default"
+      },
+      {
+        "texto": "Lavandería común",
+        "icono": "🧺",
+        "tipo": "default"
+      },
+      {
+        "texto": "Cowork",
+        "icono": "💻",
+        "tipo": "default"
+      },
+      {
+        "texto": "Estacionamiento",
+        "icono": "🚗",
+        "tipo": "default"
+      }
     ],
     "ficha_tecnica": [
-      { "campo": "Tipo", "valor": "Departamento tipo mariposa" },
-      { "campo": "Operación", "valor": "Venta" },
-      { "campo": "Precio", "valor": "$80.000.000" },
-      { "campo": "Superficie total", "valor": "53 m²" },
-      { "campo": "Superficie útil", "valor": "51 m²" },
-      { "campo": "Terraza", "valor": "2 m²" },
-      { "campo": "Dormitorios", "valor": "2" },
-      { "campo": "Baños", "valor": "2" },
-      { "campo": "Piso", "valor": "8 de 15" },
-      { "campo": "Estacionamiento", "valor": "1" },
-      { "campo": "Bodega", "valor": "No incluye" },
-      { "campo": "Orientación", "valor": "Sur-Oeste" },
-      { "campo": "Antigüedad", "valor": "17 años" },
-      { "campo": "Gastos comunes", "valor": "Desde $70.000/mes" },
-      { "campo": "Seguridad", "valor": "Condominio cerrado 24 hrs" },
-      { "campo": "Gas", "valor": "Natural" },
-      { "campo": "Contribuciones", "valor": "0,9 UF trimestral (~$32.563)" },
-      { "campo": "Corretaje", "valor": "2% del precio · $1.600.000 (+ IVA)" }
+      {
+        "campo": "Tipo",
+        "valor": "Departamento tipo mariposa"
+      },
+      {
+        "campo": "Operación",
+        "valor": "Venta"
+      },
+      {
+        "campo": "Precio",
+        "valor": "$80.000.000"
+      },
+      {
+        "campo": "Superficie total",
+        "valor": "53 m²"
+      },
+      {
+        "campo": "Superficie útil",
+        "valor": "51 m²"
+      },
+      {
+        "campo": "Terraza",
+        "valor": "2 m²"
+      },
+      {
+        "campo": "Dormitorios",
+        "valor": "2"
+      },
+      {
+        "campo": "Baños",
+        "valor": "2"
+      },
+      {
+        "campo": "Piso",
+        "valor": "8 de 15"
+      },
+      {
+        "campo": "Estacionamiento",
+        "valor": "1"
+      },
+      {
+        "campo": "Bodega",
+        "valor": "No incluye"
+      },
+      {
+        "campo": "Orientación",
+        "valor": "Sur-Oeste"
+      },
+      {
+        "campo": "Antigüedad",
+        "valor": "17 años"
+      },
+      {
+        "campo": "Gastos comunes",
+        "valor": "Desde $70.000/mes"
+      },
+      {
+        "campo": "Seguridad",
+        "valor": "Condominio cerrado 24 hrs"
+      },
+      {
+        "campo": "Gas",
+        "valor": "Natural"
+      },
+      {
+        "campo": "Contribuciones",
+        "valor": "0,9 UF trimestral (~$32.563)"
+      },
+      {
+        "campo": "Corretaje",
+        "valor": "2% del precio · $1.600.000 (+ IVA)"
+      }
     ],
     "servicios_edificio": [
-      { "icono": "🏋️", "nombre": "Gimnasio equipado" },
-      { "icono": "🔥", "nombre": "Quincho con parrilla" },
-      { "icono": "🧺", "nombre": "Lavandería común" },
-      { "icono": "💻", "nombre": "Cowork" },
-      { "icono": "🎉", "nombre": "Salón de fiestas" },
-      { "icono": "👶", "nombre": "Área juegos infantiles" },
-      { "icono": "🛗", "nombre": "Ascensor" },
-      { "icono": "🚗", "nombre": "Estacionamiento visitas" },
-      { "icono": "🌿", "nombre": "Área verde" },
-      { "icono": "♿", "nombre": "Rampa accesibilidad" },
-      { "icono": "🔒", "nombre": "Conserjería 24 hrs" }
+      {
+        "icono": "🏋️",
+        "nombre": "Gimnasio equipado"
+      },
+      {
+        "icono": "🔥",
+        "nombre": "Quincho con parrilla"
+      },
+      {
+        "icono": "🧺",
+        "nombre": "Lavandería común"
+      },
+      {
+        "icono": "💻",
+        "nombre": "Cowork"
+      },
+      {
+        "icono": "🎉",
+        "nombre": "Salón de fiestas"
+      },
+      {
+        "icono": "👶",
+        "nombre": "Área juegos infantiles"
+      },
+      {
+        "icono": "🛗",
+        "nombre": "Ascensor"
+      },
+      {
+        "icono": "🚗",
+        "nombre": "Estacionamiento visitas"
+      },
+      {
+        "icono": "🌿",
+        "nombre": "Área verde"
+      },
+      {
+        "icono": "♿",
+        "nombre": "Rampa accesibilidad"
+      },
+      {
+        "icono": "🔒",
+        "nombre": "Conserjería 24 hrs"
+      }
     ],
     "transporte": [
-      { "tipo": "metro", "nombre": "Parque O'Higgins", "distancia": "451 m", "tiempo": "6 min" },
-      { "tipo": "bus", "nombre": "Santiago / Lord Cochrane", "distancia": "90 m", "tiempo": "1 min" },
-      { "tipo": "bus", "nombre": "Av. Matta / Lord Cochrane", "distancia": "103 m", "tiempo": "1 min" },
-      { "tipo": "bus", "nombre": "Nataniel Cox / Manuel A. Matta", "distancia": "266 m", "tiempo": "3 min" },
-      { "tipo": "bus", "nombre": "Aconcagua / Lord Cochrane", "distancia": "273 m", "tiempo": "3 min" }
+      {
+        "tipo": "metro",
+        "nombre": "Parque O'Higgins",
+        "distancia": "451 m",
+        "tiempo": "6 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Santiago / Lord Cochrane",
+        "distancia": "90 m",
+        "tiempo": "1 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Av. Matta / Lord Cochrane",
+        "distancia": "103 m",
+        "tiempo": "1 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Nataniel Cox / Manuel A. Matta",
+        "distancia": "266 m",
+        "tiempo": "3 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Aconcagua / Lord Cochrane",
+        "distancia": "273 m",
+        "tiempo": "3 min"
+      }
     ],
     "imagenes": {
       "hero": "img/propiedades/lord-cochrane-1030/foto-02.jpg",
@@ -225,23 +572,74 @@
         "img/propiedades/lord-cochrane-1030/foto-07.jpg"
       ],
       "galeria": [
-        { "src": "img/propiedades/lord-cochrane-1030/foto-27.jpg", "label": "Dormitorio principal" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-28.jpg", "label": "Living-comedor" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-29.jpg", "label": "Terraza" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-30.jpg", "label": "Dormitorio principal vista" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-31.jpg", "label": "Dormitorio 2" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-32.jpg", "label": "Dormitorio 2 clóset" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-33.jpg", "label": "Escritorio" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-34.jpg", "label": "Área de servicio" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-35.jpg", "label": "Baño principal" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-36.jpg", "label": "Baño 2" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-37.jpg", "label": "Cocina" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-38.jpg", "label": "Pasillo" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-39.jpg", "label": "Estacionamiento" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-40.jpg", "label": "Hall edificio" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-41.jpg", "label": "Quincho" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-42.jpg", "label": "Lavandería" },
-        { "src": "img/propiedades/lord-cochrane-1030/foto-43.jpg", "label": "Terraza quincho" }
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-27.jpg",
+          "label": "Dormitorio principal"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-28.jpg",
+          "label": "Living-comedor"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-29.jpg",
+          "label": "Terraza"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-30.jpg",
+          "label": "Dormitorio principal vista"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-31.jpg",
+          "label": "Dormitorio 2"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-32.jpg",
+          "label": "Dormitorio 2 clóset"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-33.jpg",
+          "label": "Escritorio"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-34.jpg",
+          "label": "Área de servicio"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-35.jpg",
+          "label": "Baño principal"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-36.jpg",
+          "label": "Baño 2"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-37.jpg",
+          "label": "Cocina"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-38.jpg",
+          "label": "Pasillo"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-39.jpg",
+          "label": "Estacionamiento"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-40.jpg",
+          "label": "Hall edificio"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-41.jpg",
+          "label": "Quincho"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-42.jpg",
+          "label": "Lavandería"
+        },
+        {
+          "src": "img/propiedades/lord-cochrane-1030/foto-43.jpg",
+          "label": "Terraza quincho"
+        }
       ]
     },
     "agente": {
@@ -287,42 +685,153 @@
       "Logia · Comedor de diario · Homeoffice"
     ],
     "tags": [
-      { "texto": "Chimenea", "icono": "🔥", "tipo": "gold" },
-      { "texto": "Patio amplio", "icono": "🌿", "tipo": "gold" },
-      { "texto": "Jardín", "icono": "🌳", "tipo": "gold" },
-      { "texto": "Bodega", "icono": "📦", "tipo": "default" },
-      { "texto": "Homeoffice", "icono": "💻", "tipo": "default" },
-      { "texto": "Logia", "icono": "🧺", "tipo": "default" },
-      { "texto": "Gas natural", "icono": "🔥", "tipo": "default" },
-      { "texto": "Calefacción", "icono": "🌡️", "tipo": "default" },
-      { "texto": "Sin GC", "icono": "✅", "tipo": "gold" },
-      { "texto": "5 estac.", "icono": "🚗", "tipo": "default" }
+      {
+        "texto": "Chimenea",
+        "icono": "🔥",
+        "tipo": "gold"
+      },
+      {
+        "texto": "Patio amplio",
+        "icono": "🌿",
+        "tipo": "gold"
+      },
+      {
+        "texto": "Jardín",
+        "icono": "🌳",
+        "tipo": "gold"
+      },
+      {
+        "texto": "Bodega",
+        "icono": "📦",
+        "tipo": "default"
+      },
+      {
+        "texto": "Homeoffice",
+        "icono": "💻",
+        "tipo": "default"
+      },
+      {
+        "texto": "Logia",
+        "icono": "🧺",
+        "tipo": "default"
+      },
+      {
+        "texto": "Gas natural",
+        "icono": "🔥",
+        "tipo": "default"
+      },
+      {
+        "texto": "Calefacción",
+        "icono": "🌡️",
+        "tipo": "default"
+      },
+      {
+        "texto": "Sin GC",
+        "icono": "✅",
+        "tipo": "gold"
+      },
+      {
+        "texto": "5 estac.",
+        "icono": "🚗",
+        "tipo": "default"
+      }
     ],
     "ficha_tecnica": [
-      { "campo": "Tipo", "valor": "Casa" },
-      { "campo": "Operación", "valor": "Venta" },
-      { "campo": "Precio", "valor": "UF 7.900" },
-      { "campo": "Precio CLP", "valor": "$314.086.261" },
-      { "campo": "Superficie total", "valor": "607 m²" },
-      { "campo": "Superficie útil", "valor": "140 m²" },
-      { "campo": "Dormitorios", "valor": "5" },
-      { "campo": "Baños", "valor": "3" },
-      { "campo": "Estacionamientos", "valor": "5" },
-      { "campo": "Bodega", "valor": "1" },
-      { "campo": "Cantidad de pisos", "valor": "1" },
-      { "campo": "Antigüedad", "valor": "58 años" },
-      { "campo": "Gastos comunes", "valor": "$0" },
-      { "campo": "Orientación", "valor": "Nor-Oriente" },
-      { "campo": "Condominio", "valor": "No" },
-      { "campo": "Calefacción", "valor": "Sí" },
-      { "campo": "Gas natural", "valor": "Sí" }
+      {
+        "campo": "Tipo",
+        "valor": "Casa"
+      },
+      {
+        "campo": "Operación",
+        "valor": "Venta"
+      },
+      {
+        "campo": "Precio",
+        "valor": "UF 7.900"
+      },
+      {
+        "campo": "Precio CLP",
+        "valor": "$314.086.261"
+      },
+      {
+        "campo": "Superficie total",
+        "valor": "607 m²"
+      },
+      {
+        "campo": "Superficie útil",
+        "valor": "140 m²"
+      },
+      {
+        "campo": "Dormitorios",
+        "valor": "5"
+      },
+      {
+        "campo": "Baños",
+        "valor": "3"
+      },
+      {
+        "campo": "Estacionamientos",
+        "valor": "5"
+      },
+      {
+        "campo": "Bodega",
+        "valor": "1"
+      },
+      {
+        "campo": "Cantidad de pisos",
+        "valor": "1"
+      },
+      {
+        "campo": "Antigüedad",
+        "valor": "58 años"
+      },
+      {
+        "campo": "Gastos comunes",
+        "valor": "$0"
+      },
+      {
+        "campo": "Orientación",
+        "valor": "Nor-Oriente"
+      },
+      {
+        "campo": "Condominio",
+        "valor": "No"
+      },
+      {
+        "campo": "Calefacción",
+        "valor": "Sí"
+      },
+      {
+        "campo": "Gas natural",
+        "valor": "Sí"
+      }
     ],
     "servicios_edificio": [],
     "transporte": [
-      { "tipo": "bus", "nombre": "Cantuarias 695", "distancia": "201 m", "tiempo": "3 min" },
-      { "tipo": "bus", "nombre": "Larraín Alcalde 2002", "distancia": "213 m", "tiempo": "3 min" },
-      { "tipo": "bus", "nombre": "Gabriel González Videla", "distancia": "226 m", "tiempo": "3 min" },
-      { "tipo": "bus", "nombre": "Balmaceda 1802", "distancia": "273 m", "tiempo": "4 min" }
+      {
+        "tipo": "bus",
+        "nombre": "Cantuarias 695",
+        "distancia": "201 m",
+        "tiempo": "3 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Larraín Alcalde 2002",
+        "distancia": "213 m",
+        "tiempo": "3 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Gabriel González Videla",
+        "distancia": "226 m",
+        "tiempo": "3 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Balmaceda 1802",
+        "distancia": "273 m",
+        "tiempo": "4 min"
+      }
     ],
     "imagenes": {
       "hero": "img/propiedades/larrain-alcalde-1810/foto-01.jpg",
@@ -334,18 +843,54 @@
         "img/propiedades/larrain-alcalde-1810/foto-06.jpg"
       ],
       "galeria": [
-        { "src": "img/propiedades/larrain-alcalde-1810/foto-18.jpg", "label": "Fachada" },
-        { "src": "img/propiedades/larrain-alcalde-1810/foto-19.jpg", "label": "Patio frontal" },
-        { "src": "img/propiedades/larrain-alcalde-1810/foto-20.jpg", "label": "Living con chimenea" },
-        { "src": "img/propiedades/larrain-alcalde-1810/foto-21.jpg", "label": "Living-comedor" },
-        { "src": "img/propiedades/larrain-alcalde-1810/foto-22.jpg", "label": "Cocina equipada" },
-        { "src": "img/propiedades/larrain-alcalde-1810/foto-23.jpg", "label": "Dormitorio principal" },
-        { "src": "img/propiedades/larrain-alcalde-1810/foto-24.jpg", "label": "Dormitorio 2" },
-        { "src": "img/propiedades/larrain-alcalde-1810/foto-25.jpg", "label": "Dormitorio 3" },
-        { "src": "img/propiedades/larrain-alcalde-1810/foto-26.jpg", "label": "Baño 1" },
-        { "src": "img/propiedades/larrain-alcalde-1810/foto-27.jpg", "label": "Baño 2" },
-        { "src": "img/propiedades/larrain-alcalde-1810/foto-28.jpg", "label": "Patio trasero" },
-        { "src": "img/propiedades/larrain-alcalde-1810/foto-29.jpg", "label": "Jardín" }
+        {
+          "src": "img/propiedades/larrain-alcalde-1810/foto-18.jpg",
+          "label": "Fachada"
+        },
+        {
+          "src": "img/propiedades/larrain-alcalde-1810/foto-19.jpg",
+          "label": "Patio frontal"
+        },
+        {
+          "src": "img/propiedades/larrain-alcalde-1810/foto-20.jpg",
+          "label": "Living con chimenea"
+        },
+        {
+          "src": "img/propiedades/larrain-alcalde-1810/foto-21.jpg",
+          "label": "Living-comedor"
+        },
+        {
+          "src": "img/propiedades/larrain-alcalde-1810/foto-22.jpg",
+          "label": "Cocina equipada"
+        },
+        {
+          "src": "img/propiedades/larrain-alcalde-1810/foto-23.jpg",
+          "label": "Dormitorio principal"
+        },
+        {
+          "src": "img/propiedades/larrain-alcalde-1810/foto-24.jpg",
+          "label": "Dormitorio 2"
+        },
+        {
+          "src": "img/propiedades/larrain-alcalde-1810/foto-25.jpg",
+          "label": "Dormitorio 3"
+        },
+        {
+          "src": "img/propiedades/larrain-alcalde-1810/foto-26.jpg",
+          "label": "Baño 1"
+        },
+        {
+          "src": "img/propiedades/larrain-alcalde-1810/foto-27.jpg",
+          "label": "Baño 2"
+        },
+        {
+          "src": "img/propiedades/larrain-alcalde-1810/foto-28.jpg",
+          "label": "Patio trasero"
+        },
+        {
+          "src": "img/propiedades/larrain-alcalde-1810/foto-29.jpg",
+          "label": "Jardín"
+        }
       ]
     },
     "agente": {
@@ -389,47 +934,168 @@
       "Refrigerador incluido + calefacción"
     ],
     "tags": [
-      { "texto": "Admite mascotas", "icono": "🐾", "tipo": "gold" },
-      { "texto": "Terraza propia", "icono": "🌿", "tipo": "default" },
-      { "texto": "Walk-in clóset", "icono": "👔", "tipo": "default" },
-      { "texto": "Homeoffice", "icono": "💻", "tipo": "default" },
-      { "texto": "Balcón", "icono": "🏠", "tipo": "default" },
-      { "texto": "Logia independiente", "icono": "🧺", "tipo": "default" },
-      { "texto": "Calefacción", "icono": "🌡️", "tipo": "default" },
-      { "texto": "Accesibilidad", "icono": "♿", "tipo": "default" }
+      {
+        "texto": "Admite mascotas",
+        "icono": "🐾",
+        "tipo": "gold"
+      },
+      {
+        "texto": "Terraza propia",
+        "icono": "🌿",
+        "tipo": "default"
+      },
+      {
+        "texto": "Walk-in clóset",
+        "icono": "👔",
+        "tipo": "default"
+      },
+      {
+        "texto": "Homeoffice",
+        "icono": "💻",
+        "tipo": "default"
+      },
+      {
+        "texto": "Balcón",
+        "icono": "🏠",
+        "tipo": "default"
+      },
+      {
+        "texto": "Logia independiente",
+        "icono": "🧺",
+        "tipo": "default"
+      },
+      {
+        "texto": "Calefacción",
+        "icono": "🌡️",
+        "tipo": "default"
+      },
+      {
+        "texto": "Accesibilidad",
+        "icono": "♿",
+        "tipo": "default"
+      }
     ],
     "ficha_tecnica": [
-      { "campo": "Superficie total", "valor": "86 m²" },
-      { "campo": "Superficie útil", "valor": "82 m²" },
-      { "campo": "Terraza", "valor": "4 m²" },
-      { "campo": "Dormitorios", "valor": "2" },
-      { "campo": "Baños", "valor": "2" },
-      { "campo": "Estacionamiento", "valor": "1" },
-      { "campo": "Bodega", "valor": "1" },
-      { "campo": "Piso", "valor": "6° de 6" },
-      { "campo": "Dptos. por piso", "valor": "6" },
-      { "campo": "Precio", "valor": "UF 7.300" },
-      { "campo": "Precio CLP", "valor": "$289.294.895" },
-      { "campo": "GC desde", "valor": "$230.000/mes" },
-      { "campo": "Orientación", "valor": "Sur" },
-      { "campo": "Antigüedad", "valor": "7 años" },
-      { "campo": "Seguridad", "valor": "24 horas" },
-      { "campo": "Admite mascotas", "valor": "Sí" },
-      { "campo": "ID Publicación", "valor": "MLC-1887625517" }
+      {
+        "campo": "Superficie total",
+        "valor": "86 m²"
+      },
+      {
+        "campo": "Superficie útil",
+        "valor": "82 m²"
+      },
+      {
+        "campo": "Terraza",
+        "valor": "4 m²"
+      },
+      {
+        "campo": "Dormitorios",
+        "valor": "2"
+      },
+      {
+        "campo": "Baños",
+        "valor": "2"
+      },
+      {
+        "campo": "Estacionamiento",
+        "valor": "1"
+      },
+      {
+        "campo": "Bodega",
+        "valor": "1"
+      },
+      {
+        "campo": "Piso",
+        "valor": "6° de 6"
+      },
+      {
+        "campo": "Dptos. por piso",
+        "valor": "6"
+      },
+      {
+        "campo": "Precio",
+        "valor": "UF 7.300"
+      },
+      {
+        "campo": "Precio CLP",
+        "valor": "$289.294.895"
+      },
+      {
+        "campo": "GC desde",
+        "valor": "$230.000/mes"
+      },
+      {
+        "campo": "Orientación",
+        "valor": "Sur"
+      },
+      {
+        "campo": "Antigüedad",
+        "valor": "7 años"
+      },
+      {
+        "campo": "Seguridad",
+        "valor": "24 horas"
+      },
+      {
+        "campo": "Admite mascotas",
+        "valor": "Sí"
+      },
+      {
+        "campo": "ID Publicación",
+        "valor": "MLC-1887625517"
+      }
     ],
     "servicios_edificio": [
-      { "icono": "🏋️", "nombre": "Gimnasio equipado + bicicletero" },
-      { "icono": "🎉", "nombre": "Salón multiuso / fiestas" },
-      { "icono": "🌿", "nombre": "Áreas verdes y sendero" },
-      { "icono": "☀️", "nombre": "Terraza exterior y lounge" },
-      { "icono": "🎮", "nombre": "Área de juegos infantiles" },
-      { "icono": "🏢", "nombre": "Conserjería 24h · Ascensor · Recepción" }
+      {
+        "icono": "🏋️",
+        "nombre": "Gimnasio equipado + bicicletero"
+      },
+      {
+        "icono": "🎉",
+        "nombre": "Salón multiuso / fiestas"
+      },
+      {
+        "icono": "🌿",
+        "nombre": "Áreas verdes y sendero"
+      },
+      {
+        "icono": "☀️",
+        "nombre": "Terraza exterior y lounge"
+      },
+      {
+        "icono": "🎮",
+        "nombre": "Área de juegos infantiles"
+      },
+      {
+        "icono": "🏢",
+        "nombre": "Conserjería 24h · Ascensor · Recepción"
+      }
     ],
     "transporte": [
-      { "tipo": "metro", "nombre": "Plaza Egaña (L3 y L4)", "distancia": "387 m", "tiempo": "5 min" },
-      { "tipo": "metro", "nombre": "Los Orientales", "distancia": "764 m", "tiempo": "10 min" },
-      { "tipo": "bus", "nombre": "Blest Gana / Vespucio", "distancia": "108 m", "tiempo": "1 min" },
-      { "tipo": "bus", "nombre": "José Arrieta / Vespucio", "distancia": "352 m", "tiempo": "5 min" }
+      {
+        "tipo": "metro",
+        "nombre": "Plaza Egaña (L3 y L4)",
+        "distancia": "387 m",
+        "tiempo": "5 min"
+      },
+      {
+        "tipo": "metro",
+        "nombre": "Los Orientales",
+        "distancia": "764 m",
+        "tiempo": "10 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Blest Gana / Vespucio",
+        "distancia": "108 m",
+        "tiempo": "1 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "José Arrieta / Vespucio",
+        "distancia": "352 m",
+        "tiempo": "5 min"
+      }
     ],
     "imagenes": {
       "hero": "img/propiedades/helsinski-5740/foto-02.jpg",
@@ -441,14 +1107,548 @@
         "img/propiedades/helsinski-5740/foto-07.jpg"
       ],
       "galeria": [
-        { "src": "img/propiedades/helsinski-5740/foto-08.jpg", "label": "Living-comedor" },
-        { "src": "img/propiedades/helsinski-5740/foto-09.jpg", "label": "Cocina equipada" },
-        { "src": "img/propiedades/helsinski-5740/foto-10.jpg", "label": "Dorm. principal" },
-        { "src": "img/propiedades/helsinski-5740/foto-11.jpg", "label": "2° dormitorio" },
-        { "src": "img/propiedades/helsinski-5740/foto-12.jpg", "label": "Vista cordillera" },
-        { "src": "img/propiedades/helsinski-5740/foto-13.jpg", "label": "Baño principal" },
-        { "src": "img/propiedades/helsinski-5740/foto-14.jpg", "label": "Homeoffice" },
-        { "src": "img/propiedades/helsinski-5740/foto-15.jpg", "label": "Pasillo + clósets" }
+        {
+          "src": "img/propiedades/helsinski-5740/foto-08.jpg",
+          "label": "Living-comedor"
+        },
+        {
+          "src": "img/propiedades/helsinski-5740/foto-09.jpg",
+          "label": "Cocina equipada"
+        },
+        {
+          "src": "img/propiedades/helsinski-5740/foto-10.jpg",
+          "label": "Dorm. principal"
+        },
+        {
+          "src": "img/propiedades/helsinski-5740/foto-11.jpg",
+          "label": "2° dormitorio"
+        },
+        {
+          "src": "img/propiedades/helsinski-5740/foto-12.jpg",
+          "label": "Vista cordillera"
+        },
+        {
+          "src": "img/propiedades/helsinski-5740/foto-13.jpg",
+          "label": "Baño principal"
+        },
+        {
+          "src": "img/propiedades/helsinski-5740/foto-14.jpg",
+          "label": "Homeoffice"
+        },
+        {
+          "src": "img/propiedades/helsinski-5740/foto-15.jpg",
+          "label": "Pasillo + clósets"
+        }
+      ]
+    },
+    "agente": {
+      "nombre": "Keyla Tobar",
+      "telefono": "+56985298224",
+      "whatsapp": "+56985298224",
+      "email": "contacto@alquimiapropiedades.com"
+    }
+  },
+  {
+    "id": "departamento-en-venta-en-estadio-nacional-nunoa",
+    "slug": "departamento-en-venta-en-estadio-nacional-nunoa",
+    "titulo": "Departamento Nuevo 3D/2B con Terraza en Estadio Nacional",
+    "direccion": "Zañartu 1905, Ñuñoa",
+    "comuna": "Ñuñoa",
+    "precio": 5000,
+    "precio_formato": "UF 5.000",
+    "moneda": "UF",
+    "gastos_comunes": "$80.000/mes",
+    "operacion": "Venta",
+    "tipo": "Departamento",
+    "estado": "Nuevo ingreso",
+    "dormitorios": 3,
+    "banos": 2,
+    "superficie_util": 90,
+    "superficie_total": 95,
+    "terraza": 5,
+    "piso": "5 de 16",
+    "estacionamientos": 1,
+    "orientacion": "Sur",
+    "highlight": "Espectacular departamento nuevo de 3 dormitorios con entrega inmediata a precio de remate. Excelentes terminaciones, sello de sustentabilidad y opción de terraza privada en azotea.",
+    "descripcion": "Espectacular departamento de 3 dormitorios, 2 baños, estacionamiento y bodega a precio de remate. Nuevo, vanguardista y con entrega inmediata. Excelentes terminaciones, excelente conectividad, sello de sustentabilidad y ahorro energético. Opción de terrazas en azotea privada. Gran oportunidad de inversión.",
+    "caracteristicas": [
+      "Departamento nuevo 0 años",
+      "3 dormitorios, 2 baños",
+      "Terraza de 5 m²",
+      "Estacionamiento y bodega",
+      "Dormitorio en suite",
+      "Walk-in closet",
+      "Logia y terraza",
+      "Piscina del edificio",
+      "Gimnasio y áreas verdes",
+      "Seguridad 24 horas",
+      "Ascensor y conserjería",
+      "Admite mascotas",
+      "Azotea privada disponible",
+      "Sello de sustentabilidad"
+    ],
+    "tags": [
+      {
+        "texto": "Nuevo",
+        "icono": "✨",
+        "tipo": "gold"
+      },
+      {
+        "texto": "Terraza",
+        "icono": "🌿",
+        "tipo": "default"
+      },
+      {
+        "texto": "Piscina",
+        "icono": "🏊",
+        "tipo": "default"
+      },
+      {
+        "texto": "Gimnasio",
+        "icono": "💪",
+        "tipo": "default"
+      },
+      {
+        "texto": "Pet Friendly",
+        "icono": "🐕",
+        "tipo": "default"
+      }
+    ],
+    "ficha_tecnica": [
+      {
+        "campo": "Superficie Total",
+        "valor": "95 m²"
+      },
+      {
+        "campo": "Superficie Útil",
+        "valor": "90 m²"
+      },
+      {
+        "campo": "Superficie Terraza",
+        "valor": "5 m²"
+      },
+      {
+        "campo": "Dormitorios",
+        "valor": "3"
+      },
+      {
+        "campo": "Baños",
+        "valor": "2"
+      },
+      {
+        "campo": "Estacionamientos",
+        "valor": "1"
+      },
+      {
+        "campo": "Bodegas",
+        "valor": "1"
+      },
+      {
+        "campo": "Piso",
+        "valor": "5 de 16"
+      },
+      {
+        "campo": "Orientación",
+        "valor": "Sur"
+      },
+      {
+        "campo": "Antigüedad",
+        "valor": "0 años"
+      },
+      {
+        "campo": "Gastos Comunes",
+        "valor": "$80.000"
+      },
+      {
+        "campo": "Torre",
+        "valor": "2"
+      },
+      {
+        "campo": "Departamentos por Piso",
+        "valor": "10"
+      }
+    ],
+    "servicios_edificio": [
+      {
+        "icono": "🏊",
+        "nombre": "Piscina"
+      },
+      {
+        "icono": "💪",
+        "nombre": "Gimnasio"
+      },
+      {
+        "icono": "🛡️",
+        "nombre": "Seguridad 24hrs"
+      },
+      {
+        "icono": "🏢",
+        "nombre": "Conserjería"
+      },
+      {
+        "icono": "🚗",
+        "nombre": "Estacionamiento visitas"
+      },
+      {
+        "icono": "🌿",
+        "nombre": "Áreas verdes"
+      },
+      {
+        "icono": "🏗️",
+        "nombre": "Azotea"
+      },
+      {
+        "icono": "♿",
+        "nombre": "Acceso discapacitados"
+      },
+      {
+        "icono": "🔧",
+        "nombre": "Salón usos múltiples"
+      },
+      {
+        "icono": "💡",
+        "nombre": "Generador eléctrico"
+      }
+    ],
+    "transporte": [
+      {
+        "tipo": "bus",
+        "nombre": "Avenida Zañartu / Marathon",
+        "distancia": "107 m",
+        "tiempo": "1 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Rodrigo de Araya / Marathon",
+        "distancia": "267 m",
+        "tiempo": "3 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Marathon / Rodrigo de Araya",
+        "distancia": "279 m",
+        "tiempo": "4 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Avenida Zañartu / Francisco Meneses",
+        "distancia": "352 m",
+        "tiempo": "5 min"
+      }
+    ],
+    "imagenes": {
+      "hero": "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-01.webp",
+      "thumbnails": [
+        "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-02.webp",
+        "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-03.webp",
+        "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-04.webp",
+        "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-05.webp",
+        "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-08.jpg"
+      ],
+      "galeria": [
+        {
+          "src": "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-02.webp",
+          "label": "Fachada"
+        },
+        {
+          "src": "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-03.webp",
+          "label": "Cocina"
+        },
+        {
+          "src": "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-04.webp",
+          "label": "Living comedor"
+        },
+        {
+          "src": "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-05.webp",
+          "label": "Sala de estar"
+        },
+        {
+          "src": "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-08.jpg",
+          "label": "Foto 8"
+        },
+        {
+          "src": "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-09.jpg",
+          "label": "Foto 9"
+        },
+        {
+          "src": "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-11.jpg",
+          "label": "Foto 11"
+        },
+        {
+          "src": "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-13.jpg",
+          "label": "Foto 13"
+        },
+        {
+          "src": "img/propiedades/departamento-en-venta-en-estadio-nacional-nunoa/foto-06.jpg",
+          "label": "Logo"
+        }
+      ]
+    },
+    "agente": {
+      "nombre": "Keyla Tobar",
+      "telefono": "+56985298224",
+      "whatsapp": "+56985298224",
+      "email": "contacto@alquimiapropiedades.com"
+    }
+  },
+  {
+    "id": "departamento-en-arriendo-en-santa-isabel-santiago",
+    "slug": "departamento-en-arriendo-en-santa-isabel-santiago",
+    "titulo": "Moderno Departamento 2D/2B con Terraza en Santa Isabel",
+    "direccion": "Santa Victoria 387, Santa Isabel, Santiago",
+    "comuna": "Santiago",
+    "precio": 500000,
+    "precio_formato": "$500.000",
+    "moneda": "CLP",
+    "gastos_comunes": "$90.000",
+    "operacion": "Arriendo",
+    "tipo": "Departamento",
+    "estado": "Nuevo ingreso",
+    "dormitorios": 2,
+    "banos": 2,
+    "superficie_util": 52,
+    "superficie_total": 50,
+    "terraza": 2,
+    "piso": "19",
+    "estacionamientos": 0,
+    "orientacion": "Sur",
+    "highlight": "Departamento de 52m² útiles en piso 19 con terraza privada y acceso a azotea con vista urbana. Edificio con completas amenidades: gimnasio, cowork, lavandería y seguridad 24hrs.",
+    "descripcion": "Moderno departamento ubicado en el piso 19 de un edificio de 21 plantas en Santa Isabel. La unidad cuenta con 52m² útiles distribuidos en dos dormitorios y dos baños, destacando el dormitorio principal en suite con acceso directo al balcón. La cocina cerrada está completamente equipada con muebles superiores e inferiores, conectando funcionalmente con la zona de estar que se abre al balcón exterior con vista urbana. El edificio ofrece excepcionales amenidades incluyendo gimnasio equipado, espacios de cowork, lavandería comunitaria, terraza en azotea con zona de recreación, salón multiuso y área de juegos infantiles. La seguridad 24 horas, conserjería y recepción garantizan tranquilidad a los residentes. Acepta mascotas e incluye bodega. Ubicación privilegiada a 11 minutos del Metro Santa Isabel.",
+    "caracteristicas": [
+      "Piso 19 con vista urbana",
+      "Dormitorio principal en suite",
+      "Cocina equipada cerrada",
+      "Balcón y terraza privada",
+      "Bodega incluida",
+      "Acepta mascotas",
+      "Seguridad 24 horas",
+      "Conserjería y recepción",
+      "Acceso a internet",
+      "Conexión lavarropas",
+      "Gas natural",
+      "Rampa accesibilidad"
+    ],
+    "tags": [
+      {
+        "texto": "Metro cercano",
+        "icono": "🚇",
+        "tipo": "default"
+      },
+      {
+        "texto": "Acepta mascotas",
+        "icono": "🐕",
+        "tipo": "gold"
+      },
+      {
+        "texto": "Terraza azotea",
+        "icono": "🏢",
+        "tipo": "gold"
+      },
+      {
+        "texto": "Gimnasio",
+        "icono": "💪",
+        "tipo": "default"
+      },
+      {
+        "texto": "Seguridad 24hrs",
+        "icono": "🛡️",
+        "tipo": "default"
+      }
+    ],
+    "ficha_tecnica": [
+      {
+        "campo": "Superficie útil",
+        "valor": "52 m²"
+      },
+      {
+        "campo": "Superficie total",
+        "valor": "50 m²"
+      },
+      {
+        "campo": "Superficie terraza",
+        "valor": "2 m²"
+      },
+      {
+        "campo": "Antigüedad",
+        "valor": "15 años"
+      },
+      {
+        "campo": "Orientación",
+        "valor": "Sur"
+      },
+      {
+        "campo": "Número de piso",
+        "valor": "19"
+      },
+      {
+        "campo": "Total pisos edificio",
+        "valor": "21"
+      },
+      {
+        "campo": "Departamentos por piso",
+        "valor": "12"
+      },
+      {
+        "campo": "Capacidad máxima",
+        "valor": "4 habitantes"
+      },
+      {
+        "campo": "Tipo seguridad",
+        "valor": "24 horas"
+      }
+    ],
+    "servicios_edificio": [
+      {
+        "icono": "💪",
+        "nombre": "Gimnasio"
+      },
+      {
+        "icono": "🧺",
+        "nombre": "Lavandería"
+      },
+      {
+        "icono": "💼",
+        "nombre": "Cowork"
+      },
+      {
+        "icono": "🏢",
+        "nombre": "Terraza azotea"
+      },
+      {
+        "icono": "🎉",
+        "nombre": "Salón de fiestas"
+      },
+      {
+        "icono": "👶",
+        "nombre": "Juegos infantiles"
+      },
+      {
+        "icono": "🅿️",
+        "nombre": "Estacionamiento visitas"
+      },
+      {
+        "icono": "🏢",
+        "nombre": "Salón multiuso"
+      },
+      {
+        "icono": "🛡️",
+        "nombre": "Seguridad 24hrs"
+      },
+      {
+        "icono": "🏪",
+        "nombre": "Recepción"
+      },
+      {
+        "icono": "🌳",
+        "nombre": "Área verde"
+      },
+      {
+        "icono": "🔌",
+        "nombre": "Generador eléctrico"
+      }
+    ],
+    "transporte": [
+      {
+        "tipo": "metro",
+        "nombre": "Santa Isabel",
+        "distancia": "861 m",
+        "tiempo": "11 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Santa Isabel / Lira",
+        "distancia": "218 m",
+        "tiempo": "3 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Santa Victoria / Portugal",
+        "distancia": "322 m",
+        "tiempo": "4 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "General Jofre / Lira",
+        "distancia": "325 m",
+        "tiempo": "4 min"
+      },
+      {
+        "tipo": "bus",
+        "nombre": "Marin / Avenida Portugal",
+        "distancia": "407 m",
+        "tiempo": "5 min"
+      }
+    ],
+    "imagenes": {
+      "hero": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-01.jpg",
+      "thumbnails": [
+        "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-03.jpg",
+        "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-04.jpg",
+        "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-05.jpg",
+        "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-06.jpg",
+        "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-07.jpg"
+      ],
+      "galeria": [
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-01.jpg",
+          "label": "Cocina moderna"
+        },
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-03.jpg",
+          "label": "Cocina equipada"
+        },
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-04.jpg",
+          "label": "Balcón con vista urbana"
+        },
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-05.jpg",
+          "label": "Sala de estar con balcón"
+        },
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-06.jpg",
+          "label": "Terraza en azotea con vista urbana"
+        },
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-09.jpg",
+          "label": "Sala de estar con balcón"
+        },
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-11.jpg",
+          "label": "Sala de estar con cocina integrada"
+        },
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-14.jpg",
+          "label": "Dormitorio principal"
+        },
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-17.jpg",
+          "label": "Dormitorio principal con balcón"
+        },
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-18.jpg",
+          "label": "Baño con lavabo doble"
+        },
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-19.jpg",
+          "label": "Baño completo"
+        },
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-24.jpg",
+          "label": "Gimnasio"
+        },
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-25.jpg",
+          "label": "Gimnasio equipado"
+        },
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-26.jpg",
+          "label": "Terraza con ping pong"
+        },
+        {
+          "src": "img/propiedades/departamento-en-arriendo-en-santa-isabel-santiago/foto-28.jpg",
+          "label": "Recepción y lobby"
+        }
       ]
     },
     "agente": {
