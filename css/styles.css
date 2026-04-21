@@ -443,6 +443,20 @@ ul { list-style: none; }
   transform: translateY(0);
 }
 
+/* === DUAL PRICE === */
+.price-secondary {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 0.45em;
+  font-weight: 400;
+  color: var(--color-text-tertiary);
+  margin-left: 0.3em;
+  vertical-align: baseline;
+}
+
+.card-price .price-secondary {
+  font-size: 0.65em;
+}
+
 /* === SECTIONS === */
 .section {
   padding: var(--space-4xl) var(--space-lg);
@@ -1419,6 +1433,19 @@ ul { list-style: none; }
   align-items: center;
   justify-content: center;
   gap: var(--space-base);
+}
+
+.vt-price-converted {
+  font-family: 'Fraunces', serif;
+  font-size: 1.22rem;
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-sm);
+}
+
+.vt-price-converted .price-secondary {
+  font-size: inherit;
+  color: inherit;
+  margin: 0;
 }
 
 .vt-share-btn {
