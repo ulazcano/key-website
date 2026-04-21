@@ -42,17 +42,6 @@ function dualPrice(precio, moneda) {
 }
 
 async function cargarPropiedades() {
-  try {
-    const res = await fetch('/api/propiedades');
-    if (!res.ok) throw new Error('API error');
-    const data = await res.json();
-    if (data && data.length > 0) {
-      propiedades = data;
-      return propiedades;
-    }
-  } catch (e) {
-    // API unavailable — fall back to static JSON
-  }
   const res = await fetch('data/propiedades.json');
   propiedades = await res.json();
   return propiedades;
