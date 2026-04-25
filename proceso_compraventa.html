@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proceso de Compraventa — Alquimia Propiedades</title>
+<meta name="description" content="Guía visual del proceso de compraventa de una propiedad: 7 etapas, plazos y total estimado. Por Alquimia Propiedades.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  /* === PAGE-SPECIFIC: PROCESO COMPRAVENTA === */
+
+  .proceso-page {
+    padding-top: 64px; /* navbar height */
+  }
+
+  /* Hero */
+  .proceso-hero {
+    padding: var(--space-4xl) var(--space-lg) var(--space-3xl);
+    text-align: center;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .proceso-hero .section-eyebrow {
+    justify-content: center;
+  }
+
+  .proceso-hero .section-eyebrow::before,
+  .proceso-hero .section-eyebrow::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--cobre);
+  }
+
+  .proceso-hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: var(--text-2xl);
+    line-height: 1.1;
+    color: var(--plum);
+    margin-bottom: var(--space-base);
+  }
+
+  .proceso-hero h1 em {
+    font-style: italic;
+    color: var(--oro);
+  }
+
+  .proceso-hero .lead {
+    max-width: 580px;
+    margin: 0 auto;
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  /* Total time pill */
+  .total-time {
+    margin: var(--space-xl) auto 0;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-base);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    padding: var(--space-md) var(--space-lg);
+    box-shadow: 0 4px 16px rgba(15, 10, 26, 0.06);
+  }
+
+  .total-time .label {
+    font-size: var(--text-xs);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+  }
+
+  .total-time .value {
+    font-family: 'Fraunces', serif;
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--plum);
+  }
+
+  .total-time .value strong {
+    color: var(--oro);
+    font-weight: 700;
+  }
+
+  /* Section divider */
+  .proceso-divider {
+    text-align: center;
+    margin: var(--space-3xl) auto var(--space-2xl);
+    max-width: 880px;
+    padding: 0 var(--space-lg);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: var(--text-base);
+    color: var(--plum-light);
+    position: relative;
+  }
+
+  .proceso-divider::before,
+  .proceso-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+  }
+
+  .proceso-divider::before { left: 0; }
+  .proceso-divider::after { right: 0; }
+
+  /* Timeline */
+  .timeline-wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 64px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 27px;
+    top: 18px;
+    bottom: 18px;
+    width: 2px;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--oro) 0,
+      var(--oro) 4px,
+      transparent 4px,
+      transparent 9px
+    );
+    opacity: .7;
+  }
+
+  .stage {
+    position: relative;
+    margin-bottom: var(--space-xl);
+  }
+
+  .stage:last-child { margin-bottom: 0; }
+
+  .stage .num {
+    position: absolute;
+    left: -64px;
+    top: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--perla);
+    border: 2px solid var(--oro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--plum);
+    box-shadow:
+      0 0 0 6px var(--perla),
+      0 6px 20px rgba(15, 10, 26, 0.08);
+    z-index: 1;
+  }
+
+  .stage.key .num {
+    background: var(--plum);
+    color: var(--oro);
+    border-color: var(--plum);
+  }
+
+  .stage .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--oro);
+    border-radius: var(--radius-sm);
+    padding: var(--space-lg) var(--space-lg);
+    box-shadow: 0 2px 8px rgba(15, 10, 26, 0.04);
+    transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+  }
+
+  .stage .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(15, 10, 26, 0.08);
+  }
+
+  .stage.key .card {
+    border-left-color: var(--plum);
+  }
+
+  .card .head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-base);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-sm);
+  }
+
+  .card h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.333rem);
+    color: var(--plum);
+    line-height: 1.2;
+  }
+
+  .card .desc {
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    line-height: 1.65;
+    margin-top: var(--space-xs);
+  }
+
+  .card .desc + .desc { margin-top: var(--space-sm); }
+
+  .time-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    background: var(--oro-wash);
+    color: var(--plum);
+    border-radius: var(--radius-pill);
+    padding: var(--space-xs) var(--space-md);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .time-chip::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--oro);
+  }
+
+  .time-chip.no-time {
+    background: transparent;
+    color: var(--color-text-tertiary);
+    border: 1px dashed var(--color-border);
+  }
+
+  .time-chip.no-time::before { background: var(--color-border); }
+
+  .stage.key .time-chip {
+    background: var(--plum);
+    color: var(--oro);
+  }
+
+  .stage.key .time-chip::before { background: var(--oro); }
+
+  .footnote {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px dashed var(--color-border);
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+    font-style: italic;
+  }
+
+  .footnote::before {
+    content: '⚠';
+    color: var(--cobre);
+    font-style: normal;
+    font-size: var(--text-sm);
+  }
+
+  /* Closing note */
+  .proceso-closing {
+    max-width: 880px;
+    margin: var(--space-3xl) auto 0;
+    padding: 0 var(--space-lg);
+  }
+
+  .proceso-closing-inner {
+    background: var(--plum);
+    color: #fff;
+    border-radius: var(--radius-md);
+    padding: var(--space-2xl) var(--space-xl);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .proceso-closing-inner::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(212, 164, 74, 0.15), transparent 70%);
+  }
+
+  .proceso-closing-inner .quote-mark {
+    font-family: 'Fraunces', serif;
+    font-size: 90px;
+    line-height: 0.5;
+    color: var(--oro);
+    opacity: .6;
+    margin-bottom: var(--space-sm);
+    height: 50px;
+  }
+
+  .proceso-closing-inner h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(1.25rem, 1rem + 1.5vw, 1.75rem);
+    line-height: 1.3;
+    margin-bottom: var(--space-md);
+    position: relative;
+  }
+
+  .proceso-closing-inner h2 strong {
+    color: var(--oro);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .proceso-closing-inner p {
+    max-width: 520px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    position: relative;
+  }
+
+  /* Page footer link */
+  .proceso-foot {
+    max-width: 880px;
+    margin: var(--space-2xl) auto var(--space-3xl);
+    padding: var(--space-lg) var(--space-lg) 0;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-base);
+  }
+
+  .proceso-foot .mark {
+    font-family: 'Fraunces', serif;
+    font-size: var(--text-base);
+    color: var(--plum);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .proceso-foot .mark em {
+    font-style: italic;
+    color: var(--oro);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+
+  .proceso-foot small {
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .proceso-hero { padding: var(--space-3xl) var(--space-base) var(--space-2xl); }
+    .total-time { flex-direction: column; gap: var(--space-xs); padding: var(--space-md) var(--space-lg); }
+    .timeline-wrap { padding: 0 var(--space-base); }
+    .timeline { padding-left: 48px; }
+    .timeline::before { left: 19px; }
+    .stage .num {
+      width: 42px; height: 42px;
+      font-size: var(--text-base);
+      left: -48px;
+      box-shadow: 0 0 0 4px var(--perla), 0 4px 14px rgba(15, 10, 26, 0.08);
+    }
+    .stage .card { padding: var(--space-base); }
+    .proceso-closing-inner { padding: var(--space-xl) var(--space-base); }
+  }
+
+  /* Print */
+  @media print {
+    body { background: #fff; }
+    .navbar { position: relative; }
+    .stage .card { box-shadow: none; break-inside: avoid; }
+    .stage { break-inside: avoid; }
+    .proceso-closing-inner { break-inside: avoid; background: var(--plum) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .navbar, .time-chip, .num { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body class="proceso-page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar-logo">
+      <img src="img/logo_alquimia_key_white.png" alt="Alquimia">
+    </a>
+    <button class="menu-toggle" onclick="document.querySelector('.navbar-links').classList.toggle('open')">&#9776;</button>
+    <div class="navbar-links">
+      <a href="index.html#propiedades">Propiedades</a>
+      <a href="index.html#nosotros">Nosotros</a>
+      <a href="index.html#contacto">Contacto</a>
+      <a href="https://wa.me/56985298224" class="navbar-wa" target="_blank">WhatsApp</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="proceso-hero">
+    <div class="section-eyebrow">Proceso paso a paso</div>
+    <h1>Cómo es la <em>compraventa</em><br>de una propiedad</h1>
+    <p class="lead">
+      Una vez que comprador y vendedor llegan a acuerdo, comienza un proceso de siete etapas que combina trámites legales, financieros y administrativos. Esta guía resume cada paso y los plazos típicos, para que sepas qué esperar en cada momento.
+    </p>
+
+    <div class="total-time">
+      <span class="label">Tiempo total aproximado</span>
+      <span class="value"><strong>≈ 90 días</strong></span>
+    </div>
+  </section>
+
+  <div class="proceso-divider">
+    <span>Las siete etapas</span>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline-wrap">
+    <section class="timeline">
+
+      <!-- 1 -->
+      <article class="stage key">
+        <div class="num">1</div>
+        <div class="card">
+          <div class="head">
+            <h3>Promesa de compraventa</h3>
+            <span class="time-chip">Inicio del proceso</span>
+          </div>
+          <p class="desc">Documento legal que formaliza el acuerdo entre comprador y vendedor. Define el precio, los plazos, las condiciones del negocio y las multas en caso de incumplimiento. Es el punto de partida formal de toda la operación.</p>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="stage">
+        <div class="num">2</div>
+        <div class="card">
+          <div class="head">
+            <h3>Tasación bancaria</h3>
+            <span class="time-chip">≈ 5 días</span>
+          </div>
+          <p class="desc">El banco que financia al comprador envía un perito a evaluar la propiedad. La tasación determina el valor comercial reconocido por el banco y es requisito para aprobar el crédito hipotecario.</p>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="stage">
+        <div class="num">3</div>
+        <div class="card">
+          <div class="head">
+            <h3>Estudio de los títulos</h3>
+            <span class="time-chip">15 a 20 días</span>
+          </div>
+          <p class="desc">Un abogado revisa los antecedentes legales de la propiedad: dominio vigente, gravámenes, prohibiciones y la cadena de propietarios anteriores. Asegura que la propiedad pueda transferirse limpiamente.</p>
+          <div class="footnote">Si surgen reparos, deben sumarse aproximadamente 5 días más desde la entrega del documento solicitado.</div>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="stage key">
+        <div class="num">4</div>
+        <div class="card">
+          <div class="head">
+            <h3>Firma de la compraventa</h3>
+            <span class="time-chip">Cierre notarial ≈ 5 días</span>
+          </div>
+          <p class="desc">En notaría se firma la escritura pública de compraventa. En esta misma instancia el comprador paga el <strong>pie (20% del precio)</strong> y la <strong>comisión del corredor</strong>.</p>
+          <p class="desc">Tras la firma, la notaría completa el cierre de la escritura en aproximadamente cinco días.</p>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="stage">
+        <div class="num">5</div>
+        <div class="card">
+          <div class="head">
+            <h3>Inscripción en el Conservador de Bienes Raíces</h3>
+            <span class="time-chip">2 a 3 semanas</span>
+          </div>
+          <p class="desc">La escritura se inscribe en el Conservador de Bienes Raíces de la comuna donde está ubicada la propiedad. Recién con esta inscripción el comprador queda como dueño legal ante todos.</p>
+          <div class="footnote">El plazo depende del flujo de trabajo de cada Conservador.</div>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="stage">
+        <div class="num">6</div>
+        <div class="card">
+          <div class="head">
+            <h3>Pago del 80% por parte del banco</h3>
+            <span class="time-chip">2 a 3 días tras la inscripción</span>
+          </div>
+          <p class="desc">Una vez inscrita la propiedad a nombre del comprador, el banco libera el saldo del precio (el 80% restante) y lo paga al vendedor en la sucursal bancaria que éste elija, generalmente la más cercana a su domicilio.</p>
+        </div>
+      </article>
+
+      <!-- 7 -->
+      <article class="stage key">
+        <div class="num">7</div>
+        <div class="card">
+          <div class="head">
+            <h3>Entrega del inmueble y acta de entrega</h3>
+            <span class="time-chip">Cierre del proceso</span>
+          </div>
+          <p class="desc">Se hace entrega material de la propiedad al comprador y se firma el acta de entrega, dejando constancia del estado del inmueble, las llaves recibidas y los consumos al día (luz, agua, gas, gastos comunes).</p>
+        </div>
+      </article>
+
+    </section>
+  </div>
+
+  <!-- CLOSING NOTE -->
+  <div class="proceso-closing">
+    <div class="proceso-closing-inner">
+      <div class="quote-mark">&ldquo;</div>
+      <h2>El plazo total estimado es de <strong>90 días</strong>,<br>pero en la práctica suele ser <strong>menor</strong>.</h2>
+      <p>Cada operación es única: factores como la rapidez del banco, la disponibilidad de antecedentes y el flujo del Conservador pueden acortar o extender los tiempos. En Alquimia te acompañamos en cada etapa del proceso.</p>
+    </div>
+  </div>
+
+  <!-- PAGE FOOTER -->
+  <div class="proceso-foot">
+    <div class="mark"><em>Alquimia</em> Propiedades</div>
+    <small>Guía informativa · Proceso de compraventa</small>
+  </div>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer" id="contacto">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="img/logo_alquimia_key_white.png" alt="Alquimia" class="footer-logo">
+        <p>Keyla Tobar — Corredora de Propiedades</p>
+        <p>contacto@alquimiapropiedades.com</p>
+      </div>
+      <div class="footer-location">
+        <h4>Oficina</h4>
+        <p>Av. Apoquindo 4451, Of. 409</p>
+        <p>Las Condes, Santiago</p>
+      </div>
+      <div class="footer-services">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#">Alquimia Venta</a></li>
+          <li><a href="#">Alquimia Arriendo</a></li>
+          <li><a href="#">Alquimia Lab</a></li>
+          <li><a href="#">Alquimia Tasa</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-copy">
+      &copy; 2026 Alquimia. Todos los derechos reservados.
+    </div>
+  </footer>
+
+</body>
+</html>
